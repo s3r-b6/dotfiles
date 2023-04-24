@@ -1,0 +1,12 @@
+#restrictive .gitignore
+/*
+!/archlinux-logout
+!/dunst
+!/kitty
+!/lvim
+lvim/plugin/packer_compiled.lua
+!/vis
+!/neofetch
+!/hypr
+!/zellij
+!/.gitignore
