@@ -1,5 +1,6 @@
 -- general `lvim` is the global options object
 lvim.log.level = "warn"
+lvim.transparent_window = true
 lvim.format_on_save.enabled = false
 lvim.colorscheme = "lunar"
 
@@ -10,12 +11,6 @@ vim.opt.relativenumber = true
 
 -- general
 lvim.log.level = "info"
-
---lvim.format_on_save = {
---  enabled = true,
---  pattern = "*.lua",
---  timeout = 1000,
---}
 
 -- keymappings <https://www.lunarvim.org/docs/configuration/keybindings>
 lvim.leader = "space"
