@@ -10,4 +10,4 @@ lvim/plugin/packer_compiled.lua
 !/hypr
 !/zellij
 !/.gitignore
-!/.zhsrc
+!/.zshrc
