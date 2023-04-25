@@ -5,6 +5,7 @@
 !/kitty
 !/lvim
 lvim/plugin/packer_compiled.lua
+lvim/lazy-lock.json
 !/vis
 !/neofetch
 !/hypr
