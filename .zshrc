@@ -25,6 +25,7 @@ if [[ -z "$ZELLIJ" ]]; then
     fi
 fi
 
+
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nvim'
 else
@@ -41,9 +42,8 @@ fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 ssh-add -l > /dev/null || ssh-add ~/.config/.ssh/key
 
-
+#neofetch img
 neofetch --pixterm ~/.config/neofetch/img/zote-2.jpg
-
 
 # Default .conf
 # Uncomment the following line to use hyphen-insensitive completion.
