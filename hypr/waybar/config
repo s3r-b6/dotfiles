@@ -13,4 +13,8 @@
 
   "modules-left": ["wlr/workspaces", "cpu", "memory", "disk"],
   "modules-right": ["custom/updater", "pulseaudio", "custom/keybindings", "clock", "tray", "custom/power"],
+
+  "wlr/workspaces": {
+    "disable-scroll": true
+  }
 }
