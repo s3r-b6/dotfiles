@@ -66,16 +66,18 @@ lvim.plugins = {
             }
         end,
     },
-    { "mbbill/undotree" },
+    { 'ThePrimeagen/vim-be-good' }, -- Prime's game
+    { 'tpope/vim-surround' },       -- change/add surroundings
+    { 'mbbill/undotree' },          -- undotree
     {
-        'folke/todo-comments.nvim',
+        'folke/todo-comments.nvim', --highlight and search todos
         event = 'BufRead',
         config = function()
             require('todo-comments').setup()
         end,
     },
     {
-        "mfussenegger/nvim-jdtls",
+        "mfussenegger/nvim-jdtls", --config for jdtls
         ft = "java",
         config = function()
             local on_attach = function(client, bufnr)
