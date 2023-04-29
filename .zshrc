@@ -16,8 +16,8 @@ source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 #open ZelliJ on shell start
 if [[ -z "$ZELLIJ" ]]; then
-    if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-        zellij attach -c
+    if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]] && pgrep zellij >dev/null ; then
+        zellij attach
     else
         zellij
     fi
