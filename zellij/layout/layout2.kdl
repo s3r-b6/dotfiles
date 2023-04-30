@@ -2,8 +2,11 @@ layout{
     pane split_direction="vertical" {
         pane command="bashtop"
         pane split_direction="horizontal"{
-            pane command="vis"
             pane command="neofetch" 
+            pane {
+                command "cmatrix"
+                args "-C" "black"
+            }
         }
     }
 }
