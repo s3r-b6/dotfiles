@@ -26,9 +26,9 @@ ${SCRIPTSDIR}/xauthority &
 
 dunst &
 hyprpaper --config ~/.config/hypr/hyprpapr.conf &
+webcord &
 #insync start &
 #dropbox &
 #telegram-desktop &
-#discord &
 #nm-applet --indicator
 #variety &
