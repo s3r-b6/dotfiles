@@ -12,7 +12,6 @@ arc-gtk-theme
 arch-install-scripts
 archlinux-login-backgrounds-git
 archlinux-logout-git
-arcolinux-alacritty-git
 arcolinux-grub-theme-vimix-git
 arcolinux-hyprland-git
 arcolinux-keyring
@@ -20,16 +19,9 @@ arcolinux-meta-steam-amd
 arcolinux-meta-utilities
 arcolinux-meta-wine
 arcolinux-mirrorlist-git
-arcolinux-neofetch-git
 arcolinux-paru-git
 arcolinux-sddm-futuristic-git
-arcolinux-sddm-materia-git
-arcolinux-sddm-simplicity-git
-arcolinux-sddm-slice-git
-arcolinux-sddm-sugar-candy-git
-arcolinux-sddm-urbanlifestyle-git
 arcolinux-systemd-services-git
-arcolinux-wallpapers-git
 arcolinuxd-system-config-git
 arcolinuxd-welcome-app-git
 awesome-terminal-fonts
@@ -113,7 +105,6 @@ linux-firmware-marvell
 linux-firmware-qlogic
 linux-headers
 logrotate
-lolcat
 lsb-release
 lsscsi
 lutris
@@ -239,7 +230,6 @@ urxvt-resize-font-git
 usb_modeswitch
 usbmuxd
 usbutils
-vim
 volumeicon
 vpnc
 vulkan-radeon

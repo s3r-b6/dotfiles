@@ -4,6 +4,8 @@ export ZELLIJ_AUTO_EXIT="true"
 export ZELLIJ_AUTO_ATTACH="true"
 alias lvim='~/.local/bin/lvim'
 alias sudolvim='sudo ~/.local/bin/lvim'
+alias backup_pkgs='pacman -Qqe > ~/.config/pkglist.txt'
+alias clean_orphans='sudo pacman -Qtdq | sudo pacman -Rns -'
 
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
