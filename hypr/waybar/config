@@ -1,20 +1,104 @@
 {
-  "include": "~/.config/hypr/waybar/modules",
-  "layer": "top",
-  //"mode": "dock",
-  "exclusive": true,
-  "passthrough": false,
-  "position": "top",
-  "spacing": 5,
-  "fixed-center": true,
-  "ipc": true,
-  "margin-left": 0,
-  "margin-right": 0,
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    //"height": 35, // Waybar height (to be removed for auto height)
+    "margin-top": 6,
+    "margin-left": 6,
+    "margin-right": 6,
+    "margin-bottom": 6,
+    
+    "output": ["DP-1", "HDMI-A-1"],
 
-  "modules-left": ["wlr/workspaces", "cpu", "memory", "disk"],
-  "modules-right": ["custom/updater", "pulseaudio", "custom/keybindings", "clock", "tray", "custom/power"],
+    "modules-left": ["wlr/workspaces","custom/updates", "disk","cpu", "memory"],
+    "modules-center": ["custom/playerctl", "pulseaudio", "pulseaudio#mic"],
+    "modules-right": ["clock", "tray","custom/powermenu"],
 
-  "wlr/workspaces": {
-    "disable-scroll": true
+    // Modules configuration
+     "wlr/workspaces": {
+         "on-click": "activate",
+         "disable-scroll": true,
+         "all-outputs": false,
+         "sort-by-number": true,
+         "format": "{icon}",
+         //"format": "{name}",
+         "format-icons": {
+             "1": "",
+             "2": "",
+             "3": "",
+             "4": "",
+             "5": "",
+             "urgent": "",
+             "focused": "",
+             "default": ""
+         }
+     },
+    "tray": {
+        "format": "test",
+        "spacing": 10,
+    },
+    "disk": {
+      "interval": 30,
+      "format": " {free}",
+    },
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%d %b, %H:%M}",
+        "format-alt": " {:%a %b %d, %G}"
+    },
+    "cpu": {
+        "interval": 1,
+        "format": " {usage:>2}% ",
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+    },
+    "memory": {
+        "interval": 10,
+        "format": " {used:0.1f}G",
+    },
+   
+    "pulseaudio": {
+        "scroll-step": 2, // %, can be a float
+        "format": "{icon} {volume} ",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-icons": {
+            "stock image type shit": ["", "", ""],
+            "default": ""
+        },
+        "on-click": "pavucontrol"
+    },
+    "pulseaudio#mic" : {
+        "format": "{format_source}",
+        "format-source": " {volume}",
+        "format-source-muted": " {volume}",
+        "scroll-step": 2,
+        "on-click": "pavucontrol"
+    },
+
+    "custom/updates": {
+        "exec": "paru -Qu | wc -l", 
+        "interval": 3600,
+        "format": "  {}  ",
+        "on-click": "kitty --class update -T update -o font_size=13 -e yay -Syu && notify-send 'The system has been updated' "
+    },
+
+  "custom/playerctl": {
+    "format": "{icon}  <span>{}</span>",
+    "return-type": "json",
+    "max-length": 35,
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} ~ {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "on-click-middle": "playerctl play-pause",
+    "on-click": "playerctl previous",
+    "on-click-right": "playerctl next",
+    "format-icons": {
+      "Playing": "<span foreground='#fff'></span>",
+      "Paused": "<span foreground='#fff'></span>"
+    }
+
+},
+
+  "custom/powermenu": {
+      "format": " ",
+      "on-click": "archlinux-logout",
   }
 }
