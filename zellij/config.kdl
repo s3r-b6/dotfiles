@@ -1,7 +1,7 @@
 ﻿theme "catppuccin-macchiato"
 layout_dir "/home/ser/.config/zellij/layout/"
 default_layout "clean"
-simplified_ui true
+simplified_ui false
 
 plugins {
     status-bar { path "status-bar"; }
@@ -24,7 +24,9 @@ themes {
     black "#1e2030" // Mantle
     white "#cad3f5"
   }
-}
+ }
+
+
 
 ui {
     pane_frames {
