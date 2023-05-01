@@ -9,9 +9,9 @@
     
     "output": ["DP-1", "HDMI-A-1"],
 
-    "modules-left": ["custom/updates", "disk","cpu", "memory","custom/playerctl", "pulseaudio", "pulseaudio#mic"],
+    "modules-left": ["custom/updates", "disk","cpu", "memory"],
     "modules-center": ["wlr/workspaces"],
-    "modules-right": ["clock", "tray","custom/powermenu"],
+    "modules-right": ["custom/playerctl", "pulseaudio","pulseaudio#mic","clock", "tray","custom/powermenu"],
 
     // Modules configuration
      "wlr/workspaces": {
@@ -47,7 +47,7 @@
     },
     "cpu": {
         "interval": 1,
-        "format": " {usage:>2}% ",
+        "format": " {usage:>2}% |",
         "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
     },
     "memory": {
@@ -57,7 +57,7 @@
    
     "pulseaudio": {
         "scroll-step": 2, // %, can be a float
-        "format": "{icon} {volume} ",
+        "format": "{icon} {volume}  |",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
@@ -78,7 +78,7 @@
     "custom/updates": {
         "exec": "paru -Qu | wc -l", 
         "interval": 3600,
-        "format": "  {}  ",
+        "format": "  {}  |",
         "on-click": "kitty --class update -T update -o font_size=13 -e yay -Syu && notify-send 'The system has been updated' "
     },
 
@@ -86,7 +86,7 @@
     "format": "{icon}  <span>{}</span>",
     "return-type": "json",
     "max-length": 35,
-    "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} ~ {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "exec": "playerctl -p spotify -a metadata --format '{\"text\": \"{{artist}} ~ {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
     "on-click-middle": "playerctl play-pause",
     "on-click": "playerctl previous",
     "on-click-right": "playerctl next",
