@@ -6,6 +6,8 @@
 !/lvim
 lvim/plugin/packer_compiled.lua
 lvim/lazy-lock.json
+!/README.md
+!/preview/
 !/pkglist.txt
 !/vis
 !/neofetch
