@@ -9,8 +9,8 @@
     
     "output": ["DP-1", "HDMI-A-1"],
 
-    "modules-left": ["wlr/workspaces","custom/updates", "disk","cpu", "memory"],
-    "modules-center": ["custom/playerctl", "pulseaudio", "pulseaudio#mic"],
+    "modules-left": ["custom/updates", "disk","cpu", "memory","custom/playerctl", "pulseaudio", "pulseaudio#mic"],
+    "modules-center": ["wlr/workspaces"],
     "modules-right": ["clock", "tray","custom/powermenu"],
 
     // Modules configuration

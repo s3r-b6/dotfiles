@@ -1,6 +1,4 @@
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
-   /* font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;*/
     font-family: Jet Brains Mono;
     font-weight: bold;
     font-size: 14px;
@@ -8,10 +6,6 @@
 
 window#waybar {
     background-color: rgba(43, 48, 59, 0.0);
-    /*border-bottom: 0px solid rgba(100, 114, 125, 0.5);
-    color: #ffffff;
-    transition-property: background-color;
-    transition-duration: .5s;*/
 }
 
 
@@ -35,15 +29,6 @@ button:hover {
 
 #workspaces button.active {
     color: #ffffff;
-}
-
-#workspaces button {
-   /* padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;*/
-    padding: 5px;
-    color: #64727D;
-    margin-right: 5px;
 }
 
 #workspaces button:hover {
@@ -115,6 +100,7 @@ button:hover {
     background-color: #343434;
     border-radius: 10px;
     border: 2px solid #418bc4;
+    margin-right: 10px;
 }
 
 @keyframes blink {
@@ -243,11 +229,9 @@ label:focus {
 
 #tray {
     padding-left: 10px;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 10px 10px 10px 10px;
     background-color: #343434;
     border: 2px solid #829b6e;
-    border-right: 0px;
-    margin-left: 15px;
 }
 
 #tray > .passive {
@@ -319,16 +303,12 @@ label:focus {
 }
 
 #custom-powermenu {
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 10px 10px 10px 10px;
     background-color: #343434;
-    border: 2px solid #829b6e;
-    border-left: 0px;
+    border: 2px solid #f38ba8;
     padding-left: 0px;
     padding-right: 10px;
     margin-right: 0px;
+    margin-left: 10px;
     font-size: 24px;
-}
-
-#custom-powermenu button:hover {
-    background-color: #f38ba8;
 }
