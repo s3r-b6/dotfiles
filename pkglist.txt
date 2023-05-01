@@ -206,6 +206,7 @@ screen
 sddm
 sdparm
 sg3_utils
+slurp
 smartmontools
 sof-firmware
 spotify
