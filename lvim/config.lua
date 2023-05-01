@@ -52,6 +52,16 @@ lvim.builtin.treesitter.auto_install = true
 -- skip lsp config for jdtls, let nvim-jdtls handle it
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
 lvim.plugins = {
+    {
+        'norcalli/nvim-colorizer.lua',
+        config = function()
+            require('colorizer').setup {
+                'css',
+                'javascript',
+                html = { mode = 'foreground', }
+            }
+        end,
+    },
     { 'unblevable/quick-scope' },
     {
         'nacro90/numb.nvim',
@@ -113,6 +123,8 @@ lvim.plugins = {
         end,
     }
 }
+
+
 
 vim.cmd [[
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
