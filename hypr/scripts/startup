@@ -13,21 +13,17 @@ done
 # Apply themes
 ${SCRIPTSDIR}/gtkthemes &
 
-# Lauch notification daemon (mako)
-${SCRIPTSDIR}/notifications &
-
 # Lauch statusbar (waybar)
 ${SCRIPTSDIR}/statusbar &
 
 # Xauthority
 ${SCRIPTSDIR}/xauthority &
 
-#dex $HOME/.config/autostart/arcolinux-welcome-app.desktop &
-
 dunst &
 hyprpaper --config ~/.config/hypr/hyprpapr.conf &
-webcord &
-#insync start &
+noisetorch -i alsa_input.usb-Generic_FULL_HD_1080P_Webcam_200901010001-02.analog-stereo && webcord &
+Exec=env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify --uri=%U &
+kitty tty-clock &
 #dropbox &
 #telegram-desktop &
 #nm-applet --indicator
