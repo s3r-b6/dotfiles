@@ -122,7 +122,7 @@
     # dmenu path.
     dmenu = /usr/bin/dmenu -p dunst:
     # Browser for opening urls in context menu.
-    browser = /usr/bin/xdg-open
+    browser = /usr/bin/firefox
     # Always run rule-defined scripts, even if the notification is suppressed
     always_run_script = true
     # Define the title & class of the windows spawned by dunst
