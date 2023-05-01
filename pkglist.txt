@@ -79,6 +79,7 @@ gpart
 gparted
 gpm
 gptfdisk
+grim
 grub
 gst-plugins-bad
 gst-plugins-base
