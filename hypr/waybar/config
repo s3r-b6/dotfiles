@@ -1,15 +1,15 @@
 {
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    //"height": 35, // Waybar height (to be removed for auto height)
+    "height": 25, // Waybar height (to be removed for auto height)
     "margin-top": 6,
     "margin-left": 6,
     "margin-right": 6,
     "margin-bottom": 6,
     
-    "output": ["DP-1", "HDMI-A-1"],
+    //"output": ["DP-1", "HDMI-A-1"],
 
-    "modules-left": ["custom/updates", "disk","cpu", "memory"],
+    "modules-left": ["custom/updates", "disk","cpu", "memory", "backlight","battery", "network"],
     "modules-center": ["wlr/workspaces"],
     "modules-right": ["custom/playerctl", "pulseaudio","pulseaudio#mic","clock", "tray","custom/powermenu"],
 
