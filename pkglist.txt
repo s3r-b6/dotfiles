@@ -15,7 +15,6 @@ archlinux-logout-git
 arcolinux-grub-theme-vimix-git
 arcolinux-hyprland-git
 arcolinux-keyring
-arcolinux-meta-steam-amd
 arcolinux-meta-utilities
 arcolinux-meta-wine
 arcolinux-mirrorlist-git
@@ -62,7 +61,6 @@ fftw
 firefox
 fsarchiver
 fzf
-gamescope
 git
 gksu
 gnu-netcat
@@ -107,11 +105,9 @@ linux-headers
 logrotate
 lsb-release
 lsscsi
-lutris
 lvm2
 man-db
 man-pages
-mangohud
 maven
 mc
 mdadm
@@ -141,7 +137,6 @@ networkmanager-pptp
 networkmanager-vpnc
 nfs-utils
 nilfs-utils
-noisetorch
 noto-fonts
 npm
 ntfs-3g
@@ -204,7 +199,6 @@ spotify
 spotify-adblock-git
 spotifywm-git
 squashfs-tools
-steam-tweaks
 stremio
 sudo
 surfn-icons-git
