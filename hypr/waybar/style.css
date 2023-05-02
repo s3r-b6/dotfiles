@@ -149,13 +149,15 @@ label:focus {
 }
 
 #network {
+    background-color: #343434;
     border-radius: 10px;
-    background-color: #1e1e1e;
+    border: 2px solid #b29fdc;
+    margin-right: 10px;
 }
 
 #network.disconnected {
     border-radius: 10px;
-    background-color: #f53c3c;
+    border-color: #f53c3c;
 }
 
 #pulseaudio {

@@ -9,7 +9,7 @@
     
     "output": ["DP-1", "HDMI-A-1"],
 
-    "modules-left": ["custom/updates", "disk","cpu", "memory"],
+    "modules-left": ["custom/updates", "disk","cpu", "memory", "network"],
     "modules-center": ["wlr/workspaces"],
     "modules-right": ["custom/playerctl", "pulseaudio","pulseaudio#mic","clock", "tray","custom/powermenu"],
 
@@ -32,6 +32,16 @@
              "default": ""
          }
      },
+  "network": {
+    "interval": 5,
+    "format-wifi": " {essid}",
+    "format-ethernet": " {ipaddr}/{cidr}",
+    "format-linked": " {ifname} (No IP)",
+    "format-disconnected": "睊 Disconnected",
+    "format-disabled": "睊 Disabled",
+    "format-alt": " {bandwidthUpBits} |  {bandwidthDownBits}",
+    "tooltip-format": " {ifname} via {gwaddr}",
+  },
     "tray": {
         "format": "test",
         "spacing": 10,
@@ -87,9 +97,7 @@
     "return-type": "json",
     "max-length": 35,
     "exec": "playerctl -p spotify -a metadata --format '{\"text\": \"{{artist}} ~ {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
-    "on-click-middle": "playerctl play-pause",
-    "on-click": "playerctl previous",
-    "on-click-right": "playerctl next",
+    "on-click": "playerctl -p spotify play-pause",
     "format-icons": {
       "Playing": "<span foreground='#fff'></span>",
       "Paused": "<span foreground='#fff'></span>"
