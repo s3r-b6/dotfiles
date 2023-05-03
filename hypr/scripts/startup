@@ -19,7 +19,9 @@ ${SCRIPTSDIR}/statusbar &
 # Xauthority
 ${SCRIPTSDIR}/xauthority &
 
+nm-applet &
 dunst &
 hyprpaper --config ~/.config/hypr/hyprpapr.conf &
+noisetorch -i alsa_input.usb-Generic_FULL_HD_1080P_Webcam_200901010001-02.analog-stereo
 Exec=env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify --uri=%U &
 #kitty tty-clock &
