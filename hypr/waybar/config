@@ -41,6 +41,7 @@
     "format-disabled": "睊 Disabled",
     "format-alt": " {bandwidthUpBits} |  {bandwidthDownBits}",
     "tooltip-format": " {ifname} via {gwaddr}",
+    "on-click-right": "kitty --class popUp-network -T network -o font_size=13 -e nmtui"
   },
     "tray": {
         "format": "test",
@@ -86,10 +87,10 @@
     },
 
     "custom/updates": {
-        "exec": "paru -Qu | wc -l", 
+        "exec": "yay -Qu | wc -l", 
         "interval": 3600,
         "format": "  {}  |",
-        "on-click": "kitty --class update -T update -o font_size=13 -e yay -Syu && notify-send 'The system has been updated' "
+        "on-click": "kitty --class popUp-update -T update -o font_size=13 -e yay -Syu && notify-send 'The system has been updated' "
     },
 
   "custom/playerctl": {
@@ -97,12 +98,13 @@
     "return-type": "json",
     "max-length": 35,
     "exec": "playerctl -p spotify -a metadata --format '{\"text\": \"{{artist}} ~ {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
-    "on-click": "playerctl -p spotify play-pause",
     "format-icons": {
       "Playing": "<span foreground='#fff'></span>",
       "Paused": "<span foreground='#fff'></span>"
-    }
-
+    },
+    "on-scroll-up": "~/.config/hypr/scripts/playerctlVol --inc",
+    "on-scroll-down": "~/.config/hypr/scripts/playerctlVol --dec",
+    "on-click": "playerctl -p spotify play-pause",
 },
 
   "custom/powermenu": {
