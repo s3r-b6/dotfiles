@@ -9,9 +9,9 @@
     
     //"output": ["DP-1", "HDMI-A-1"],
 
-    "modules-left": ["custom/updates", "disk","cpu", "memory", "backlight","battery", "network"],
+    "modules-left": ["custom/updates" ,"cpu", "memory", "battery","backlight"],
     "modules-center": ["wlr/workspaces"],
-    "modules-right": ["custom/playerctl", "pulseaudio","pulseaudio#mic","clock", "tray","custom/powermenu"],
+    "modules-right": ["custom/playerctl", "pulseaudio","pulseaudio#mic","clock", "network","tray","custom/powermenu"],
 
     // Modules configuration
      "wlr/workspaces": {
@@ -20,7 +20,6 @@
          "all-outputs": false,
          "sort-by-number": true,
          "format": "{icon}",
-         //"format": "{name}",
          "format-icons": {
              "1": "",
              "2": "",
@@ -32,6 +31,17 @@
              "default": ""
          }
      },
+    "network": {
+        "interval": 5,
+        "format-wifi": " {essid}",
+        "format-ethernet": " {ipaddr}/{cidr}",
+        "format-linked": " {ifname} (No IP)",
+        "format-disconnected": "睊 Disconnected",
+        "format-disabled": "睊 Disabled",
+        "format-alt": " {bandwidthUpBits} |  {bandwidthDownBits}",
+        "tooltip-format": " {ifname} via {gwaddr}",
+        "on-click-right": "kitty --class popUp-network -T network -o font_size=13 -e nmtui"
+    },
     "tray": {
         "format": "test",
         "spacing": 10,
@@ -48,8 +58,25 @@
     "cpu": {
         "interval": 1,
         "format": " {usage:>2}% |",
-        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
     },
+    "backlight": {
+        "interval": 3,
+        "format": "𖤓 {percent}%",
+    },
+    "battery": {
+ 		"states": {
+			"good": 95, "warning": 30, "critical": 15
+		},
+		"format": "{capacity}% {icon}",
+		"format-charging": "{capacity}% ",
+		"format-plugged": "{capacity}% ",
+		"format-alt": "{time} {icon}",
+		"format-icons": [ "", "", "", "", "" ],
+		"format": "{time} {capacity}%",
+		"format-full": "{capacity}% 🔋",
+		"format-charging": "{capacity}% ☇",
+		"format-plugged": "{capacity}% 🔌"
+ 	},
     "memory": {
         "interval": 10,
         "format": " {used:0.1f}G",
@@ -57,13 +84,13 @@
    
     "pulseaudio": {
         "scroll-step": 2, // %, can be a float
-        "format": "{icon} {volume}  |",
+        "format": "{icon} {volume} |",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
         "format-icons": {
             "stock image type shit": ["", "", ""],
-            "default": ""
+            "default": "🎧"
         },
         "on-click": "pavucontrol"
     },
@@ -78,10 +105,9 @@
     "custom/updates": {
         "exec": "paru -Qu | wc -l", 
         "interval": 3600,
-        "format": "  {}  |",
-        "on-click": "kitty --class update -T update -o font_size=13 -e yay -Syu && notify-send 'The system has been updated' "
+        "format": "  {} |",
+        "on-click": "kitty --class popUp-update -T update -o font_size=13 -e yay -Syu && notify-send 'The system has been updated' "
     },
-
   "custom/playerctl": {
     "format": "{icon}  <span>{}</span>",
     "return-type": "json",
@@ -98,7 +124,7 @@
 },
 
   "custom/powermenu": {
-      "format": " ",
+      "format": "",
       "on-click": "archlinux-logout",
   }
 }
