@@ -92,7 +92,8 @@
             "stock image type shit": ["", "", ""],
             "default": "🎧"
         },
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "on-click-right": "blueberry"
     },
     "pulseaudio#mic" : {
         "format": "{format_source}",
