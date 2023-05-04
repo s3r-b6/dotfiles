@@ -49,6 +49,14 @@ lvim.builtin.treesitter.ensure_installed = {
 -- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true
 
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+    {
+        name = "prettier",
+        args = { "--tab-width", "4" },
+    }
+}
+
 -- skip lsp config for jdtls, let nvim-jdtls handle it
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
 lvim.plugins = {
