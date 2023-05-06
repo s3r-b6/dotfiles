@@ -1,6 +1,7 @@
 {
   "layer": "top", 
   "position": "top",
+  //"height": 25,
   "margin-top": 2,
   "margin-left": 6,
   "margin-right": 6,
