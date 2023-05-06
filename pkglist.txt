@@ -17,9 +17,7 @@ arcolinux-bin-git
 arcolinux-candy-beauty-git
 arcolinux-config-all-desktops-git
 arcolinux-dconf-all-desktops-git
-arcolinux-desktop-trasher-git
 arcolinux-fonts-git
-arcolinux-foot-git
 arcolinux-grub-theme-vimix-git
 arcolinux-gtk3-arcolinux-candy-beauty-git
 arcolinux-hblock-git
@@ -35,7 +33,6 @@ arcolinux-meta-utilities
 arcolinux-meta-wine
 arcolinux-mirrorlist-git
 arcolinux-neofetch-git
-arcolinux-paru-git
 arcolinux-pipemenus-git
 arcolinux-qt5-git
 arcolinux-root-git
@@ -44,7 +41,6 @@ arcolinux-system-config-git
 arcolinux-systemd-services-git
 arcolinux-wayland-app-hooks-git
 arcolinux-wayland-profile-git
-arcolinux-welcome-app-git
 arcolinux-xfce-git
 arcolinux-zsh-git
 auto-cpufreq
@@ -151,7 +147,6 @@ kitty
 laptop-detect
 lazygit
 less
-lf
 libdvdcss
 libfido2
 libgsf
