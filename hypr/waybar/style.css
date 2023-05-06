@@ -18,9 +18,10 @@ button {
 
 #network {
     background-color: #343434;
-    border-radius: 10px;
+    border-radius: 0px 10px 10px 0px;
     border: 2px solid #b29fdc;
-    margin-right: 10px;
+    border-left: 0px;
+    padding-left: 0px;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -160,10 +161,9 @@ label:focus {
 
 #backlight {
     background-color: #343434;
-    margin-right: 10px;
-    border-radius: 0px 10px 10px 0px;
     border: 2px solid #b29fdc;
     border-left: 0px;
+    border-right: 0px;
     padding-left: 3px;
 }
 
@@ -181,18 +181,18 @@ label:focus {
 }
 #pulseaudio {
     color: #ffffff;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 0px;
+    border: 2px solid #b29fdc;
     background-color: #343434;
-    border: 2px solid #e67e80;
+    border-left: 0px;
     border-right: 0px;
 }
 
 #pulseaudio.mic {
     color: #ffffff;
-    margin-right: 10px;
-    border-radius: 0px 10px 10px 0px;
-    border: 2px solid #e67e80;
+    border: 2px solid #b29fdc;
     border-left: 0px;
+    border-right: 0px;
     padding-left: 0px;
 }
 
@@ -215,6 +215,7 @@ label:focus {
     border-radius: 10px 10px 10px 10px;
     background-color: #343434;
     border: 2px solid #829b6e;
+    margin-right: 10px;
 }
 
 #tray > .passive {
@@ -241,6 +242,6 @@ label:focus {
     border: 2px solid #f38ba8;
     padding-left: 10px;
     padding-right: 16px;
-    margin-right: 0px;
+    margin-right: 10px;
     font-size: 18px;
 }

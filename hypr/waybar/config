@@ -6,11 +6,24 @@
   "margin-right": 6,
   "margin-bottom": 0,
   
-  "modules-left":   ["custom/updates","cpu","memory","battery","backlight","network"],
+  "modules-left":   [
+      "custom/powermenu",
+      "custom/updates",
+      "battery",
+      "backlight",
+      "pulseaudio",
+      "pulseaudio#mic",
+      "cpu",
+      "memory",
+      "network"
+  ],
   "modules-center": ["wlr/workspaces"],
-  "modules-right":  ["custom/playerctl","pulseaudio","pulseaudio#mic","clock","tray","custom/powermenu"],
+  "modules-right":  [
+      "custom/playerctl",
+      "tray",
+      "clock"
+  ],
 
-  // Modules configuration
   "wlr/workspaces": {
     "on-click": "activate",
     "disable-scroll": true,
