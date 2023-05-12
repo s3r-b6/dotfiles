@@ -15,6 +15,7 @@ lvim.log.level = 'info'
 -- keymappings <https://www.lunarvim.org/docs/configuration/keybindings>
 lvim.leader = 'space'
 lvim.keys.normal_mode['<C-s>'] = ':w<cr>'
+lvim.keys.normal_mode['<leader>w'] = ''
 
 -- Copy to clipboard
 lvim.keys.visual_mode['<leader>y'] = '"+y'
@@ -22,11 +23,15 @@ lvim.keys.normal_mode['<leader>Y'] = '"+yg_'
 lvim.keys.normal_mode['<leader>y'] = '"+y'
 lvim.keys.normal_mode['<leader>yy'] = '"+yy'
 
+
 -- Paste from clipboard
 lvim.keys.normal_mode['<leader>p'] = '"+p'
 lvim.keys.normal_mode['<leader>P'] = '"+P'
 lvim.keys.visual_mode['<leader>p'] = '"+p'
 lvim.keys.visual_mode['<leader>P'] = '"+P'
+
+-- VimWiki
+lvim.keys.normal_mode['<leader>w'] = ''
 
 lvim.keys.normal_mode['<leader>u'] = vim.cmd.UndotreeToggle
 
@@ -95,7 +100,7 @@ lvim.plugins = {
         end,
     },
     {
-        "mfussenegger/nvim-jdtls", --config for jdtls
+        'mfussenegger/nvim-jdtls', --config for jdtls
         ft = "java",
         config = function()
             local on_attach = function(client, bufnr)
@@ -129,11 +134,14 @@ lvim.plugins = {
                 end,
             })
         end,
-    }
+    },
+    { 'vimwiki/vimwiki' }
 }
 
 
-
 vim.cmd [[
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+    let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+    set nocompatible
+    filetype plugin on
+    syntax on
 ]]
