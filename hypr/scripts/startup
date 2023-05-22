@@ -25,4 +25,5 @@ nm-applet &
 dunst &
 hyprpaper --config ~/.config/hypr/hyprpapr.conf &
 Exec=env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify --uri=%U &
-#kitty tty-clock &
+kitty tty-clock &
+webcord &
