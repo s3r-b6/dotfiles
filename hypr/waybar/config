@@ -21,10 +21,10 @@
          "format": "{icon}",
          //"format": "{name}",
          "format-icons": {
-             "1": "",
-             "2": "",
+             "1": "",
+             "2": "",
              "3": "󰝚",
-             "4": "",
+             "4": "󱎓",
              "5": "",
              "urgent": "",
              "focused": "",
@@ -92,9 +92,10 @@
     },
     "custom/playerctl": {
         "format": "{icon}  <span>{}</span>",
+        "exec": "playerctl -p spotify -a metadata --format '{\"text\": \"{{artist}} ~ {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+        "exec-if": "pgrep spotify",
         "return-type": "json",
         "max-length": 35,
-        "exec": "playerctl -p spotify -a metadata --format '{\"text\": \"{{artist}} ~ {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
         "on-click": "playerctl -p spotify play-pause",
         "on-scroll-up": "~/.config/hypr/scripts/playerctlVol --inc",
         "on-scroll-down": "~/.config/hypr/scripts/playerctlVol --dec",
@@ -108,8 +109,8 @@
         "on-click": "archlinux-logout",
     },
     "custom/viper-battery": {
-      "interval": 120,
+      "interval": 60,
       "format": "󰍽 {}%",
-      "exec": "razer-cli -ls | grep -Po 'charge: ([\\d]{1,3})' | sed 's/charge: //'"
+      "exec": "python ~/.local/bin/razer-cli -ls | grep -Po 'charge: ([0-9]{1,3})' | sed 's/charge: //'",
     }
 }
