@@ -85,9 +85,9 @@
         "on-click": "pavucontrol"
     },
     "custom/updates": {
+        "interval": 1800,
         "format": "  {}  |",
         "exec": "yay -Qu | wc -l", 
-        "interval": 1800,
         "on-click": "kitty --class popUp-update -T update -o font_size=13 -e yay -Syu && notify-send 'The system has been updated' "
     },
     "custom/playerctl": {
@@ -108,8 +108,8 @@
         "on-click": "archlinux-logout",
     },
     "custom/viper-battery": {
-      "format": "󰍽 {}%",
-      "exec": "razer-cli -ls | grep -Po 'charge: ([\\d]{1,3})' | sed 's/charge: //'",
       "interval": 120,
+      "format": "󰍽 {}%",
+      "exec": "razer-cli -ls | grep -Po 'charge: ([\\d]{1,3})' | sed 's/charge: //'"
     }
 }

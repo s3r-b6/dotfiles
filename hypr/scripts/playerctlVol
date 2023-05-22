@@ -13,8 +13,10 @@ fi
 volume=$(playerctl -p spotify volume)
 new_volume=$(echo "$volume $op 0.1" | bc)
 
-if (( $(echo "$new_volume < 0" | bc -l) )) || (( $(echo "$new_volume > 1" | bc -l) )); then
-    echo "New volume level is out of range (0 to 1)."
+if (( $(echo "$new_volume < 0" | bc -l) )); then
+    playerctl -p spotify volume 0
+elif (( $(echo "$new_volume > 1" | bc -l) )); then
+    playerctl -p spotify volume 1
 else
     playerctl -p spotify volume $new_volume
 fi
