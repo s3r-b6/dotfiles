@@ -49,7 +49,7 @@ lvim.builtin.treesitter.highlight.enable = true
 lvim.builtin.treesitter.ensure_installed = {
     'bash', 'c', 'javascript', 'json', 'lua',
     'python', 'typescript', 'tsx', 'css',
-    'rust', 'java', 'yaml',
+    'rust', 'java', 'yaml', 'sql'
 }
 -- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true
@@ -59,11 +59,13 @@ formatters.setup {
     {
         name = "prettier",
         args = { "--tab-width", "4" },
-    }
+    },
 }
+
 
 -- skip lsp config for jdtls, let nvim-jdtls handle it
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
+
 lvim.plugins = {
     {
         'norcalli/nvim-colorizer.lua',
@@ -89,7 +91,6 @@ lvim.plugins = {
             }
         end,
     },
-    { 'ThePrimeagen/vim-be-good' }, -- Prime's game
     { 'tpope/vim-surround' },       -- change/add surroundings
     { 'mbbill/undotree' },          -- undotree
     {
@@ -135,12 +136,18 @@ lvim.plugins = {
             })
         end,
     },
-    { 'vimwiki/vimwiki' }
+    { 'vimwiki/vimwiki' },
+    { 'tpope/vim-dadbod' },
+    { 'kristijanhusak/vim-dadbod-ui' }
 }
 
-
 vim.cmd [[
+    let g:dbs = {
+    \  'dev': 'mysql://root:1234@localhost:3306/'
+    \ }
+
     let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+    let g:db_ui_use_nerd_fonts = 1
     set nocompatible
     filetype plugin on
     syntax on
