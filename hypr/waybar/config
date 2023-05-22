@@ -14,41 +14,42 @@
 
     // Modules configuration
      "wlr/workspaces": {
-         "on-click": "activate",
-         "disable-scroll": true,
-         "all-outputs": false,
-         "sort-by-number": true,
-         "format": "{icon}",
-         //"format": "{name}",
-         "format-icons": {
-             "1": "",
-             "2": "",
-             "3": "󰝚",
-             "4": "󱎓",
-             "5": "",
-             "urgent": "",
-             "focused": "",
-             "default": ""
-         }
+        "on-click": "activate",
+        "disable-scroll": true,
+        "all-outputs": false,
+        "sort-by-number": true,
+        "format": "{icon}",
+        //"format": "{name}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "󰝚",
+            "4": "󱎓",
+            "5": "",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
      },
     "network": {
-      "interval": 5,
-      "format-wifi": " {essid}",
-      "format-ethernet": " {ipaddr}/{cidr}",
-      "format-linked": " {ifname} (No IP)",
-      "format-disconnected": "睊 Disconnected",
-      "format-disabled": "睊 Disabled",
-      "format-alt": " {bandwidthUpBits} |  {bandwidthDownBits}",
-      "tooltip-format": " {ifname} via {gwaddr}",
-      "on-click-right": "kitty --class popUp-network -T network -o font_size=13 -e nmtui"
+        "interval": 5,
+        "format-wifi": " {essid}",
+        "format-ethernet": " {ipaddr}/{cidr}",
+        "format-linked": " {ifname} (No IP)",
+        "format-disconnected": "睊 Disconnected",
+        "format-disabled": "睊 Disabled",
+        "format-alt": " {bandwidthUpBits} |  {bandwidthDownBits}",
+        "tooltip": false,
+        "on-click-right": "kitty --class popUp-network -T network -o font_size=13 -e nmtui"
     },
     "tray": {
         "format": "test",
         "spacing": 10,
     },
     "disk": {
-      "interval": 120,
-      "format": " {free}",
+        "interval": 120,
+        "format": " {free}",
+        "tooltip": false,
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
@@ -63,6 +64,7 @@
     "memory": {
         "interval": 10,
         "format": " {used:0.1f}G",
+        "tooltip": false,
     },
    
     "pulseaudio": {
@@ -75,20 +77,23 @@
             "stock image type shit": ["", "", ""],
             "default": ""
         },
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "tooltip": false,
     },
     "pulseaudio#mic" : {
         "format": "{format_source}",
         "format-source": " {volume}",
         "format-source-muted": " {volume}",
         "scroll-step": 2,
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "tooltip": false,
     },
     "custom/updates": {
         "interval": 1800,
         "format": "  {}  |",
         "exec": "yay -Qu | wc -l", 
-        "on-click": "kitty --class popUp-update -T update -o font_size=13 -e yay -Syu && notify-send 'The system has been updated' "
+        "on-click": "kitty --class popUp-update -T update -o font_size=13 -e yay -Syu && notify-send 'The system has been updated' ",
+        "tooltip": false,
     },
     "custom/playerctl": {
         "format": "{icon}  <span>{}</span>",
@@ -107,10 +112,12 @@
     "custom/powermenu": {
         "format": " ",
         "on-click": "archlinux-logout",
+        "tooltip": false,
     },
     "custom/viper-battery": {
-      "interval": 60,
-      "format": "󰍽 {}%",
-      "exec": "python ~/.local/bin/razer-cli -ls | grep -Po 'charge: ([0-9]{1,3})' | sed 's/charge: //'",
+        "interval": 60,
+        "format": "󰍽 {}%",
+        "exec": "python ~/.local/bin/razer-cli -ls | grep -Po 'charge: ([0-9]{1,3})' | sed 's/charge: //'",
+        "tooltip": false,
     }
 }
