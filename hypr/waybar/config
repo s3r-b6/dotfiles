@@ -1,15 +1,14 @@
 {
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    //"height": 35, // Waybar height (to be removed for auto height)
     "margin-top": 6,
     "margin-left": 6,
     "margin-right": 6,
-    "margin-bottom": 6,
+    "margin-bottom": 0,
     
     "output": ["DP-1", "HDMI-A-1"],
 
-    "modules-left": ["custom/updates", "disk","cpu", "memory", "network"],
+    "modules-left": ["custom/updates", "disk","cpu", "memory", "network", "custom/viper-battery"],
     "modules-center": ["wlr/workspaces"],
     "modules-right": ["custom/playerctl", "pulseaudio","pulseaudio#mic","clock", "tray","custom/powermenu"],
 
@@ -32,23 +31,23 @@
              "default": ""
          }
      },
-  "network": {
-    "interval": 5,
-    "format-wifi": " {essid}",
-    "format-ethernet": " {ipaddr}/{cidr}",
-    "format-linked": " {ifname} (No IP)",
-    "format-disconnected": "睊 Disconnected",
-    "format-disabled": "睊 Disabled",
-    "format-alt": " {bandwidthUpBits} |  {bandwidthDownBits}",
-    "tooltip-format": " {ifname} via {gwaddr}",
-    "on-click-right": "kitty --class popUp-network -T network -o font_size=13 -e nmtui"
-  },
+    "network": {
+      "interval": 5,
+      "format-wifi": " {essid}",
+      "format-ethernet": " {ipaddr}/{cidr}",
+      "format-linked": " {ifname} (No IP)",
+      "format-disconnected": "睊 Disconnected",
+      "format-disabled": "睊 Disabled",
+      "format-alt": " {bandwidthUpBits} |  {bandwidthDownBits}",
+      "tooltip-format": " {ifname} via {gwaddr}",
+      "on-click-right": "kitty --class popUp-network -T network -o font_size=13 -e nmtui"
+    },
     "tray": {
         "format": "test",
         "spacing": 10,
     },
     "disk": {
-      "interval": 30,
+      "interval": 120,
       "format": " {free}",
     },
     "clock": {
@@ -57,7 +56,7 @@
         "format-alt": " {:%a %b %d, %G}"
     },
     "cpu": {
-        "interval": 1,
+        "interval": 3,
         "format": " {usage:>2}% |",
         "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
     },
@@ -85,30 +84,32 @@
         "scroll-step": 2,
         "on-click": "pavucontrol"
     },
-
     "custom/updates": {
-        "exec": "yay -Qu | wc -l", 
-        "interval": 3600,
         "format": "  {}  |",
+        "exec": "yay -Qu | wc -l", 
+        "interval": 1800,
         "on-click": "kitty --class popUp-update -T update -o font_size=13 -e yay -Syu && notify-send 'The system has been updated' "
     },
-
-  "custom/playerctl": {
-    "format": "{icon}  <span>{}</span>",
-    "return-type": "json",
-    "max-length": 35,
-    "exec": "playerctl -p spotify -a metadata --format '{\"text\": \"{{artist}} ~ {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
-    "format-icons": {
-      "Playing": "<span foreground='#fff'></span>",
-      "Paused": "<span foreground='#fff'></span>"
+    "custom/playerctl": {
+        "format": "{icon}  <span>{}</span>",
+        "return-type": "json",
+        "max-length": 35,
+        "exec": "playerctl -p spotify -a metadata --format '{\"text\": \"{{artist}} ~ {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+        "on-click": "playerctl -p spotify play-pause",
+        "on-scroll-up": "~/.config/hypr/scripts/playerctlVol --inc",
+        "on-scroll-down": "~/.config/hypr/scripts/playerctlVol --dec",
+        "format-icons": {
+          "Playing": "<span foreground='#fff'></span>",
+          "Paused": "<span foreground='#fff'></span>"
+        },
     },
-    "on-scroll-up": "~/.config/hypr/scripts/playerctlVol --inc",
-    "on-scroll-down": "~/.config/hypr/scripts/playerctlVol --dec",
-    "on-click": "playerctl -p spotify play-pause",
-},
-
-  "custom/powermenu": {
-      "format": " ",
-      "on-click": "archlinux-logout",
-  }
+    "custom/powermenu": {
+        "format": " ",
+        "on-click": "archlinux-logout",
+    },
+    "custom/viper-battery": {
+      "format": "󰍽 {}%",
+      "exec": "razer-cli -ls | grep -Po 'charge: ([\\d]{1,3})' | sed 's/charge: //'",
+      "interval": 120,
+    }
 }

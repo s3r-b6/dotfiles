@@ -5,9 +5,8 @@
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.0);
+    background-color: rgba(43, 48, 59, 0);
 }
-
 
 button {
     /* Use box-shadow instead of border so the text isn't offset */
@@ -51,7 +50,7 @@ button:hover {
 }
 
 #mode {
-    background-color: #64727D;
+    background-color: #64727d;
     border-bottom: 3px solid #ffffff;
 }
 
@@ -68,7 +67,7 @@ button:hover {
 #wireplumber,
 #custom-media,
 #custom-sep,
-#custom-updates, 
+#custom-updates,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -146,6 +145,14 @@ label:focus {
 
 #backlight {
     background-color: #90b1b1;
+}
+
+#custom-viper-battery {
+    background-color: #343434;
+    border-radius: 10px;
+    border: 2px solid #b29fdc;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 #network {
