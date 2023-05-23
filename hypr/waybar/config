@@ -1,28 +1,27 @@
 {
   "layer": "top", 
   "position": "top",
-  //"height": 25,
   "margin-top": 0,
   "margin-left": 0,
   "margin-right": 0,
   "margin-bottom": 0,
   
   "modules-left":   [
-      "custom/powermenu",
-      "battery",
-      "backlight",
-      "cpu",
-      "memory",
-      "network",
-      "custom/updates"
+    "custom/powermenu",
+    "battery",
+    "backlight",
+    "cpu",
+    "memory",
+    "network",
+    "custom/updates"
   ],
   "modules-center": ["wlr/workspaces"],
   "modules-right":  [
-      "pulseaudio",
-      "pulseaudio#mic",
-      "custom/playerctl",
-      "tray",
-      "clock"
+    "pulseaudio",
+    "pulseaudio#mic",
+    "custom/playerctl",
+    "tray",
+    "clock"
   ],
 
   "wlr/workspaces": {
@@ -32,34 +31,35 @@
     "sort-by-number": true,
     "format": "{icon}",
     "format-icons": {
-        "1": "",
-        "2": "",
-        "3": "",
-        "4": "",
-        "5": "",
+        "1": "",
+        "2": "",
+        "3": "󰝚",
+        "4": "󱎓",
+        "5": "",        
         "urgent": "",
         "focused": "",
         "default": ""
     }
-   },
+  },
   "network": {
-      "interval": 5,
-      "format-wifi": " {essid}",
-      "format-ethernet": " {ipaddr}/{cidr}",
-      "format-linked": " {ifname} (No IP)",
-      "format-disconnected": "睊 Disconnected",
-      "format-disabled": "睊 Disabled",
-      "format-alt": " {bandwidthUpBits} |  {bandwidthDownBits}",
-      "tooltip-format": " {ifname} via {gwaddr}",
-      "on-click-right": "kitty --class popUp-network -T network -o font_size=13 -e nmtui"
+    "interval": 5,
+    "format-wifi": " {essid}",
+    "format-ethernet": " {ipaddr}/{cidr}",
+    "format-linked": " {ifname} (No IP)",
+    "format-disconnected": "睊 Disconnected",
+    "format-disabled": "睊 Disabled",
+    "format-alt": " {bandwidthUpBits} |  {bandwidthDownBits}",
+    "tooltip-format": " {ifname} via {gwaddr}",
+    "on-click-right": "kitty --class popUp-network -T network -o font_size=13 -e nmtui"
   },
   "tray": {
-      "format": "test",
-      "spacing": 10,
+    "format": "test",
+    "spacing": 10,
   },
   "disk": {
     "interval": 30,
     "format": " {free}",
+    "tooltip": false,
   },
   "clock": {
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
@@ -73,6 +73,7 @@
   "backlight": {
     "interval": 3,
     "format": "𖤓 {percent}%",
+    "tooltip": false,
   },
   "battery": {
   	"states": {
@@ -81,54 +82,60 @@
   	"format": "{icon}  {capacity}% ",
   	"format-charging": "☇ {capacity}% ",
   	"format-plugged":  "🔌{capacity}% ",
-  	"format-icons": [ "", "", "", "", "" ]
+  	"format-icons": [ "", "", "", "", "" ],
+    "tooltip": false,
   },
   "memory": {
-      "interval": 10,
-      "format": " {used:0.1f}G",
+    "interval": 10,
+    "format": " {used:0.1f}G",
+    "tooltip": false,
   },
   "pulseaudio": {
-      "scroll-step": 2, // %, can be a float
-      "format": "{icon} {volume} ",
-      "format-bluetooth": "{volume}% {icon} {format_source} ",
-      "format-bluetooth-muted": "󰝟 {icon} {format_source} ",
-      "format-muted": "󰝟 {format_source} ",
-      "format-icons": {
-          "stock image type shit": ["", "", ""],
-          "default": "🎧"
-      },
-      "on-click": "pavucontrol",
-      "on-click-right": "blueberry"
+    "scroll-step": 2, // %, can be a float
+    "format": "{icon} {volume} ",
+    "format-bluetooth": "{volume}% {icon} {format_source} ",
+    "format-bluetooth-muted": "󰝟 {icon} {format_source} ",
+    "format-muted": "󰝟 {format_source} ",
+    "format-icons": {
+        "stock image type shit": ["", "", ""],
+        "default": "🎧"
+    },
+    "on-click": "pavucontrol",
+    "on-click-right": "blueberry"
   },
   "pulseaudio#mic" : {
-      "format": "{format_source}",
-      "format-source": " {volume}",
-      "format-source-muted": " {volume}",
-      "scroll-step": 2,
-      "on-click": "pavucontrol",
-      "on-click-right": "blueberry"
+    "format": "{format_source}",
+    "format-source": " {volume}",
+    "format-source-muted": " {volume}",
+    "scroll-step": 2,
+    "on-click": "pavucontrol",
+    "on-click-right": "blueberry"
   },
   "custom/updates": {
-      "exec": "yay -Qu | wc -l",
-      "interval": 3600,
-      "format": "  {} ",
-      "on-click": "kitty --class popUp-update -T update -o font_size=13 -e yay -Syu && notify-send 'The system has been updated' "
+    "exec": "yay -Qu | wc -l",
+    "interval": 3600,
+    "format": "  {} ",
+    "on-click": "kitty --class popUp-update -T update -o font_size=13 -e yay -Syu && notify-send 'The system has been updated' ",
+    "tooltip": false,
   },
   "custom/playerctl": {
     "format": "{icon}  <span>{}</span>",
+    "exec": "playerctl -p spotify -a metadata --format '{\"text\": \"{{markup_escape(artist)}} ~ {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "exec-if": "pgrep spotify",
     "return-type": "json",
     "max-length": 35,
-    "exec": "playerctl -p spotify -a metadata --format '{\"text\": \"{{artist}} ~ {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
-    "on-click-middle": "playerctl play-pause",
-    "on-click": "playerctl previous",
-    "on-click-right": "playerctl next",
+    "on-click": "playerctl -p spotify play-pause",
+    "on-scroll-up": "~/.config/hypr/scripts/playerctlVol --inc",
+    "on-scroll-down": "~/.config/hypr/scripts/playerctlVol --dec",
     "format-icons": {
       "Playing": "<span foreground='#fff'></span>",
       "Paused": "<span foreground='#fff'></span>"
-    }
+    },
+    "tooltip": false,
   },
   "custom/powermenu": {
-      "format": "",
-      "on-click": "archlinux-logout",
+    "format": "",
+    "on-click": "archlinux-logout",
+    "tooltip": false,
   }
 }

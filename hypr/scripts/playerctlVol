@@ -1,0 +1,22 @@
+#/bin/bash
+# dumb little script
+if [[ "$1" == "--inc" ]]; then
+  op="+"
+elif [[ "$1" == "--dec" ]]; then
+  op="-"
+else
+  echo "Usage: $0 [--inc|--dec]" >&2
+  exit 1
+fi
+
+
+volume=$(playerctl -p spotify volume)
+new_volume=$(echo "$volume $op 0.1" | bc)
+
+if (( $(echo "$new_volume < 0" | bc -l) )); then
+    playerctl -p spotify volume 0
+elif (( $(echo "$new_volume > 1" | bc -l) )); then
+    playerctl -p spotify volume 1
+else
+    playerctl -p spotify volume $new_volume
+fi

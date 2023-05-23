@@ -1,7 +1,6 @@
 * {
     font-family: Jet Brains Mono;
     font-weight: bold;
-    font-size: 14px;
 }
 
 window#waybar {
@@ -24,6 +23,7 @@ button:hover {
 }
 
 #workspaces {
+    font-size: 18px;
     margin-right: 15px;
 }
 
@@ -34,13 +34,11 @@ button:hover {
 #workspaces button:hover {
     background: #11111b;
     color: #cdd6f4;
-    
 }
 
 #workspaces button.focused {
     color: #a6adc8;
     background: #eba0ac;
-    
 }
 
 #workspaces button.urgent {
@@ -64,15 +62,14 @@ button:hover {
 #custom-updates,
 #tray,
 #mode {
+    font-size: 14px;
     padding: 0 10px;
     color: #ffffff;
 }
 
 #window,
 #workspaces {
-    
     padding: 0px 10px;
-    
 }
 
 .modules-left > widget:first-child > #workspaces {
