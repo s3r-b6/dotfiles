@@ -23,6 +23,12 @@ lvim.keys.normal_mode['<leader>Y'] = '"+yg_'
 lvim.keys.normal_mode['<leader>y'] = '"+y'
 lvim.keys.normal_mode['<leader>yy'] = '"+yy'
 
+-- Splits
+lvim.keys.normal_mode["<leader>bor"] = ":vsplit<CR>"
+lvim.keys.normal_mode["<leader>bod"] = ":split<CR>"
+lvim.keys.normal_mode["<leader>bq"] = ":q<CR>"
+lvim.keys.normal_mode["<leader>b="] = "<C-W>="
+lvim.keys.normal_mode["<leader>q"] = ""
 
 -- Paste from clipboard
 lvim.keys.normal_mode['<leader>p'] = '"+p'
