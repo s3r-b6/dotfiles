@@ -115,9 +115,10 @@
         "tooltip": false,
     },
     "custom/viper-battery": {
-        "interval": 60,
-        "format": "󰍽 {}%",
-        "exec": "python ~/.local/bin/razer-cli -ls | grep -Po 'charge: ([0-9]{1,3})' | sed 's/charge: //'",
+        "format": "{}",
+        "exec": "~/.config/hypr/scripts/viper-battery.rs",
         "tooltip": false,
+        "interval": 90,
+        "max-length": 35,
     }
 }
