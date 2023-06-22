@@ -1,5 +1,7 @@
 let mapleader=" "
 
+Plug 'tpope/vim-surround'
+Plug 'machakann/vim-highlightedyank'
 
 """ Common settings -------------------------
 set showmode
@@ -8,19 +10,16 @@ set incsearch
 set relativenumber
 set number
 
+set ideajoin
+set clipboard+=ideaput
+
 """ Plugins ---------------------------------
-Plug 'tpope/vim-surround'
-Plug 'machakann/vim-highlightedyank'
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 set NERDTree
 set quickscope
 set which-key
 set notimeout
-
-""" Idea specific settings ------------------
-set ideajoin
-set ideastatusicon=gray
 
 """ IdeaVim ---------------------------------
 nnoremap \e :e ~/.ideavimrc<CR>
@@ -36,6 +35,12 @@ nmap KE         :action ShowErrorDescription<CR>
 
 nmap <leader>/  :action CommentByLineComment<CR>
 vmap <leader>/  :action CommentByLineComment<CR>
+
+""" Copy/Paste to SystemClipBoard -----------
+nmap <leader>y  :action $Copy<CR><Esc>
+vmap <leader>y  :action $Copy<CR><Esc>
+nmap <leader>p  :action $Paste<CR>
+vmap <leader>p  :action $Paste<CR>
 
 """ Goto ------------------------------------
 nnoremap gc :action GotoClass<CR>
