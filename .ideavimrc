@@ -1,11 +1,5 @@
 let mapleader=" "
 
-""" Plugins  --------------------------------
-Plug 'tpope/vim-surround'
-Plug 'machakann/vim-highlightedyank'
-
-set quickscope
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 """ Common settings -------------------------
 set showmode
@@ -14,9 +8,16 @@ set incsearch
 set relativenumber
 set number
 
-""" Idea specific settings ------------------
-set ideajoin
-set ideastatusicon=gray
+""" Plugins ---------------------------------
+Plug 'tpope/vim-surround'
+Plug 'machakann/vim-highlightedyank'
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+set NERDTree
+set quickscope
+set which-key
+set notimeout
+
 """ Idea specific settings ------------------
 set ideajoin
 set ideastatusicon=gray
@@ -24,6 +25,7 @@ set ideastatusicon=gray
 """ IdeaVim ---------------------------------
 nnoremap \e :e ~/.ideavimrc<CR>
 nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+nnoremap \f :action SearchEverywhere<CR>
 
 """ Binds -----------------------------------
 nmap <leader>lf :action ReformatCode<CR>
@@ -31,12 +33,15 @@ nmap <leader>lr :action RenameElement<CR>
 nmap <leader>la :action ShowIntentionActions<CR>
 nmap K          :action QuickJavaDoc<CR>
 nmap KE         :action ShowErrorDescription<CR>
-nmap <leader>f  :action SearchEverywhere<CR>
+
+nmap <leader>/  :action CommentByLineComment<CR>
+vmap <leader>/  :action CommentByLineComment<CR>
 
 """ Goto ------------------------------------
 nnoremap gc :action GotoClass<CR>
 nnoremap gi :action GotoImplementation<CR>
 nnoremap gd :action GotoDeclaration<CR>
+nnoremap gu :action FindUsages<CR>
 nnoremap gp :action GotoSuperMethod<CR>
 nnoremap ge :action GotoNextError<CR>
 nnoremap gE :action GotoPreviousError<CR>
@@ -46,22 +51,27 @@ nnoremap gf :action Forward<CR>
 """ Buffer ----------------------------------
 nmap <leader>bb :action PreviousTab<CR>
 nmap <leader>bn :action NextTab<CR>
-nmap <leader>bq :action CloseActiveTab<CR>
+
+""" Tabs ------------------------------------
+nmap <leader>q :action CloseContent<CR>
+nmap <leader>Q :action ReopenClosedTab<CR>
 
 """ Splits ----------------------------------
 nmap <leader>bor :action SplitVertically<CR>
-nmap <leader>bx  :action Unsplit<CR>
+nmap <leader>bod :action SplitHorizontally<CR>
+nmap <leader>bq  :action Unsplit<CR>
+nmap <leader>bqa :action UnsplitAll<CR>
 nmap <M-h>       :action PrevSplitter<CR>
 nmap <M-l>       :action NextSplitter<CR>
 
 """ Project Tree ----------------------------
-nmap <leader>es  :action ActivateProjectToolWindow<CR>
-nmap <leader>eh  :action HideActiveWindow<CR>
+nmap <leader>e  :NERDTree<CR>
+nmap <leader>E  :action HideActiveWindow<CR>
 
 """ Run -------------------------------------
 nnoremap ,r :action Run<CR>
-nnoremap ,c :action RunClass<CR>
 nnoremap ,s :action Stop<CR>
+nnoremap ,c :action RunClass<CR>
 nnoremap ,d :action Debug<CR>
 
 """ Term ------------------------------------
