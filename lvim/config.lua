@@ -133,6 +133,10 @@ lvim.plugins = {
                 root_dir = vim.fs.dirname(
                     vim.fs.find({ ".gradlew", ".git", "mvnw", "pom.xml", "build.gradle" }, { upward = true })[1]
                 ),
+                settings = {
+                    ["java.format.settings.profile"] = "GoogleStyle",
+                    ["java.format.settings.url"] = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml"
+                }
             }
             vim.api.nvim_create_autocmd("FileType", {
                 pattern = "java",

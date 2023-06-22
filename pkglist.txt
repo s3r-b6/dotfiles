@@ -1,4 +1,6 @@
 accountsservice
+adobe-source-han-sans-cn-fonts
+adobe-source-han-sans-jp-fonts
 aic94xx-firmware
 alsa-firmware
 alsa-plugins
@@ -63,6 +65,7 @@ fsarchiver
 fzf
 gamemode
 gamescope
+gimp
 git
 gksu
 gnu-netcat
@@ -85,6 +88,7 @@ hyprland
 hyprpaper
 hyprpicker-git
 imagemagick
+intellij-idea-community-edition-jre
 irssi
 jdk
 jfsutils
@@ -93,6 +97,7 @@ kitty
 lapack
 laptop-detect
 lazygit
+ldtk
 less
 libdisplay-info
 libfido2
@@ -131,6 +136,7 @@ mobile-broadband-provider-info
 modemmanager
 mtools
 nano
+nasm
 nbd
 ncurses
 ndisc6
@@ -144,6 +150,7 @@ networkmanager-vpnc
 nfs-utils
 nilfs-utils
 noto-fonts
+noto-fonts-emoji
 npm
 ntfs-3g
 ntp
@@ -208,6 +215,7 @@ spotifywm-git
 sqlitebrowser-cipher
 squashfs-tools
 steam-tweaks
+strace
 stremio
 sudo
 surfn-icons-git
@@ -217,6 +225,7 @@ terminus-font
 testdisk
 the_silver_searcher
 thunar
+thunar-archive-plugin
 tmux
 tpm2-tss
 ttf-dejavu

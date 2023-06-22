@@ -6,6 +6,7 @@
 !/lvim
 lvim/plugin/packer_compiled.lua
 lvim/lazy-lock.json
+!/.ideavimrc
 !/README.md
 !/preview/
 !/pkglist.txt
