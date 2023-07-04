@@ -66,6 +66,9 @@ formatters.setup {
         name = "prettier",
         args = { "--tab-width", "4" },
     },
+    {
+        name = "ocamlformat",
+    },
 }
 
 

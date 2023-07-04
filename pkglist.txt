@@ -157,6 +157,7 @@ ntp
 numlockx
 nvme-cli
 oh-my-zsh-git
+opam
 open-iscsi
 openconnect
 openrazer-meta
