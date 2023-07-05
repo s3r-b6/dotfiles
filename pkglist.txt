@@ -304,7 +304,6 @@ xorg-xwd
 xorg-xwininfo
 xorg-xwud
 yay
-zellij
 zsh
 zsh-autosuggestions-git
 zsh-fast-syntax-highlighting

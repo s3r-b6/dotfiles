@@ -11,7 +11,7 @@ fn main() {
 
     let str = String::from_utf8(output.stdout).unwrap();
     let charge_pos = str.find("charge: ").unwrap() + 8;
-    let charge_percent = str.get(charge_pos..charge_pos + 2).unwrap().trim();
+    let charge_percent = str.get(charge_pos..charge_pos + 3).unwrap().trim();
 
     if charge_percent == "0" {
         println!("󰍾");

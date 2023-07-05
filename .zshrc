@@ -1,7 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
 export TERM='kitty'
-export ZELLIJ_AUTO_EXIT="true"
-export ZELLIJ_AUTO_ATTACH="true"
 export PATH="$HOME/.local/bin:$PATH"
 
 alias lvim='~/.local/bin/lvim'
@@ -16,19 +14,6 @@ plugins=(git z)
 source $ZSH/oh-my-zsh.sh
 source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-#open ZelliJ on shell start
-if [[ -z "$ZELLIJ" ]]; then
-    if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]] && pgrep zellij >dev/null ; then
-        zellij attach
-    else
-        zellij
-    fi
-
-    if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
-        exit
-    fi
-fi
 
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nvim'
