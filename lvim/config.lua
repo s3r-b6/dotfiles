@@ -16,7 +16,6 @@ lvim.log.level = 'info'
 lvim.leader = 'space'
 lvim.keys.normal_mode['<C-s>'] = ':w<cr>'
 lvim.keys.normal_mode['<leader>w'] = ''
-
 -- Copy to clipboard
 lvim.keys.visual_mode['<leader>y'] = '"+y'
 lvim.keys.normal_mode['<leader>Y'] = '"+yg_'
@@ -29,6 +28,13 @@ lvim.keys.normal_mode["<leader>bod"] = ":split<CR>"
 lvim.keys.normal_mode["<leader>bq"] = ":q<CR>"
 lvim.keys.normal_mode["<leader>b="] = "<C-W>="
 lvim.keys.normal_mode["<leader>q"] = ""
+
+-- Newline
+lvim.keys.normal_mode['[ '] = 'O<ESC>'
+lvim.keys.normal_mode['] '] = 'o<ESC>'
+-- Errors
+lvim.keys.normal_mode['[q'] = ':cprevious<CR>'
+lvim.keys.normal_mode[']q'] = ':cnext<CR>'
 
 -- Paste from clipboard
 lvim.keys.normal_mode['<leader>p'] = '"+p'
@@ -74,8 +80,9 @@ formatters.setup {
 
 -- skip lsp config for jdtls, let nvim-jdtls handle it
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
-
+lvim.builtin.which_key.setup.plugins.registers = true
 lvim.plugins = {
+    { 'tpope/vim-repeat' },
     {
         'norcalli/nvim-colorizer.lua',
         config = function()
