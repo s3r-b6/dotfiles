@@ -12,6 +12,7 @@ lvim/lazy-lock.json
 !/pkglist.txt
 !/vis
 !/neofetch
+!/nvim
 !/hypr
 !/zellij
 !/.gitignore
