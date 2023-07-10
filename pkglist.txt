@@ -32,6 +32,7 @@ bind
 blas
 broadcom-wl-dkms
 btrfs-progs
+catppuccin-gtk-theme-mocha
 cblas
 chaotic-keyring
 cliphist
@@ -156,6 +157,7 @@ ntfs-3g
 ntp
 numlockx
 nvme-cli
+nwg-look
 oh-my-zsh-git
 opam
 open-iscsi
@@ -211,7 +213,7 @@ slurp
 smartmontools
 sof-firmware
 spotify
-spotify-adblock-git
+spotify-adblock
 spotifywm-git
 sqlitebrowser-cipher
 squashfs-tools
@@ -222,6 +224,7 @@ sudo
 surfn-icons-git
 syslinux
 tcpdump
+tela-circle-icon-theme-dracula
 terminus-font
 testdisk
 the_silver_searcher

@@ -1,28 +1,27 @@
 * {
     font-family: Jet Brains Mono;
+	padding-top: 1px;
     font-weight: bold;
+	min-height: 10px;
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 button {
-    /* Use box-shadow instead of border so the text isn't offset */
     box-shadow: inset 0 -3px transparent;
-    /* Avoid rounded borders under each button name */
     border: none;
     border-radius: 0;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
     background: inherit;
     box-shadow: inset 0 -3px #ffffff;
 }
 
 #workspaces {
-    font-size: 24px;
+    font-size: 20px;
     margin-right: 15px;
 }
 
@@ -40,10 +39,6 @@ button:hover {
     color: #a6adc8;
     background: #eba0ac;
     border-radius: 10px;
-}
-
-#workspaces button.urgent {
-    background-color: #eb4d4b;
 }
 
 #mode {
@@ -67,7 +62,7 @@ button:hover {
 #scratchpad,
 #custom-playerctl,
 #custom-viper-battery {
-    padding: 0 10px;
+    padding: 0 8 0 6px;
     font-size: 14px;
     color: #ffffff;
 }
@@ -75,9 +70,9 @@ button:hover {
 #window,
 #workspaces {
     border-radius: 10px;
-    padding: 0px 10px;
+    padding: 0px 0px;
     background-color: #343434;
-    border: 2px solid #68c136;
+    border: 1px solid #b29fdc;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -93,7 +88,7 @@ button:hover {
 #clock {
     background-color: #343434;
     border-radius: 10px;
-    border: 2px solid #418bc4;
+    border: 1px solid #b29fdc;
     margin-right: 10px;
 }
 
@@ -112,7 +107,7 @@ label:focus {
     border-radius: 10px 0px 0px 10px;
     color: #ffffff;
     background-color: #343434;
-    border: 2px solid #b29fdc;
+    border: 1px solid #b29fdc;
     padding-left: 10px;
     padding-right: 5px;
     border-right: 0px;
@@ -122,7 +117,7 @@ label:focus {
     border-radius: 0px 10px 10px 0px;
     color: #ffffff;
     background-color: #343434;
-    border: 2px solid #b29fdc;
+    border: 1px solid #b29fdc;
     padding-left: 0px;
     border-left: 0px;
     margin-right: 15px;
@@ -132,7 +127,7 @@ label:focus {
     border-radius: 0px 10px 10px 0px;
     color: #ffffff;
     background-color: #343434;
-    border: 2px solid #b29fdc;
+    border: 1px solid #b29fdc;
     padding-left: 0px;
     border-left: 0px;
     margin-right: 15px;
@@ -145,7 +140,7 @@ label:focus {
 #custom-viper-battery {
     background-color: #343434;
     border-radius: 10px;
-    border: 2px solid #b29fdc;
+    border: 1px solid #b29fdc;
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -153,7 +148,7 @@ label:focus {
 #network {
     background-color: #343434;
     border-radius: 10px;
-    border: 2px solid #b29fdc;
+    border: 1px solid #b29fdc;
     margin-right: 10px;
 }
 
@@ -166,7 +161,7 @@ label:focus {
     background-color: #343434;
     border-radius: 10px 0px 0px 10px;
     color: #ffffff;
-    border: 2px solid #e67e80;
+    border: 1px solid #b29fdc;
     border-right: 0px;
 }
 
@@ -174,7 +169,7 @@ label:focus {
     color: #ffffff;
     margin-right: 15px;
     border-radius: 0px 10px 10px 0px;
-    border: 2px solid #e67e80;
+    border: 1px solid #b29fdc;
     border-left: 0px;
     padding-left: 0px;
 }
@@ -211,31 +206,17 @@ label:focus {
     border-radius: 10px 0px 0px 10px;
     color: #ffffff;
     background-color: #343434;
-    border: 2px solid #b29fdc;
+    border: 1px solid #b29fdc;
     padding-left: 10px;
     border-right: 0px;
 }
 
-#temperature {
-    border-radius: 0px 10px 10px 0px;
-    color: #ffffff;
-    background-color: #343434;
-    border: 2px solid #b29fdc;
-    border-left: 0px;
-    padding-left: 0px;
-}
-
-#temperature.critical {
-    border-radius: 10px;
-    color: #c6020c;
-    background-color: #eb4d4b;
-}
-
 #tray {
     padding-left: 10px;
+    padding-right: 10px;
     border-radius: 10px 10px 10px 10px;
     background-color: #343434;
-    border: 2px solid #829b6e;
+    border: 1px solid #b29fdc;
 }
 
 #tray > .passive {
@@ -247,60 +228,10 @@ label:focus {
     background-color: #eb4d4b;
 }
 
-#idle_inhibitor {
-    background-color: #2d3436;
-}
-
-#idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
-}
-
-#mpd {
-    background-color: #66cc99;
-    color: #2a5c45;
-}
-
-#mpd.disconnected {
-    background-color: #f53c3c;
-}
-
-#mpd.stopped {
-    background-color: #90b1b1;
-}
-
-#mpd.paused {
-    background-color: #51a37a;
-}
-
-#language {
-    background: #00b093;
-    color: #740864;
-    padding: 0 5px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#keyboard-state {
-    background: #97e1ad;
-    color: #000000;
-    padding: 0 0px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#keyboard-state > label {
-    padding: 0 5px;
-}
-
-#keyboard-state > label.locked {
-    background: rgba(0, 0, 0, 0.2);
-}
-
 #custom-playerctl {
     border-radius: 10px;
     background-color: #343434;
-    border: 2px solid #dbbc7f;
+    border: 1px solid #b29fdc;
     margin-right: 15px;
     padding-left: 10px;
     padding-right: 10px;
@@ -309,7 +240,7 @@ label:focus {
 #custom-powermenu {
     border-radius: 10px 10px 10px 10px;
     background-color: #343434;
-    border: 2px solid #f38ba8;
+    border: 1px solid #b29fdc;
     padding-left: 0px;
     padding-right: 14px;
     margin-right: 0px;
