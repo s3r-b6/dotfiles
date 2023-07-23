@@ -24,6 +24,7 @@ return {
 			}
 		end,
 	},
+	{ 'mhartington/formatter.nvim' },
 	{
 		'neovim/nvim-lspconfig',
 		dependencies = {
@@ -42,7 +43,7 @@ return {
 			'rafamadriz/friendly-snippets',
 		},
 	},
-	{ 'folke/which-key.nvim',    opts = { plugins = { registers = true } } },
+	{ 'folke/which-key.nvim',      opts = { plugins = { registers = true } } },
 	{
 		'lewis6991/gitsigns.nvim',
 		opts = {
@@ -125,28 +126,5 @@ return {
 		'nvim-treesitter/nvim-treesitter',
 		dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects', },
 		build = ':tsupdate',
-	},
-	{
-		"jay-babu/mason-null-ls.nvim",
-		event = { "bufreadpre", "bufnewfile" },
-		dependencies = {
-			"williamboman/mason.nvim",
-			"jose-elias-alvarez/null-ls.nvim",
-		},
-		config = function()
-			require("mason").setup()
-			require("mason-null-ls").setup({
-				ensure_installed = {},
-				automatic_installation = false,
-				handlers = {},
-			})
-			require("null-ls").setup({
-				sources = {
-					name = "prettier",
-					args = { "--tab-width", "4" },
-				},
-				{ name = "ocamlformat", },
-			})
-		end
 	},
 }

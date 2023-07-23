@@ -24,6 +24,48 @@ local function setup_plugins()
 
 	pcall(require('telescope').load_extension, 'fzf')
 
+	local util = require 'formatter.util'
+	local mason_bin = "~/.local/share/nvim/mason/bin/"
+	local formatter_settings = {
+		css = { function()
+			return {
+				exe = mason_bin .. "prettier",
+				args = { util.escape_path(util.get_current_buffer_file_path()), },
+				stdin = true
+			}
+		end,
+		},
+		json = { function()
+			return {
+				exe = mason_bin .. "fixjson",
+				args = { util.get_current_buffer_file_name() },
+				stdin = true
+			}
+		end
+		},
+
+		["*"] = {
+			require("formatter.filetypes.any").remove_trailing_whitespace
+		}
+	}
+
+	require('formatter').setup {
+		logging = true,
+		log_level = vim.log.levels.WARN,
+		filetype = formatter_settings,
+	}
+
+	vim.keymap.set("n", "<leader>lf", function()
+			if formatter_settings[vim.bo.filetype] ~= nil then
+				vim.cmd([[Format]])
+			else
+				vim.lsp.buf.format()
+			end
+		end,
+		{
+			desc =
+			"Format the current buffer. If there is a config in formatter.nvim, it will use that, if not, it will try to use LSP formatting"
+		})
 
 	require('nvim-tree').setup({
 		sync_root_with_cwd = true,
@@ -37,10 +79,11 @@ local function setup_plugins()
 	-- [[ Configure Treesitter ]]
 	require('nvim-treesitter.configs').setup {
 		ensure_installed = {
-			'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim'
+			'c', 'cpp', 'go', 'lua', 'python', 'rust',
+			'tsx', 'typescript', 'vimdoc', 'vim', 'ocaml'
 		},
 
-		auto_install = false,
+		auto_install = true,
 
 		highlight = { enable = true },
 		indent = { enable = true },
@@ -100,7 +143,7 @@ local function setup_plugins()
 	}
 
 	local servers = {
-		-- gopls = {},
+		gopls = {},
 		-- pyright = {},
 		clangd = {},
 		ocamllsp = {},
@@ -134,19 +177,27 @@ local function setup_plugins()
 		vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation' })
 		vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { desc = 'Signature Documentation' })
 
-		vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-			vim.lsp.buf.format()
-		end, { desc = 'Format current buffer with LSP' })
-		vim.keymap.set('n', '<leader>lf', ':Format<CR>', { desc = '[F]ormat', silent = true })
+		vim.diagnostic.config({
+			float = {
+				focusable = false,
+				style = "minimal",
+				border = "rounded",
+				source = "always",
+				header = "",
+				prefix = "",
+			},
+			signs = true,
+			underline = true,
+			update_in_insert = true,
+		})
 	end
 
-
+	require('mason').setup()
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-	local mason_lspconfig = require 'mason-lspconfig'
-	mason_lspconfig.setup {
-		ensure_installed = vim.tbl_keys(servers),
-	}
+	local mason_lspconfig = require('mason-lspconfig')
+
+	mason_lspconfig.setup { ensure_installed = vim.tbl_keys(servers), }
 	mason_lspconfig.setup_handlers {
 		function(server_name)
 			require('lspconfig')[server_name].setup {
