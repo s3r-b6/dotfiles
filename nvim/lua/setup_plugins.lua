@@ -8,6 +8,8 @@ local function setup_plugins()
 		pattern = '*',
 	})
 
+	require('nvim-highlight-colors').setup {}
+
 	require('numb').setup {
 		show_numbers = true,
 		show_cursorline = true,
@@ -51,6 +53,14 @@ local function setup_plugins()
 			}
 		end
 		},
+		ocaml = { function()
+			return {
+				exe = "ocamlformat",
+				args = { util.escape_path(util.get_current_buffer_file_path()), },
+				stdin = true
+			}
+		end,
+		},
 
 		["*"] = {
 			require("formatter.filetypes.any").remove_trailing_whitespace
@@ -65,6 +75,7 @@ local function setup_plugins()
 
 	vim.keymap.set("n", "<leader>lf", function()
 			if formatter_settings[vim.bo.filetype] ~= nil then
+				vim.cmd('write')
 				vim.cmd([[Format]])
 			else
 				vim.lsp.buf.format()
