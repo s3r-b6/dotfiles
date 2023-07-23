@@ -6,24 +6,12 @@ return {
 		config = function() vim.cmd.colorscheme 'catppuccin-mocha' end,
 	},
 	{ 'lunarwatcher/auto-pairs' },
-	{ "kdheepak/lazygit.nvim",  dependencies = { "nvim-lua/plenary.nvim", } },
+	{ "kdheepak/lazygit.nvim",     dependencies = { "nvim-lua/plenary.nvim", } },
 	{ 'unblevable/quick-scope' },
 	{ 'mbbill/undotree' },
 	{ 'tpope/vim-surround' },
 	{ 'tpope/vim-repeat' },
-	{
-		'nacro90/numb.nvim',
-		event = 'bufread',
-		config = function()
-			require('numb').setup {
-				show_numbers = true,
-				show_cursorline = true,
-				hide_relativenumbers = true,
-				number_only = false,
-				centered_peeking = true,
-			}
-		end,
-	},
+	{ 'nacro90/numb.nvim',         event = 'bufread', },
 	{ 'mhartington/formatter.nvim' },
 	{
 		'neovim/nvim-lspconfig',
@@ -43,7 +31,7 @@ return {
 			'rafamadriz/friendly-snippets',
 		},
 	},
-	{ 'folke/which-key.nvim',      opts = { plugins = { registers = true } } },
+	{ 'folke/which-key.nvim',    opts = { plugins = { registers = true } } },
 	{
 		'lewis6991/gitsigns.nvim',
 		opts = {

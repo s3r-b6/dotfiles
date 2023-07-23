@@ -1,4 +1,4 @@
-local setup_keys = function()
+local function setup_keys()
 	-- Go back, go forth
 	vim.keymap.set('n', "gb", "<C-O>")
 	vim.keymap.set('n', "gn", "<C-I>")
@@ -75,4 +75,4 @@ local setup_keys = function()
 	vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 end
 
-return setup_keys
+return { setup_keys = setup_keys }

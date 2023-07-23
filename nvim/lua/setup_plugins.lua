@@ -1,4 +1,4 @@
-local setup_plugins = function()
+local function setup_plugins()
 	local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 	vim.api.nvim_create_autocmd('TextYankPost', {
 		callback = function()
@@ -7,6 +7,14 @@ local setup_plugins = function()
 		group = highlight_group,
 		pattern = '*',
 	})
+
+	require('numb').setup {
+		show_numbers = true,
+		show_cursorline = true,
+		hide_relativenumbers = true,
+		number_only = false,
+		centered_peeking = true,
+	}
 
 	local actions = require "telescope.actions"
 	require('telescope').setup {
@@ -224,4 +232,4 @@ local setup_plugins = function()
 	}
 end
 
-return setup_plugins
+return { setup_plugins = setup_plugins }
