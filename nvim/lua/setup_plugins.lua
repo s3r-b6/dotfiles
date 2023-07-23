@@ -1,4 +1,4 @@
-local function setup_plugins()
+local setup_plugins = function()
 	local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 	vim.api.nvim_create_autocmd('TextYankPost', {
 		callback = function()
@@ -76,7 +76,7 @@ local function setup_plugins()
 		},
 	})
 
-	-- [[ Configure Treesitter ]]
+	---@diagnostic disable-next-line: missing-fields
 	require('nvim-treesitter.configs').setup {
 		ensure_installed = {
 			'c', 'cpp', 'go', 'lua', 'python', 'rust',
@@ -159,50 +159,18 @@ local function setup_plugins()
 
 	require('neodev').setup()
 	-- [ Configure LSP ]
-	local on_attach = function(_, bufnr)
-		vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { desc = '[R]ename' })
-		vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { desc = 'Code [A]ction' })
-		vim.keymap.set('v', '<leader>la', vim.lsp.buf.code_action, { desc = 'Code [A]ction' })
 
-		vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = '[G]oto [D]efinition' })
-		vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, { desc = '[G]oto [R]eferences' })
-		vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, { desc = '[G]oto [I]mplementation' })
-		vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, { desc = 'Type [D]efinition' })
-		vim.keymap.set('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols,
-			{ desc = '[D]ocument [S]ymbols' })
-		vim.keymap.set('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
-			{ desc = '[W]orkspace [S]ymbols' })
-
-		-- See `:help K` for why this keymap
-		vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation' })
-		vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { desc = 'Signature Documentation' })
-
-		vim.diagnostic.config({
-			float = {
-				focusable = false,
-				style = "minimal",
-				border = "rounded",
-				source = "always",
-				header = "",
-				prefix = "",
-			},
-			signs = true,
-			underline = true,
-			update_in_insert = true,
-		})
-	end
 
 	require('mason').setup()
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 	local mason_lspconfig = require('mason-lspconfig')
-
 	mason_lspconfig.setup { ensure_installed = vim.tbl_keys(servers), }
 	mason_lspconfig.setup_handlers {
 		function(server_name)
 			require('lspconfig')[server_name].setup {
 				capabilities = capabilities,
-				on_attach = on_attach,
+				on_attach = require('lsp_keymaps'),
 				settings = servers[server_name],
 			}
 		end,
@@ -213,6 +181,7 @@ local function setup_plugins()
 	local luasnip = require 'luasnip'
 	require('luasnip.loaders.from_vscode').lazy_load()
 	luasnip.config.setup {}
+	---@diagnostic disable-next-line: missing-fields
 	cmp.setup {
 		snippet = {
 			expand = function(args)
@@ -255,4 +224,4 @@ local function setup_plugins()
 	}
 end
 
-return { setup_plugins = setup_plugins }
+return setup_plugins
