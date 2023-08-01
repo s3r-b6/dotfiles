@@ -29,11 +29,16 @@ vim.diagnostic.config({
 	severity_sort = true,
 })
 
-vim.cmd [[
-	set nowrap
-	let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-	filetype plugin on
-]]
+vim.cmd('filetype plugin on')
+vim.opt.wrap = false
+vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
+vim.g.coq_settings = {
+	auto_start = 'shut-up',
+	keymap = {
+		recommended = false,
+		bigger_preview = '',
+	}
+}
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then

@@ -28,6 +28,8 @@ local function setup_plugins()
 		centered_peeking = true,
 	}
 
+	require('lsp/java_cfg')
+
 	require("nvim-lightbulb").setup({
 		autocmd = { enabled = true }
 	})
@@ -204,77 +206,46 @@ local function setup_plugins()
 		},
 	}
 
+	local coq = require("coq")
+
 	require('neodev').setup()
-	-- [ Configure LSP ]
-
-
 	require('mason').setup()
-	local capabilities = vim.lsp.protocol.make_client_capabilities()
-	capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 	local mason_lspconfig = require('mason-lspconfig')
 	mason_lspconfig.setup { ensure_installed = vim.tbl_keys(servers), }
 	mason_lspconfig.setup_handlers {
 		function(server_name)
 			require('lspconfig')[server_name].setup {
-				capabilities = capabilities,
+				capabilities = coq.lsp_ensure_capabilities(),
 				on_attach = require('lsp_keymaps'),
 				settings = servers[server_name],
 			}
 		end,
 	}
 
-	-- See `:help cmp`
-	local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-	local cmp = require 'cmp'
-	local luasnip = require 'luasnip'
-	require('luasnip.loaders.from_vscode').lazy_load()
-	luasnip.config.setup {}
-	---@diagnostic disable-next-line: missing-fields
-	cmp.setup {
-		snippet = {
-			expand = function(args)
-				luasnip.lsp_expand(args.body)
-			end,
-		},
-		mapping = cmp.mapping.preset.insert {
-			['<C-j>'] = cmp.mapping.select_next_item(),
-			['<C-k>'] = cmp.mapping.select_prev_item(),
-			['<C-d>'] = cmp.mapping.scroll_docs(-4),
-			['<C-f>'] = cmp.mapping.scroll_docs(4),
-			['<C-Space>'] = cmp.mapping.complete {},
-			['<CR>'] = cmp.mapping.confirm {
-				behavior = cmp.ConfirmBehavior.Replace,
-				select = true,
-			},
-			['<Tab>'] = cmp.mapping(function(fallback)
-				if cmp.visible() then
-					cmp.select_next_item()
-				elseif luasnip.expand_or_locally_jumpable() then
-					luasnip.expand_or_jump()
-				else
-					fallback()
-				end
-			end, { 'i', 's' }),
-			['<S-Tab>'] = cmp.mapping(function(fallback)
-				if cmp.visible() then
-					cmp.select_prev_item()
-				elseif luasnip.locally_jumpable(-1) then
-					luasnip.jump(-1)
-				else
-					fallback()
-				end
-			end, { 'i', 's' }),
-		},
-		sources = {
-			{ name = 'nvim_lsp' },
-			{ name = 'luasnip' }
-		},
-	}
+	local npairs = require('nvim-autopairs')
+	npairs.setup({ map_bs = false, map_cr = false })
 
-	cmp.event:on(
-		'confirm_done',
-		cmp_autopairs.on_confirm_done()
-	)
+	_G.MUtils = {}
+	MUtils.CR = function()
+		if vim.fn.pumvisible() ~= 0 then
+			if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
+				return npairs.esc('<c-y>')
+			else
+				return npairs.esc('<c-e>') .. npairs.autopairs_cr()
+			end
+		else
+			return npairs.autopairs_cr()
+		end
+	end
+	vim.api.nvim_set_keymap('i', '<cr>', 'v:lua.MUtils.CR()', { expr = true, noremap = true })
+	MUtils.BS = function()
+		if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
+			return npairs.esc('<c-e>') .. npairs.autopairs_bs()
+		else
+			return npairs.autopairs_bs()
+		end
+	end
+	vim.api.nvim_set_keymap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
 end
 
 return { setup_plugins = setup_plugins }

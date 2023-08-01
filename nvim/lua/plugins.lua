@@ -5,6 +5,7 @@ return {
 		priority = 1000,
 		config = function() vim.cmd.colorscheme 'catppuccin-mocha' end,
 	},
+	{ 'akinsho/toggleterm.nvim',           version = "*",                              config = true },
 	{ "brenoprata10/nvim-highlight-colors" },
 	{ 'windwp/nvim-autopairs' },
 	{ "kdheepak/lazygit.nvim",             dependencies = { "nvim-lua/plenary.nvim", } },
@@ -24,17 +25,14 @@ return {
 			'folke/neodev.nvim',
 		},
 	},
-	{ 'hrsh7th/cmp-path' },
 	{
-		'hrsh7th/nvim-cmp',
+		'ms-jpq/coq_nvim',
 		dependencies = {
-			'l3mon4d3/luasnip',
-			'saadparwaiz1/cmp_luasnip',
-			'hrsh7th/cmp-nvim-lsp',
-			'rafamadriz/friendly-snippets',
+			{ 'ms-jpq/coq.artifacts' },
+			{ 'ms-jpq/coq.thirdparty' },
 		},
 	},
-	{ 'folke/which-key.nvim', opts = { plugins = { registers = true } } },
+	{ 'folke/which-key.nvim',    opts = { plugins = { registers = true } } },
 	{
 		'lewis6991/gitsigns.nvim',
 		opts = {
@@ -107,4 +105,5 @@ return {
 		dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects', },
 		build = ':tsupdate',
 	},
+	{ "mfussenegger/nvim-jdtls" },
 }
