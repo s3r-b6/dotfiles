@@ -25,5 +25,5 @@ nm-applet &
 dunst &
 hyprpaper --config ~/.config/hypr/hyprpapr.conf &
 spotify &
-kitty tty-clock -C 5 -b -B &
+#kitty tty-clock -C 5 -b -B &
 webcord &

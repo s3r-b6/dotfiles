@@ -6,6 +6,7 @@ alsa-firmware
 alsa-plugins
 alsa-utils
 amd-ucode
+android-tools
 arandr
 arc-gtk-theme
 arch-install-scripts
@@ -41,6 +42,7 @@ cmake
 cmatrix
 cryptsetup
 ddrescue
+devour
 dex
 dhclient
 dialog
@@ -100,6 +102,7 @@ laptop-detect
 lazygit
 ldtk
 less
+lf
 libdisplay-info
 libfido2
 libpwquality
@@ -187,6 +190,7 @@ ppp
 pv
 python-numpy
 python-pip
+python-pipx
 python-wxpython
 qbittorrent
 qt5-graphicaleffects
@@ -213,7 +217,6 @@ slurp
 smartmontools
 sof-firmware
 spotify
-spotify-adblock
 spotifywm-git
 sqlitebrowser-cipher
 squashfs-tools
@@ -307,6 +310,7 @@ xorg-xwd
 xorg-xwininfo
 xorg-xwud
 yay
+zathura
 zsh
 zsh-autosuggestions-git
 zsh-fast-syntax-highlighting

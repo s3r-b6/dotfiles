@@ -6,11 +6,12 @@ return {
 		config = function() vim.cmd.colorscheme 'catppuccin-mocha' end,
 	},
 	{ "brenoprata10/nvim-highlight-colors" },
-	{ 'lunarwatcher/auto-pairs' },
+	{ 'windwp/nvim-autopairs' },
 	{ "kdheepak/lazygit.nvim",             dependencies = { "nvim-lua/plenary.nvim", } },
 	{ 'unblevable/quick-scope' },
 	{ 'mbbill/undotree' },
 	{ 'tpope/vim-surround' },
+	{ 'kosayoda/nvim-lightbulb' },
 	{ 'tpope/vim-repeat' },
 	{ 'nacro90/numb.nvim',                 event = 'bufread', },
 	{ 'mhartington/formatter.nvim' },
@@ -23,6 +24,7 @@ return {
 			'folke/neodev.nvim',
 		},
 	},
+	{ 'hrsh7th/cmp-path' },
 	{
 		'hrsh7th/nvim-cmp',
 		dependencies = {
@@ -32,7 +34,7 @@ return {
 			'rafamadriz/friendly-snippets',
 		},
 	},
-	{ 'folke/which-key.nvim',    opts = { plugins = { registers = true } } },
+	{ 'folke/which-key.nvim', opts = { plugins = { registers = true } } },
 	{
 		'lewis6991/gitsigns.nvim',
 		opts = {
@@ -67,17 +69,6 @@ return {
 	{
 		'lukas-reineke/indent-blankline.nvim',
 		opts = { show_trailing_blankline_indent = false, },
-	},
-	{
-		'nvim-tree/nvim-tree.lua',
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
-		opts = {
-			disable_netrw = true,
-			sort_by = "case_sensitive",
-			view = { width = 30, },
-			renderer = { group_empty = true, },
-			filters = { dotfiles = true, },
-		},
 	},
 	{ 'ahmedkhalf/project.nvim', },
 	{

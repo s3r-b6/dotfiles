@@ -1,7 +1,5 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.number = true
@@ -27,12 +25,15 @@ vim.opt.sidescroll = 1
 vim.opt.sidescrolloff = 8
 vim.opt.whichwrap = 'lh'
 
+vim.diagnostic.config({
+	severity_sort = true,
+})
+
 vim.cmd [[
 	set nowrap
 	let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 	filetype plugin on
 ]]
-
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then

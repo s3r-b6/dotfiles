@@ -18,3 +18,4 @@ lvim/lazy-lock.json
 !/.gitignore
 !/.zshrc
 !/pipewire
+!/lf
