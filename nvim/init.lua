@@ -1,13 +1,13 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
 vim.opt.number = true
 vim.opt.hidden = true
 vim.opt.hlsearch = false
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.numberwidth = 4
+vim.g.shiftwidth = 4
+vim.opt.tabstop = 4
 vim.opt.mouse = 'a'
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.breakindent = true
@@ -23,16 +23,25 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.sidescroll = 1
 vim.opt.sidescrolloff = 8
-vim.opt.whichwrap = 'lh'
-
-vim.diagnostic.config({
-	severity_sort = true,
-})
-
-vim.cmd('filetype plugin on')
 vim.opt.wrap = false
+vim.opt.whichwrap = 'lh'
+vim.cmd('filetype plugin on')
+
+vim.diagnostic.config({ severity_sort = true })
+
+-- QuickScope and COQ global settings
 vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
 vim.g.coq_settings = {
+	clients = {
+		lsp = {
+			enabled = true,
+			weight_adjust = 2,
+		},
+		tree_sitter = {
+			enabled = true,
+			weight_adjust = 1,
+		},
+	},
 	auto_start = 'shut-up',
 	keymap = {
 		recommended = false,

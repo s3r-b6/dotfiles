@@ -19,7 +19,7 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 set NERDTree
 set quickscope
 set which-key
-set notimeout
+set timeout=1000
 
 """ IdeaVim ---------------------------------
 nnoremap \e :e ~/.ideavimrc<CR>

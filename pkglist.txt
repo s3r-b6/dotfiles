@@ -51,6 +51,7 @@ dmidecode
 dmraid
 dnsmasq
 dosfstools
+dragon-drop
 duf
 dunst
 e2fsprogs

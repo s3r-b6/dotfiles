@@ -90,20 +90,30 @@ local function setup_plugins()
 			}
 		end
 		},
-		ocaml = { function()
+		ocaml = {
+			function()
+				return {
+					exe = "ocamlformat",
+					args = { "--enable-outside-detected-project",
+						util.escape_path(util.get_current_buffer_file_path()), },
+					stdin = true
+				}
+			end,
+		},
+		python = { function()
 			return {
-				exe = "ocamlformat",
-				args = { "--enable-outside-detected-project",
-					util.escape_path(util.get_current_buffer_file_path()), },
-				stdin = true
+				exe = mason_bin .. "black",
+				args = { util.get_current_buffer_file_name() },
+				stdin = false
 			}
 		end,
 		},
-
 		["*"] = {
 			require("formatter.filetypes.any").remove_trailing_whitespace
 		}
 	}
+
+	require('ibl').setup({ scope = { enabled = false } })
 
 	require('formatter').setup {
 		logging = true,
@@ -113,23 +123,21 @@ local function setup_plugins()
 
 	vim.keymap.set("n", "<leader>lf", function()
 			if formatter_settings[vim.bo.filetype] ~= nil then
-				vim.cmd('write')
+				-- vim.cmd('write')
 				vim.cmd([[Format]])
 			else
 				vim.lsp.buf.format()
 			end
 		end,
-		{
-			desc =
-			"Format the current buffer. If there is a config in formatter.nvim, it will use that, if not, it will try to use LSP formatting"
-		})
+		{ desc = "Format the current buffer. Use formatter.nvim, if possible, else, try LSP formatting" })
 
 
 	---@diagnostic disable-next-line: missing-fields
 	require('nvim-treesitter.configs').setup {
 		ensure_installed = {
 			'c', 'cpp', 'go', 'lua', 'python', 'rust',
-			'tsx', 'typescript', 'vimdoc', 'vim', 'ocaml'
+			'tsx', 'typescript', 'vimdoc', 'vim', 'ocaml',
+			'java'
 		},
 
 		auto_install = true,
@@ -193,7 +201,6 @@ local function setup_plugins()
 
 	local servers = {
 		gopls = {},
-		-- pyright = {},
 		clangd = {},
 		ocamllsp = {},
 		rust_analyzer = {},
@@ -204,7 +211,9 @@ local function setup_plugins()
 				telemetry = { enable = false },
 			},
 		},
+		jdtls = {}
 	}
+
 
 	local coq = require("coq")
 
@@ -214,16 +223,23 @@ local function setup_plugins()
 	mason_lspconfig.setup { ensure_installed = vim.tbl_keys(servers), }
 	mason_lspconfig.setup_handlers {
 		function(server_name)
-			require('lspconfig')[server_name].setup {
-				capabilities = coq.lsp_ensure_capabilities(),
+			local config = {
 				on_attach = require('lsp_keymaps'),
 				settings = servers[server_name],
 			}
+			require('lspconfig')[server_name].setup(coq.lsp_ensure_capabilities(config))
 		end,
 	}
 
+	local remap = vim.api.nvim_set_keymap
 	local npairs = require('nvim-autopairs')
+
 	npairs.setup({ map_bs = false, map_cr = false })
+
+	remap('i', '<esc>', [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
+	remap('i', '<c-c>', [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true, noremap = true })
+	remap('i', '<tab>', [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true, noremap = true })
+	remap('i', '<s-tab>', [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true, noremap = true })
 
 	_G.MUtils = {}
 	MUtils.CR = function()
@@ -237,7 +253,8 @@ local function setup_plugins()
 			return npairs.autopairs_cr()
 		end
 	end
-	vim.api.nvim_set_keymap('i', '<cr>', 'v:lua.MUtils.CR()', { expr = true, noremap = true })
+	remap('i', '<cr>', 'v:lua.MUtils.CR()', { expr = true, noremap = true })
+
 	MUtils.BS = function()
 		if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
 			return npairs.esc('<c-e>') .. npairs.autopairs_bs()
@@ -245,7 +262,7 @@ local function setup_plugins()
 			return npairs.autopairs_bs()
 		end
 	end
-	vim.api.nvim_set_keymap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
+	remap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
 end
 
 return { setup_plugins = setup_plugins }

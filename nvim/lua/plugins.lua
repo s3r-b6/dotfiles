@@ -27,12 +27,14 @@ return {
 	},
 	{
 		'ms-jpq/coq_nvim',
+		branch = 'coq',
 		dependencies = {
 			{ 'ms-jpq/coq.artifacts' },
 			{ 'ms-jpq/coq.thirdparty' },
 		},
 	},
-	{ 'folke/which-key.nvim',    opts = { plugins = { registers = true } } },
+	{ 'folke/which-key.nvim', opts = { plugins = { registers = true } } },
+	{ 'tpope/vim-sleuth' },
 	{
 		'lewis6991/gitsigns.nvim',
 		opts = {
@@ -66,7 +68,8 @@ return {
 	},
 	{
 		'lukas-reineke/indent-blankline.nvim',
-		opts = { show_trailing_blankline_indent = false, },
+		main = "ibl",
+		opts = {},
 	},
 	{ 'ahmedkhalf/project.nvim', },
 	{
