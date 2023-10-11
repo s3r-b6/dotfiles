@@ -1,8 +1,10 @@
 #!/bin/bash
 
-CONFIG="$HOME/.config/hypr/waybar/config.jsonc"
+CONFIG_1="$HOME/.config/hypr/waybar/config_1.jsonc"
+CONFIG_2="$HOME/.config/hypr/waybar/config_2.jsonc"
 STYLE="$HOME/.config/hypr/waybar/style.css"
 
 if [[ ! $(pidof waybar) ]]; then
-	waybar --bar main-bar --log-level error --config ${CONFIG} --style ${STYLE}
+	waybar --bar main-bar --log-level error --config ${CONFIG_1} --style ${STYLE} &
+	waybar --bar second-bar --log-level error --config ${CONFIG_2} --style ${STYLE} &
 fi
