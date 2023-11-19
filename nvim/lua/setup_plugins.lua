@@ -8,15 +8,14 @@ local function setup_plugins()
 		pattern = '*',
 	})
 
-	require("nvim-autopairs").setup({
-		enable_check_bracket_line = true,
-		check_ts = true,
-		ts_config = {
-			lua = { 'string' }, -- it will not add a pair on that treesitter node
-			javascript = { 'template_string' },
-			java = false, -- don't check treesitter on java
-		}
-	})
+	require('oil').setup {
+		columns = {
+			"icon",
+			"permissions",
+			"size",
+			-- "mtime",
+		},
+	}
 
 	require('nvim-highlight-colors').setup {}
 
@@ -85,7 +84,7 @@ local function setup_plugins()
 		json = { function()
 			return {
 				exe = mason_bin .. "fixjson",
-				args = { util.get_current_buffer_file_name() },
+				args = { util.escape_path(util.get_current_buffer_file_path()), },
 				stdin = true
 			}
 		end
@@ -103,7 +102,7 @@ local function setup_plugins()
 		python = { function()
 			return {
 				exe = mason_bin .. "black",
-				args = { util.get_current_buffer_file_name() },
+				args = { util.escape_path(util.get_current_buffer_file_path()), },
 				stdin = false
 			}
 		end,
@@ -230,39 +229,6 @@ local function setup_plugins()
 			require('lspconfig')[server_name].setup(coq.lsp_ensure_capabilities(config))
 		end,
 	}
-
-	local remap = vim.api.nvim_set_keymap
-	local npairs = require('nvim-autopairs')
-
-	npairs.setup({ map_bs = false, map_cr = false })
-
-	remap('i', '<esc>', [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
-	remap('i', '<c-c>', [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true, noremap = true })
-	remap('i', '<tab>', [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true, noremap = true })
-	remap('i', '<s-tab>', [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true, noremap = true })
-
-	_G.MUtils = {}
-	MUtils.CR = function()
-		if vim.fn.pumvisible() ~= 0 then
-			if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
-				return npairs.esc('<c-y>')
-			else
-				return npairs.esc('<c-e>') .. npairs.autopairs_cr()
-			end
-		else
-			return npairs.autopairs_cr()
-		end
-	end
-	remap('i', '<cr>', 'v:lua.MUtils.CR()', { expr = true, noremap = true })
-
-	MUtils.BS = function()
-		if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
-			return npairs.esc('<c-e>') .. npairs.autopairs_bs()
-		else
-			return npairs.autopairs_bs()
-		end
-	end
-	remap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
 end
 
 return { setup_plugins = setup_plugins }

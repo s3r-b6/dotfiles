@@ -33,6 +33,10 @@ local function setup_keys()
 	vim.keymap.set('n', '<leader>k', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 	vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
+	-- Oil
+	vim.keymap.set('n', '<leader>le', ":Oil<CR>", { desc = 'Open Oil' })
+	vim.keymap.set('n', '<leader>lE', require("oil").close, { desc = 'Close Oil' })
+
 	--Telescope maps
 	local builtin = require('telescope.builtin')
 	vim.keymap.set('n', '<leader>?', builtin.oldfiles, { desc = '[?] Find recently opened files' })

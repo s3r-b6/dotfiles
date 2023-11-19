@@ -7,7 +7,6 @@ return {
 	},
 	{ 'akinsho/toggleterm.nvim',           version = "*",                              config = true },
 	{ "brenoprata10/nvim-highlight-colors" },
-	{ 'windwp/nvim-autopairs' },
 	{ "kdheepak/lazygit.nvim",             dependencies = { "nvim-lua/plenary.nvim", } },
 	{ 'unblevable/quick-scope' },
 	{ 'mbbill/undotree' },
@@ -16,6 +15,11 @@ return {
 	{ 'tpope/vim-repeat' },
 	{ 'nacro90/numb.nvim',                 event = 'bufread', },
 	{ 'mhartington/formatter.nvim' },
+	{
+		'stevearc/oil.nvim',
+		opts = {},
+		dependencies = { "nvim-tree/nvim-web-devicons" }
+	},
 	{
 		'neovim/nvim-lspconfig',
 		dependencies = {
