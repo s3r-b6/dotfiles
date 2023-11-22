@@ -1,0 +1,110 @@
+{
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.iconTheme": "catppuccin-perfect-mocha",
+    "vim.foldfix": true,
+    "vim.highlightedyank.enable": true,
+    "vim.leader": " ",
+    "vim.statusBarColors.visualline": "",
+    "vim.insertModeKeyBindings": [],
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "<leader>",
+                "e",
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.toggleSidebarVisibility",
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "l",
+                "f"
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.formatDocument",
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "l",
+                "a"
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.quickFix",
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "b",
+                "q"
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.closeActiveEditor",
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "b",
+                "b"
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.previousEditor",
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "b",
+                "n"
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.nextEditor",
+                }
+            ]
+        },
+    ],
+    "vim.visualModeKeyBindings": [
+        {
+            "before": [
+                "<leader>",
+                "v",
+                "i",
+                "m"
+            ],
+            "commands": [
+                {
+                    "command": "git.clone",
+                    "args": [
+                        "https://github.com/VSCodeVim/Vim.git"
+                    ]
+                }
+            ]
+        }
+    ],
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.minimap.enabled": false,
+    "diffEditor.wordWrap": "off",
+    "omnisharp.enableEditorConfigSupport": false,
+    "dotnet.server.useOmnisharp": true,
+    "editor.lineNumbers": "relative",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none"
+}

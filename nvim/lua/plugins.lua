@@ -7,7 +7,6 @@ return {
 	},
 	{ 'akinsho/toggleterm.nvim',           version = "*",                              config = true },
 	{ "brenoprata10/nvim-highlight-colors" },
-	{ 'windwp/nvim-autopairs' },
 	{ "kdheepak/lazygit.nvim",             dependencies = { "nvim-lua/plenary.nvim", } },
 	{ 'unblevable/quick-scope' },
 	{ 'mbbill/undotree' },
@@ -17,20 +16,23 @@ return {
 	{ 'nacro90/numb.nvim',                 event = 'bufread', },
 	{ 'mhartington/formatter.nvim' },
 	{
+		'hrsh7th/nvim-cmp',
+		dependencies = {
+			'neovim/nvim-lspconfig',
+			'hrsh7th/cmp-nvim-lsp',
+			'hrsh7th/cmp-buffer',
+			'hrsh7th/cmp-path',
+			'hrsh7th/cmp-cmdline',
+			'L3MON4D3/LuaSnip',
+		},
+	},
+	{
 		'neovim/nvim-lspconfig',
 		dependencies = {
 			{ 'williamboman/mason.nvim', config = true },
 			'williamboman/mason-lspconfig.nvim',
 			{ 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 			'folke/neodev.nvim',
-		},
-	},
-	{
-		'ms-jpq/coq_nvim',
-		branch = 'coq',
-		dependencies = {
-			{ 'ms-jpq/coq.artifacts' },
-			{ 'ms-jpq/coq.thirdparty' },
 		},
 	},
 	{ 'folke/which-key.nvim', opts = { plugins = { registers = true } } },
@@ -109,4 +111,19 @@ return {
 		build = ':tsupdate',
 	},
 	{ "mfussenegger/nvim-jdtls" },
+	{ 'mfussenegger/nvim-dap' },
+	{
+		'jay-babu/mason-nvim-dap.nvim',
+		event = "VeryLazy",
+		dependencies = {
+			'mfussenegger/nvim-dap',
+			'williamboman/mason.nvim',
+		},
+		opts = { handlers = {} }
+	},
+	{
+		'rcarriga/nvim-dap-ui',
+		event = "VeryLazy",
+		dependencies = { 'mfussenegger/nvim-dap' }
+	}
 }

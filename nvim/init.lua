@@ -26,28 +26,16 @@ vim.opt.sidescrolloff = 8
 vim.opt.wrap = false
 vim.opt.whichwrap = 'lh'
 vim.cmd('filetype plugin on')
+vim.cmd('set guicursor=n-v-c-sm-i:block,ci-ve:ver25,r-cr-o:hor20')
+vim.cmd([[
+let g:LanguageClient_serverCommands = {
+      \ 'c': ['C:\Program Files (x86)\mingw64\bin'],
+      \ 'cpp': ['C:\Program Files (x86)\mingw64\bin'],
+      \ }]])
+vim.cmd([[let g:LanguageClient_autoStart = 1]])
 
 vim.diagnostic.config({ severity_sort = true })
-
--- QuickScope and COQ global settings
 vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
-vim.g.coq_settings = {
-	clients = {
-		lsp = {
-			enabled = true,
-			weight_adjust = 2,
-		},
-		tree_sitter = {
-			enabled = true,
-			weight_adjust = 1,
-		},
-	},
-	auto_start = 'shut-up',
-	keymap = {
-		recommended = false,
-		bigger_preview = '',
-	}
-}
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then

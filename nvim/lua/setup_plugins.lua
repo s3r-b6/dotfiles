@@ -7,17 +7,6 @@ local function setup_plugins()
 		group = highlight_group,
 		pattern = '*',
 	})
-
-	require("nvim-autopairs").setup({
-		enable_check_bracket_line = true,
-		check_ts = true,
-		ts_config = {
-			lua = { 'string' }, -- it will not add a pair on that treesitter node
-			javascript = { 'template_string' },
-			java = false, -- don't check treesitter on java
-		}
-	})
-
 	require('nvim-highlight-colors').setup {}
 
 	require('numb').setup {
@@ -64,7 +53,9 @@ local function setup_plugins()
 	pcall(require('telescope').load_extension, 'projects')
 
 	local util = require 'formatter.util'
-	local mason_bin = "~/.local/share/nvim/mason/bin/"
+
+	local mason_bin = "C:\\Users\\Sergio\\AppData\\Local\\nvim-data\\mason\\bin\\"
+	-- TODO: ésto no funciona en windows por alguna misteriosa razón
 	local formatter_settings = {
 		html = { function()
 			return {
@@ -85,25 +76,16 @@ local function setup_plugins()
 		json = { function()
 			return {
 				exe = mason_bin .. "fixjson",
-				args = { util.get_current_buffer_file_name() },
+				args = { util.escape_path(util.get_current_buffer_file_path()), },
 				stdin = true
 			}
 		end
 		},
-		ocaml = {
-			function()
-				return {
-					exe = "ocamlformat",
-					args = { "--enable-outside-detected-project",
-						util.escape_path(util.get_current_buffer_file_path()), },
-					stdin = true
-				}
-			end,
-		},
 		python = { function()
 			return {
-				exe = mason_bin .. "black",
-				args = { util.get_current_buffer_file_name() },
+				cwd = mason_bin,
+				exe = "black",
+				args = { util.escape_path(util.get_current_buffer_file_path()), },
 				stdin = false
 			}
 		end,
@@ -201,8 +183,6 @@ local function setup_plugins()
 
 	local servers = {
 		gopls = {},
-		clangd = {},
-		ocamllsp = {},
 		rust_analyzer = {},
 		tsserver = {},
 		lua_ls = {
@@ -211,11 +191,62 @@ local function setup_plugins()
 				telemetry = { enable = false },
 			},
 		},
-		jdtls = {}
+		jdtls = {},
 	}
 
 
-	local coq = require("coq")
+	local cmp = require 'cmp'
+	cmp.setup({
+		snippet = {
+			expand = function(args)
+				require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+				-- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+				-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+				-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+			end,
+		},
+		window = {
+			--	completion = cmp.config.window.bordered(),
+			--	documentation = cmp.config.window.bordered(),
+		},
+		mapping = cmp.mapping.preset.insert({
+			['<C-j>'] = cmp.mapping.select_next_item(),
+			['<C-k>'] = cmp.mapping.select_prev_item(),
+			['<C-b>'] = cmp.mapping.scroll_docs(-4),
+			['<C-f>'] = cmp.mapping.scroll_docs(4),
+			['<C-Space>'] = cmp.mapping.complete(),
+			['<C-e>'] = cmp.mapping.abort(),
+			['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		}),
+		sources = cmp.config.sources({
+			{ name = 'nvim_lsp' },
+			{ name = 'vsnip' },
+		}, {
+			{ name = 'buffer' },
+		})
+	})
+
+	cmp.setup.filetype('gitcommit', {
+		sources = cmp.config.sources({
+			{ name = 'git' },
+		}, {
+			{ name = 'buffer' },
+		})
+	})
+	cmp.setup.cmdline({ '/', '?' }, {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = {
+			{ name = 'buffer' }
+		}
+	})
+	cmp.setup.cmdline(':', {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = cmp.config.sources({
+			{ name = 'path' }
+		}, {
+			{ name = 'cmdline' }
+		})
+	})
 
 	require('neodev').setup()
 	require('mason').setup()
@@ -223,46 +254,29 @@ local function setup_plugins()
 	mason_lspconfig.setup { ensure_installed = vim.tbl_keys(servers), }
 	mason_lspconfig.setup_handlers {
 		function(server_name)
-			local config = {
+			require('lspconfig')[server_name].setup {
+				capabilities = require('cmp_nvim_lsp').default_capabilities(),
 				on_attach = require('lsp_keymaps'),
-				settings = servers[server_name],
+				settings = servers[server_name]
 			}
-			require('lspconfig')[server_name].setup(coq.lsp_ensure_capabilities(config))
 		end,
 	}
 
-	local remap = vim.api.nvim_set_keymap
-	local npairs = require('nvim-autopairs')
+	require('lspconfig').clangd.setup {
+		capabilities = require('cmp_nvim_lsp').default_capabilities(),
+		on_attach = require('lsp_keymaps'),
+	}
 
-	npairs.setup({ map_bs = false, map_cr = false })
+	require('mason-nvim-dap').setup()
+	local dapui, dap = require('dapui'), require('dap')
+	dapui.setup()
+	dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
+	dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
+	dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
 
-	remap('i', '<esc>', [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
-	remap('i', '<c-c>', [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true, noremap = true })
-	remap('i', '<tab>', [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true, noremap = true })
-	remap('i', '<s-tab>', [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true, noremap = true })
-
-	_G.MUtils = {}
-	MUtils.CR = function()
-		if vim.fn.pumvisible() ~= 0 then
-			if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
-				return npairs.esc('<c-y>')
-			else
-				return npairs.esc('<c-e>') .. npairs.autopairs_cr()
-			end
-		else
-			return npairs.autopairs_cr()
-		end
-	end
-	remap('i', '<cr>', 'v:lua.MUtils.CR()', { expr = true, noremap = true })
-
-	MUtils.BS = function()
-		if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
-			return npairs.esc('<c-e>') .. npairs.autopairs_bs()
-		else
-			return npairs.autopairs_bs()
-		end
-	end
-	remap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
+	vim.keymap.set("n", ",do", function() dapui.toggle() end, { desc = '[D]AP ui [o]pen' })
+	vim.keymap.set("n", ",db", ":DapToggleBreakpoint<CR>", { desc = '[D]AP toggle [b]reakpoint' })
+	vim.keymap.set("n", ",dc", ":DapContinue<CR>", { desc = '[D]AP [C]ontinue' })
 end
 
 return { setup_plugins = setup_plugins }
