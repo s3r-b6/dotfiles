@@ -125,5 +125,13 @@ return {
 		'rcarriga/nvim-dap-ui',
 		event = "VeryLazy",
 		dependencies = { 'mfussenegger/nvim-dap' }
+	},
+	{ 'chentoast/marks.nvim' },
+	{
+		'theHamsta/nvim-dap-virtual-text',
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter',
+			'mfussenegger/nvim-dap',
+		}
 	}
 }
