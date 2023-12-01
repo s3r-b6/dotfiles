@@ -300,6 +300,25 @@ local function setup_plugins()
 		} }
 	})
 
+
+	local codelldb_cfg = {
+		name = 'DEF: LLDB Launch',
+		type = 'codelldb',
+		request = 'launch',
+		program = function()
+			local parent_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':h')
+			return vim.fn.input('Path to executable: ', parent_dir .. '\\build\\', 'file')
+		end,
+		cwd = '${workspaceFolder}',
+		stopOnEntry = false,
+		args = {},
+	}
+	dap.configurations.cpp = { codelldb_cfg }
+	dap.configurations.c = { codelldb_cfg }
+	dap.configurations.rust = { codelldb_cfg }
+	dap.configurations.zig = { codelldb_cfg }
+
+
 	dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
 	dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
 	dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
