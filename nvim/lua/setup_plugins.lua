@@ -95,16 +95,6 @@ local function setup_plugins()
 			}
 		end
 		},
-		ocaml = {
-			function()
-				return {
-					exe = "ocamlformat",
-					args = { "--enable-outside-detected-project",
-						util.escape_path(util.get_current_buffer_file_path()), },
-					stdin = true
-				}
-			end,
-		},
 		python = { function()
 			return {
 				exe = mason_bin .. "black",
@@ -141,7 +131,7 @@ local function setup_plugins()
 	require('nvim-treesitter.configs').setup {
 		ensure_installed = {
 			'c', 'cpp', 'go', 'lua', 'python', 'rust',
-			'tsx', 'typescript', 'vimdoc', 'vim', 'ocaml',
+			'tsx', 'typescript', 'vimdoc', 'vim',
 			'java'
 		},
 		auto_install = false,
@@ -203,14 +193,11 @@ local function setup_plugins()
 	}
 
 	local servers = {
-		gopls = {},
 		clangd = {},
-		ocamllsp = {},
 		rust_analyzer = {},
 		tsserver = {},
 		lua_ls = {
-			Lua = { workspace = { checkThirdParty = false }, telemetry = { enable = false },
-			},
+			Lua = { workspace = { checkThirdParty = false }, telemetry = { enable = false }, },
 		},
 		jdtls = {},
 		zls = {
