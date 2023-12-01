@@ -54,8 +54,7 @@ local function setup_plugins()
 
 	local util = require 'formatter.util'
 
-	local mason_bin = "C:\\Users\\Sergio\\AppData\\Local\\nvim-data\\mason\\bin\\"
-	-- TODO: ésto no funciona en windows por alguna misteriosa razón
+	local mason_bin = vim.g.mason_bin
 	local formatter_settings = {
 		html = { function()
 			return {
@@ -119,15 +118,14 @@ local function setup_plugins()
 		ensure_installed = {
 			'c', 'cpp', 'go', 'lua', 'python', 'rust',
 			'tsx', 'typescript', 'vimdoc', 'vim', 'ocaml',
-			'java'
+			'java', 'zig'
 		},
 
-		auto_install = true,
-
+		auto_install = false,
 		highlight = { enable = true },
-		indent = { enable = true },
+		indent = { enable = false },
 		incremental_selection = {
-			enable = true,
+			enable = false,
 			keymaps = {
 				init_selection = '<c-space>',
 				node_incremental = '<c-space>',
@@ -140,7 +138,6 @@ local function setup_plugins()
 				enable = true,
 				lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
 				keymaps = {
-					-- You can use the capture groups defined in textobjects.scm
 					['aa'] = '@parameter.outer',
 					['ia'] = '@parameter.inner',
 					['af'] = '@function.outer',
@@ -151,7 +148,7 @@ local function setup_plugins()
 			},
 			move = {
 				enable = true,
-				set_jumps = true, -- whether to set jumps in the jumplist
+				set_jumps = true,
 				goto_next_start = {
 					[']m'] = '@function.outer',
 					[']]'] = '@class.outer',
@@ -192,6 +189,9 @@ local function setup_plugins()
 			},
 		},
 		jdtls = {},
+		zls = {
+			zig_lib_path = "~/zig/lib",
+		}
 	}
 
 
@@ -318,6 +318,26 @@ local function setup_plugins()
 	vim.keymap.set("n", ",dr", ":DapToggleRepl<CR>", { desc = '[D]AP toggle [R]EPL' })
 	vim.keymap.set("n", ",dc", ":DapContinue<CR>", { desc = '[D]AP [C]ontinue' })
 	vim.keymap.set("n", ",de", ":lua require'dapui'.eval()", { desc = '[D]AP [E]val' })
+
+
+	local codelldb_cfg = {
+		name = 'DEF: LLDB Launch',
+		type = 'codelldb',
+		request = 'launch',
+		program = function()
+			local parent_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':h')
+			return vim.fn.input('Path to executable: ', parent_dir .. '/build/', 'file')
+		end,
+		cwd = '${workspaceFolder}',
+		stopOnEntry = false,
+		args = {},
+	}
+
+
+	dap.configurations.cpp = { codelldb_cfg }
+	dap.configurations.c = { codelldb_cfg }
+	dap.configurations.rust = { codelldb_cfg }
+	dap.configurations.zig = { codelldb_cfg }
 
 
 	vim.keymap.set("n", "<F10>", ":DapStepOver<CR>", { desc = 'Step over' })

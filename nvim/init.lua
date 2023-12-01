@@ -1,11 +1,3 @@
-vim.o.shell = 'pwsh'
-vim.o.shellcmdflag =
-'-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
-vim.o.shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-vim.o.shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-vim.o.shellquote = ''
-vim.o.shellxquote = ''
-
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.opt.number = true
@@ -26,21 +18,16 @@ vim.opt.signcolumn = 'yes'
 vim.opt.updatetime = 250
 vim.opt.timeout = true
 vim.opt.timeoutlen = 300
-vim.opt.completeopt = 'menuone,noselect'
+vim.opt.completeopt = 'menuone,noselect,noinsert'
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.sidescroll = 1
 vim.opt.sidescrolloff = 8
 vim.opt.wrap = false
 vim.opt.whichwrap = 'lh'
+vim.opt.guicursor = "n-v-c-sm-i:block,ci-ve:ver25,r-cr-o:hor20"
+
 vim.cmd('filetype plugin on')
-vim.cmd('set guicursor=n-v-c-sm-i:block,ci-ve:ver25,r-cr-o:hor20')
-vim.cmd([[
-let g:LanguageClient_serverCommands = {
-      \ 'c': ['C:\Program Files (x86)\mingw64\bin'],
-      \ 'cpp': ['C:\Program Files (x86)\mingw64\bin'],
-      \ }]])
-vim.cmd([[let g:LanguageClient_autoStart = 1]])
 
 vim.diagnostic.config({ severity_sort = true })
 vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
@@ -62,3 +49,4 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup("plugins", {})
 require('setup_plugins').setup_plugins()
 require('keymaps').setup_keys()
+require('win').win_cfg()
