@@ -113,5 +113,31 @@ return {
 		build = ':tsupdate',
 	},
 	{ "mfussenegger/nvim-jdtls" },
-	{ "David-Kunz/gen.nvim" }
+	-- Testing this, will see if it stays
+	{ "David-Kunz/gen.nvim" },
+	--
+	{ 'mfussenegger/nvim-dap' },
+	{
+		'jay-babu/mason-nvim-dap.nvim',
+		event = "VeryLazy",
+		dependencies = {
+			'mfussenegger/nvim-dap',
+			'williamboman/mason.nvim',
+		},
+		opts = { handlers = {} }
+	},
+	{
+		'rcarriga/nvim-dap-ui',
+		event = "VeryLazy",
+		dependencies = { 'mfussenegger/nvim-dap' }
+	},
+	{ 'chentoast/marks.nvim' },
+	{
+		'theHamsta/nvim-dap-virtual-text',
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter',
+			'mfussenegger/nvim-dap',
+		}
+	}
+
 }
