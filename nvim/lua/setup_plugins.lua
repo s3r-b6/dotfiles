@@ -1,21 +1,36 @@
 local function setup_plugins()
-	local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+	-- Global settings
+	vim.g.lazygit_floating_window_winblend = 5
+	vim.g.lazygit_floating_window_scaling_factor = 0.85
+	vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
+
 	vim.api.nvim_create_autocmd('TextYankPost', {
 		callback = function()
 			vim.highlight.on_yank()
 		end,
-		group = highlight_group,
+		group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
 		pattern = '*',
 	})
-	require('nvim-highlight-colors').setup {}
 
-	require('numb').setup {
-		show_numbers = true,
-		show_cursorline = true,
-		hide_relativenumbers = true,
-		number_only = false,
-		centered_peeking = true,
-	}
+	require('illuminate').configure({
+		{
+			providers = { 'lsp', 'treesitter', 'regex', },
+			delay = 100,
+			filetype_overrides = {},
+			filetypes_denylist = { 'dirvish', 'fugitive', },
+			filetypes_allowlist = {},
+			modes_denylist = {},
+			modes_allowlist = {},
+			providers_regex_syntax_denylist = {},
+			providers_regex_syntax_allowlist = {},
+			under_cursor = true,
+			large_file_cutoff = 2000,
+			large_file_overrides = nil,
+			min_count_to_highlight = 1,
+		}
+	})
+
+
 
 	require('lsp/java_cfg')
 
@@ -80,10 +95,19 @@ local function setup_plugins()
 			}
 		end
 		},
+		ocaml = {
+			function()
+				return {
+					exe = "ocamlformat",
+					args = { "--enable-outside-detected-project",
+						util.escape_path(util.get_current_buffer_file_path()), },
+					stdin = true
+				}
+			end,
+		},
 		python = { function()
 			return {
-				cwd = mason_bin,
-				exe = "black",
+				exe = mason_bin .. "black",
 				args = { util.escape_path(util.get_current_buffer_file_path()), },
 				stdin = false
 			}
@@ -118,14 +142,13 @@ local function setup_plugins()
 		ensure_installed = {
 			'c', 'cpp', 'go', 'lua', 'python', 'rust',
 			'tsx', 'typescript', 'vimdoc', 'vim', 'ocaml',
-			'java', 'zig'
+			'java'
 		},
-
 		auto_install = false,
 		highlight = { enable = true },
-		indent = { enable = false },
+		indent = { enable = true },
 		incremental_selection = {
-			enable = false,
+			enable = true,
 			keymaps = {
 				init_selection = '<c-space>',
 				node_incremental = '<c-space>',
@@ -138,6 +161,7 @@ local function setup_plugins()
 				enable = true,
 				lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
 				keymaps = {
+					-- You can use the capture groups defined in textobjects.scm
 					['aa'] = '@parameter.outer',
 					['ia'] = '@parameter.inner',
 					['af'] = '@function.outer',
@@ -148,7 +172,7 @@ local function setup_plugins()
 			},
 			move = {
 				enable = true,
-				set_jumps = true,
+				set_jumps = true, -- whether to set jumps in the jumplist
 				goto_next_start = {
 					[']m'] = '@function.outer',
 					[']]'] = '@class.outer',
@@ -180,12 +204,12 @@ local function setup_plugins()
 
 	local servers = {
 		gopls = {},
+		clangd = {},
+		ocamllsp = {},
 		rust_analyzer = {},
 		tsserver = {},
 		lua_ls = {
-			Lua = {
-				workspace = { checkThirdParty = false },
-				telemetry = { enable = false },
+			Lua = { workspace = { checkThirdParty = false }, telemetry = { enable = false },
 			},
 		},
 		jdtls = {},
@@ -193,7 +217,6 @@ local function setup_plugins()
 			zig_lib_path = "~/zig/lib",
 		}
 	}
-
 
 	local cmp = require 'cmp'
 	cmp.setup({
@@ -225,7 +248,6 @@ local function setup_plugins()
 			{ name = 'buffer' },
 		})
 	})
-
 	cmp.setup.filetype('gitcommit', {
 		sources = cmp.config.sources({
 			{ name = 'git' },
@@ -248,23 +270,6 @@ local function setup_plugins()
 		})
 	})
 
-	require 'marks'.setup {
-		default_mappings = false,
-		builtin_marks = { "." },
-		cyclic = true,
-		force_write_shada = false,
-		refresh_interval = 250,
-		sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
-		excluded_filetypes = {},
-		mappings = {
-			set_next = "m,",
-			next = "m]",
-			prev = "m[",
-			set = "m",
-			delete = "dm"
-		}
-	}
-
 	require('neodev').setup()
 	require('mason').setup()
 	local mason_lspconfig = require('mason-lspconfig')
@@ -286,63 +291,31 @@ local function setup_plugins()
 
 	local dapui, dap = require('dapui'), require('dap')
 	require('mason-nvim-dap').setup()
-	require('nvim-dap-virtual-text').setup()
+	require('nvim-dap-virtual-text').setup({})
 
-	dapui.setup(
-		{
-			layouts = { {
-				elements = {
-					{ id = "scopes",      size = 0.40 },
-					{ id = "breakpoints", size = 0.20 },
-					{ id = "stacks",      size = 0.20 },
-					{ id = "watches",     size = 0.20 }
-				},
-				position = "left",
-				size = 60
-			}, {
-				elements = {
-					{ id = "repl",    size = 0.5 },
-					{ id = "console", size = 0.5 }
-				},
-				position = "bottom",
-				size = 10
-			} }
-		}
-	)
+	dapui.setup({
+		layouts = { {
+			elements = {
+				{ id = "scopes",      size = 0.40 },
+				{ id = "breakpoints", size = 0.20 },
+				{ id = "stacks",      size = 0.20 },
+				{ id = "watches",     size = 0.20 }
+			},
+			position = "left",
+			size = 60
+		}, {
+			elements = {
+				{ id = "repl",    size = 0.5 },
+				{ id = "console", size = 0.5 }
+			},
+			position = "bottom",
+			size = 10
+		} }
+	})
+
 	dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
 	dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
 	dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
-
-	vim.keymap.set("n", ",do", function() dapui.toggle() end, { desc = '[D]AP UI [O]pen' })
-	vim.keymap.set("n", ",db", ":DapToggleBreakpoint<CR>", { desc = '[D]AP toggle [B]reakpoint' })
-	vim.keymap.set("n", ",dr", ":DapToggleRepl<CR>", { desc = '[D]AP toggle [R]EPL' })
-	vim.keymap.set("n", ",dc", ":DapContinue<CR>", { desc = '[D]AP [C]ontinue' })
-	vim.keymap.set("n", ",de", ":lua require'dapui'.eval()", { desc = '[D]AP [E]val' })
-
-
-	local codelldb_cfg = {
-		name = 'DEF: LLDB Launch',
-		type = 'codelldb',
-		request = 'launch',
-		program = function()
-			local parent_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':h')
-			return vim.fn.input('Path to executable: ', parent_dir .. '/build/', 'file')
-		end,
-		cwd = '${workspaceFolder}',
-		stopOnEntry = false,
-		args = {},
-	}
-
-
-	dap.configurations.cpp = { codelldb_cfg }
-	dap.configurations.c = { codelldb_cfg }
-	dap.configurations.rust = { codelldb_cfg }
-	dap.configurations.zig = { codelldb_cfg }
-
-
-	vim.keymap.set("n", "<F10>", ":DapStepOver<CR>", { desc = 'Step over' })
-	vim.keymap.set("n", "<F11>", ":DapStepInto<CR>", { desc = 'Step into' })
-	vim.keymap.set("n", "<F12>", ":DapStepOut<CR>", { desc = 'Step out' })
 end
 
 return { setup_plugins = setup_plugins }
