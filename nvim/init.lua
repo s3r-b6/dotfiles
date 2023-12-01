@@ -6,8 +6,6 @@ vim.opt.hlsearch = false
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.numberwidth = 4
-vim.g.shiftwidth = 4
-vim.opt.tabstop = 4
 vim.opt.mouse = 'a'
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.breakindent = true
@@ -20,14 +18,14 @@ vim.opt.timeout = true
 vim.opt.timeoutlen = 300
 vim.opt.completeopt = 'menuone,noselect,noinsert'
 vim.opt.termguicolors = true
-vim.opt.scrolloff = 8
 vim.opt.sidescroll = 1
+vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
+vim.opt.tabstop = 4
 vim.opt.wrap = false
 vim.opt.whichwrap = 'lh'
-vim.opt.guicursor = "n-v-c-sm-i:block,ci-ve:ver25,r-cr-o:hor20"
-
 vim.cmd('filetype plugin on')
+vim.cmd('set guicursor=n-i-v-c-sm:block,ci-ve:ver25,r-cr-o:hor20')
 
 vim.diagnostic.config({ severity_sort = true })
 vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }

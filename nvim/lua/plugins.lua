@@ -27,11 +27,14 @@ return {
 		},
 	},
 	{
-		'ms-jpq/coq_nvim',
-		branch = 'coq',
+		'hrsh7th/nvim-cmp',
 		dependencies = {
-			{ 'ms-jpq/coq.artifacts' },
-			{ 'ms-jpq/coq.thirdparty' },
+			'neovim/nvim-lspconfig',
+			'hrsh7th/cmp-nvim-lsp',
+			'hrsh7th/cmp-buffer',
+			'hrsh7th/cmp-path',
+			'hrsh7th/cmp-cmdline',
+			'L3MON4D3/LuaSnip',
 		},
 	},
 	{ "mfussenegger/nvim-jdtls", event = "VeryLazy", },
