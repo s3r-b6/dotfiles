@@ -43,8 +43,8 @@ local function setup_keys()
 	vim.cmd([[inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"]])
 
 	--gen.nvim
-	vim.keymap.set('v', ',g', ':Gen<CR>', { desc = 'Call Gen (ollama llm)', silent = true })
-	vim.keymap.set('n', ',g', ':Gen<CR>', { desc = 'Call Gen (ollama llm)', silent = true })
+	-- vim.keymap.set('v', ',g', ':Gen<CR>', { desc = 'Call Gen (ollama llm)', silent = true })
+	-- vim.keymap.set('n', ',g', ':Gen<CR>', { desc = 'Call Gen (ollama llm)', silent = true })
 
 	-- Dap && dapui
 	vim.keymap.set("n", ",do", function() require('dapui').toggle() end, { desc = '[D]AP UI [O]pen' })

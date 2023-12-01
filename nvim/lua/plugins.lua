@@ -100,6 +100,6 @@ return {
 		},
 	},
 
-	-- Testing this, will see if it stays
-	{ "David-Kunz/gen.nvim", event = "VeryLazy", },
+	-- Testing this, will see if it stays || Ollama is not in win, I think
+	-- { "David-Kunz/gen.nvim", event = "VeryLazy", },
 }
