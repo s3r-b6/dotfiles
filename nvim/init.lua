@@ -27,7 +27,6 @@ vim.opt.wrap = false
 vim.opt.whichwrap = 'lh'
 vim.cmd('filetype plugin on')
 vim.cmd('set guicursor=n-i-v-c-sm:block,ci-ve:ver25,r-cr-o:hor20')
-vim.cmd([[inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"]])
 
 vim.diagnostic.config({ severity_sort = true })
 

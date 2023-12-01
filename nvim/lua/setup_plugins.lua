@@ -1,5 +1,6 @@
 local function setup_plugins()
 	local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+
 	vim.api.nvim_create_autocmd('TextYankPost', {
 		callback = function()
 			vim.highlight.on_yank()
@@ -8,24 +9,27 @@ local function setup_plugins()
 		pattern = '*',
 	})
 
-	require('oil').setup {
-		columns = {
-			"icon",
-			"permissions",
-			"size",
-			-- "mtime",
-		},
-	}
+	require('illuminate').configure({
+		{
+			providers = { 'lsp', 'treesitter', 'regex', },
+			delay = 100,
+			filetype_overrides = {},
+			filetypes_denylist = { 'dirvish', 'fugitive', },
+			filetypes_allowlist = {},
+			modes_denylist = {},
+			modes_allowlist = {},
+			providers_regex_syntax_denylist = {},
+			providers_regex_syntax_allowlist = {},
+			under_cursor = true,
+			large_file_cutoff = 2000,
+			large_file_overrides = nil,
+			min_count_to_highlight = 1,
+		}
+	})
 
-	require('nvim-highlight-colors').setup {}
 
-	require('numb').setup {
-		show_numbers = true,
-		show_cursorline = true,
-		hide_relativenumbers = true,
-		number_only = false,
-		centered_peeking = true,
-	}
+	vim.g.lazygit_floating_window_winblend = 5
+	vim.g.lazygit_floating_window_scaling_factor = 0.85
 
 	require('lsp/java_cfg')
 
@@ -138,9 +142,7 @@ local function setup_plugins()
 			'tsx', 'typescript', 'vimdoc', 'vim', 'ocaml',
 			'java'
 		},
-
-		auto_install = true,
-
+		auto_install = false,
 		highlight = { enable = true },
 		indent = { enable = true },
 		incremental_selection = {
@@ -205,9 +207,7 @@ local function setup_plugins()
 		rust_analyzer = {},
 		tsserver = {},
 		lua_ls = {
-			Lua = {
-				workspace = { checkThirdParty = false },
-				telemetry = { enable = false },
+			Lua = { workspace = { checkThirdParty = false }, telemetry = { enable = false },
 			},
 		},
 		jdtls = {}
@@ -215,26 +215,6 @@ local function setup_plugins()
 
 
 	local coq = require("coq")
-
-	require 'marks'.setup {
-		default_mappings = false,
-		builtin_marks = { "." },
-		cyclic = true,
-		force_write_shada = false,
-		refresh_interval = 250,
-		sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
-		excluded_filetypes = {},
-		mappings = {
-			set_next = "m,",
-			next = "m]",
-			prev = "m[",
-			set = "m",
-			delete = "dm"
-		}
-	}
-
-
-
 	require('neodev').setup()
 	require('mason').setup()
 	local mason_lspconfig = require('mason-lspconfig')
@@ -251,43 +231,31 @@ local function setup_plugins()
 
 	local dapui, dap = require('dapui'), require('dap')
 	require('mason-nvim-dap').setup()
-	require('nvim-dap-virtual-text').setup()
+	require('nvim-dap-virtual-text').setup({})
 
-	dapui.setup(
-		{
-			layouts = { {
-				elements = {
-					{ id = "scopes",      size = 0.40 },
-					{ id = "breakpoints", size = 0.20 },
-					{ id = "stacks",      size = 0.20 },
-					{ id = "watches",     size = 0.20 }
-				},
-				position = "left",
-				size = 60
-			}, {
-				elements = {
-					{ id = "repl",    size = 0.5 },
-					{ id = "console", size = 0.5 }
-				},
-				position = "bottom",
-				size = 10
-			} }
-		}
-	)
+	dapui.setup({
+		layouts = { {
+			elements = {
+				{ id = "scopes",      size = 0.40 },
+				{ id = "breakpoints", size = 0.20 },
+				{ id = "stacks",      size = 0.20 },
+				{ id = "watches",     size = 0.20 }
+			},
+			position = "left",
+			size = 60
+		}, {
+			elements = {
+				{ id = "repl",    size = 0.5 },
+				{ id = "console", size = 0.5 }
+			},
+			position = "bottom",
+			size = 10
+		} }
+	})
+
 	dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
 	dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
 	dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
-
-	vim.keymap.set("n", ",do", function() dapui.toggle() end, { desc = '[D]AP UI [O]pen' })
-	vim.keymap.set("n", ",db", ":DapToggleBreakpoint<CR>", { desc = '[D]AP toggle [B]reakpoint' })
-	vim.keymap.set("n", ",dr", ":DapToggleRepl<CR>", { desc = '[D]AP toggle [R]EPL' })
-	vim.keymap.set("n", ",dc", ":DapContinue<CR>", { desc = '[D]AP [C]ontinue' })
-	vim.keymap.set("n", ",de", ":lua require'dapui'.eval()", { desc = '[D]AP [E]val' })
-
-
-	vim.keymap.set("n", "<F10>", ":DapStepOver<CR>", { desc = 'Step over' })
-	vim.keymap.set("n", "<F11>", ":DapStepInto<CR>", { desc = 'Step into' })
-	vim.keymap.set("n", "<F12>", ":DapStepOut<CR>", { desc = 'Step out' })
 end
 
 return { setup_plugins = setup_plugins }
