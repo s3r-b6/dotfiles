@@ -113,4 +113,5 @@ return {
 		build = ':tsupdate',
 	},
 	{ "mfussenegger/nvim-jdtls" },
+	{ "David-Kunz/gen.nvim" }
 }

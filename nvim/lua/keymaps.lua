@@ -52,6 +52,10 @@ local function setup_keys()
 
 	vim.keymap.set('i', '<C-j>', [[pumvisible() ? "<C-n>" : "<C-j>"]], { expr = true, noremap = true })
 	vim.keymap.set('i', '<C-k>', [[pumvisible() ? "<C-p>" : "<C-k>"]], { expr = true, noremap = true })
+
+	--gen.nvim
+	vim.keymap.set('v', '<leader>]', ':Gen<CR>')
+	vim.keymap.set('n', '<leader>]', ':Gen<CR>')
 end
 
 return { setup_keys = setup_keys }

@@ -30,7 +30,7 @@ fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 ssh-add -l > /dev/null || ssh-add ~/.config/.ssh/key
 
-neofetch
+fastfetch
 
 # opam configuration
 [[ ! -r /home/ser/.opam/opam-init/init.zsh ]] || source /home/ser/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
