@@ -1,11 +1,31 @@
 local function setup_plugins()
-	local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+	-- Global settings
+	vim.g.lazygit_floating_window_winblend = 5
+	vim.g.lazygit_floating_window_scaling_factor = 0.85
+	vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
+	vim.g.coq_settings = {
+		clients = {
+			lsp = {
+				enabled = true,
+				weight_adjust = 2,
+			},
+			tree_sitter = {
+				enabled = true,
+				weight_adjust = 1,
+			},
+		},
+		auto_start = 'shut-up',
+		keymap = {
+			recommended = false,
+			bigger_preview = '',
+		}
+	}
 
 	vim.api.nvim_create_autocmd('TextYankPost', {
 		callback = function()
 			vim.highlight.on_yank()
 		end,
-		group = highlight_group,
+		group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
 		pattern = '*',
 	})
 
@@ -28,8 +48,6 @@ local function setup_plugins()
 	})
 
 
-	vim.g.lazygit_floating_window_winblend = 5
-	vim.g.lazygit_floating_window_scaling_factor = 0.85
 
 	require('lsp/java_cfg')
 
@@ -256,6 +274,8 @@ local function setup_plugins()
 	dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
 	dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
 	dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
+
+	vim.cmd('autocmd BufEnter * :Sleuth')
 end
 
 return { setup_plugins = setup_plugins }

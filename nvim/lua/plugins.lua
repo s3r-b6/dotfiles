@@ -50,7 +50,7 @@ return {
 
 	-- Useful
 	{ 'tpope/vim-surround',      event = "VeryLazy" },
-	{ 'tpope/vim-sleuth',        event = "VeryLazy", },
+	{ 'tpope/vim-sleuth', },
 	{ 'tpope/vim-repeat',        event = "VeryLazy" },
 	{ 'mbbill/undotree',         event = "VeryLazy" },
 	{ 'unblevable/quick-scope',  event = "VeryLazy" },
