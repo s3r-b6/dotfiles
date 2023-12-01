@@ -13,7 +13,7 @@ return {
 	{ 'ahmedkhalf/project.nvim', },
 
 	-- Treesitter
-	{ 'nvim-treesitter/nvim-treesitter', dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' }, event = "VeryLazy" },
+	{ 'nvim-treesitter/nvim-treesitter', dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' } },
 
 	-- LSP / Formatting / Autocomplete
 	{ 'mhartington/formatter.nvim', },
@@ -93,7 +93,7 @@ return {
 		opts = {
 			options = {
 				icons_enabled = false,
-				theme = 'moonfly',
+				theme = 'nightfly',
 				component_separators = '|',
 				section_separators = '',
 			},

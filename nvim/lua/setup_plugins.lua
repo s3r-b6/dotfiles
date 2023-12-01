@@ -274,8 +274,6 @@ local function setup_plugins()
 	dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
 	dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
 	dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
-
-	vim.cmd('autocmd BufEnter * :Sleuth')
 end
 
 return { setup_plugins = setup_plugins }
