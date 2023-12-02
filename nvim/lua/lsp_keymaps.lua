@@ -14,7 +14,7 @@ local on_attach = function(_, bufnr)
 
 	-- See `:help K` for why this keymap
 	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation' })
-	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { desc = 'Signature Documentation' })
+	--vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { desc = 'Signature Documentation' })
 
 	vim.diagnostic.config({
 		float = {

@@ -2,6 +2,16 @@ local function setup_keys()
 	-- Go next, go back
 	vim.keymap.set('n', "gn", "<C-I>", { desc = "[G]o [n]ext" })
 	vim.keymap.set('n', "gb", "<C-O>", { desc = "[G]o [b]ack" })
+
+
+	vim.cmd([[inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"]])
+
+	vim.keymap.set('i', '<C-j>', [[pumvisible() ? "<C-n>" : "<C-j>"]],
+		{ desc = "Remaps C-j to C-n", expr = true, noremap = false })
+	vim.keymap.set('i', '<C-k>', [[pumvisible() ? "<C-p>" : "<C-k>"]],
+		{ desc = "Remaps C-k to C-p", expr = true, noremap = false })
+
+
 	-- Clipboard
 	vim.keymap.set('v', '<leader>y', '"+y', { desc = "Copy to clipboard the selection" })
 	vim.keymap.set('n', '<leader>Y', '"+yg_', { desc = "Copy to clipboard until end of line" })
@@ -38,9 +48,6 @@ local function setup_keys()
 	vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
 	vim.keymap.set('n', '<leader>sp', ':Telescope projects<CR>', { desc = '[S]earch [P]rojects' })
 
-	vim.keymap.set('i', '<C-j>', [[pumvisible() ? "<C-n>" : "<C-j>"]], { expr = true, noremap = true })
-	vim.keymap.set('i', '<C-k>', [[pumvisible() ? "<C-p>" : "<C-k>"]], { expr = true, noremap = true })
-	vim.cmd([[inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"]])
 
 	--gen.nvim
 	vim.keymap.set('v', ',g', ':Gen<CR>', { desc = 'Call Gen (ollama llm)', silent = true })

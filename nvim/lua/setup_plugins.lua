@@ -3,23 +3,6 @@ local function setup_plugins()
 	vim.g.lazygit_floating_window_winblend = 5
 	vim.g.lazygit_floating_window_scaling_factor = 0.85
 	vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
-	vim.g.coq_settings = {
-		clients = {
-			lsp = {
-				enabled = true,
-				weight_adjust = 2,
-			},
-			tree_sitter = {
-				enabled = true,
-				weight_adjust = 1,
-			},
-		},
-		auto_start = 'shut-up',
-		keymap = {
-			recommended = false,
-			bigger_preview = '',
-		}
-	}
 
 	vim.api.nvim_create_autocmd('TextYankPost', {
 		callback = function()
