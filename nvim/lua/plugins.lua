@@ -1,8 +1,7 @@
 return {
 	-- Telescope
-	{
-		'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' }
-	},
+	{ 'nvim-telescope/telescope.nvim',          branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
+	{ 'nvim-telescope/telescope-ui-select.nvim' },
 	{
 		'nvim-telescope/telescope-fzf-native.nvim',
 		build = 'make',
@@ -36,7 +35,7 @@ return {
 	},
 
 	-- Language specific
-	{ "mfussenegger/nvim-jdtls",   event = "VeryLazy", },
+	{ "mfussenegger/nvim-jdtls",  event = "VeryLazy", },
 	{ "simrat39/rust-tools.nvim", event = "VeryLazy", },
 
 	-- DAP
@@ -86,23 +85,11 @@ return {
 
 	-- Pretty
 	-- nvim-tree/nvim-web-devicons
-	{
-		"catppuccin/nvim", name = "catppuccin", config = function() vim.cmd.colorscheme 'catppuccin-mocha' end,
-	},
-	{ 'lukas-reineke/indent-blankline.nvim', main = "ibl", opts = {}, },
+	{ "catppuccin/nvim",                     name = "catppuccin", priority = 1000 },
+	{ 'lukas-reineke/indent-blankline.nvim', main = "ibl",        opts = {}, },
 	{ 'kosayoda/nvim-lightbulb' },
-	{
-		'nvim-lualine/lualine.nvim',
-		opts = {
-			options = {
-				icons_enabled = false,
-				theme = 'nightfly',
-				component_separators = '|',
-				section_separators = '',
-			},
-		},
-	},
+	{ 'nvim-lualine/lualine.nvim', },
 
 	-- Testing this, will see if it stays
-	{ "David-Kunz/gen.nvim", event = "VeryLazy", },
+	{ "David-Kunz/gen.nvim",                 event = "VeryLazy", },
 }

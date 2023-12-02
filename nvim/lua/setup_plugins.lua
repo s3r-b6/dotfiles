@@ -30,45 +30,74 @@ local function setup_plugins()
 		}
 	})
 
-	require("nvim-lightbulb").setup({
+
+	require('catppuccin').setup({
+		integrations = {
+			gitsigns = true,
+			treesitter = true,
+			telescope = {
+				enabled = true,
+				-- style = "nvchad"
+			},
+			which_key = true,
+			dap = {
+				enabled = true,
+				enable_ui = true,
+			}
+		}
+	})
+
+	vim.cmd.colorscheme "catppuccin"
+
+	require('lualine').setup {
+		options = {
+			icons_enabled = false,
+			theme = "catppuccin",
+			component_separators = '|',
+			section_separators = '',
+		}
+	}
+
+	require('nvim-lightbulb').setup({
 		autocmd = { enabled = true }
 	})
 
 	require('project_nvim').setup {
 		manual_mode = false,
-		detection_methods = { "lsp", "pattern" },
-		patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+		detection_methods = { 'lsp', 'pattern' },
+		patterns = { '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json' },
 		ignore_lsp = {},
 		exclude_dirs = {},
 		show_hidden = false,
 		silent_chdir = true,
 		scope_chdir = 'global',
-		datapath = vim.fn.stdpath("data"),
+		datapath = vim.fn.stdpath('data'),
 	}
 
-	local actions = require "telescope.actions"
+	local actions = require 'telescope.actions'
 	require('telescope').setup {
 		defaults = {
 			mappings = {
 				i = {
 					['<C-k>'] = actions.move_selection_previous,
 					['<C-j>'] = actions.move_selection_next,
-					["<C-u>"] = actions.preview_scrolling_up,
-					["<C-d>"] = actions.preview_scrolling_down,
+					['<C-u>'] = actions.preview_scrolling_up,
+					['<C-d>'] = actions.preview_scrolling_down,
 				},
 			},
-		},
+		}
 	}
 
 	pcall(require('telescope').load_extension, 'fzf')
 	pcall(require('telescope').load_extension, 'projects')
+	pcall(require('telescope').load_extension, 'ui-select')
 
 	local util = require 'formatter.util'
-	local mason_bin = "~/.local/share/nvim/mason/bin/"
+	local mason_bin = '~/.local/share/nvim/mason/bin/'
 	local formatter_settings = {
 		html = { function()
 			return {
-				exe = mason_bin .. "prettier",
+				exe = mason_bin .. 'prettier',
 				args = { util.escape_path(util.get_current_buffer_file_path()), },
 				stdin = true
 			}
@@ -76,7 +105,7 @@ local function setup_plugins()
 		},
 		css = { function()
 			return {
-				exe = mason_bin .. "prettier",
+				exe = mason_bin .. 'prettier',
 				args = { util.escape_path(util.get_current_buffer_file_path()), },
 				stdin = true
 			}
@@ -84,7 +113,7 @@ local function setup_plugins()
 		},
 		json = { function()
 			return {
-				exe = mason_bin .. "fixjson",
+				exe = mason_bin .. 'fixjson',
 				args = { util.escape_path(util.get_current_buffer_file_path()), },
 				stdin = true
 			}
@@ -93,8 +122,8 @@ local function setup_plugins()
 		ocaml = {
 			function()
 				return {
-					exe = "ocamlformat",
-					args = { "--enable-outside-detected-project",
+					exe = 'ocamlformat',
+					args = { '--enable-outside-detected-project',
 						util.escape_path(util.get_current_buffer_file_path()), },
 					stdin = true
 				}
@@ -102,14 +131,14 @@ local function setup_plugins()
 		},
 		python = { function()
 			return {
-				exe = mason_bin .. "black",
+				exe = mason_bin .. 'black',
 				args = { util.escape_path(util.get_current_buffer_file_path()), },
 				stdin = false
 			}
 		end,
 		},
-		["*"] = {
-			require("formatter.filetypes.any").remove_trailing_whitespace
+		['*'] = {
+			require('formatter.filetypes.any').remove_trailing_whitespace
 		}
 	}
 
@@ -121,7 +150,7 @@ local function setup_plugins()
 		filetype = formatter_settings,
 	}
 
-	vim.keymap.set("n", "<leader>lf", function()
+	vim.keymap.set('n', '<leader>lf', function()
 			if formatter_settings[vim.bo.filetype] ~= nil then
 				-- vim.cmd('write')
 				vim.cmd([[Format]])
@@ -129,7 +158,7 @@ local function setup_plugins()
 				vim.lsp.buf.format()
 			end
 		end,
-		{ desc = "Format the current buffer. Use formatter.nvim, if possible, else, try LSP formatting" })
+		{ desc = 'Format the current buffer. Use formatter.nvim, if possible, else, try LSP formatting' })
 
 
 	---@diagnostic disable-next-line: missing-fields
@@ -197,7 +226,7 @@ local function setup_plugins()
 		},
 	}
 
-	local coq = require("coq")
+	local coq = require('coq')
 	require('neodev').setup()
 	require('mason').setup()
 
@@ -211,15 +240,15 @@ local function setup_plugins()
 			lspconfig[server_name].setup(coq.lsp_ensure_capabilities(cfg))
 		end,
 		-- This is handled through nvim-jdtls
-		["jdtls"] = function() end,
+		['jdtls'] = function() end,
 
 		--- Specific server configs:
 
-		["rust_analyzer"] = function()
-			require("rust-tools").setup { server = { on_attach = keymaps } }
+		['rust_analyzer'] = function()
+			require('rust-tools').setup { server = { on_attach = keymaps } }
 		end,
 
-		["lua_ls"] = function(server_name)
+		['lua_ls'] = function(server_name)
 			local cfg = {
 				on_attach = keymaps,
 				settings = {
@@ -245,26 +274,26 @@ local function setup_plugins()
 	dapui.setup({
 		layouts = { {
 			elements = {
-				{ id = "scopes",      size = 0.40 },
-				{ id = "breakpoints", size = 0.20 },
-				{ id = "stacks",      size = 0.20 },
-				{ id = "watches",     size = 0.20 }
+				{ id = 'scopes',      size = 0.40 },
+				{ id = 'breakpoints', size = 0.20 },
+				{ id = 'stacks',      size = 0.20 },
+				{ id = 'watches',     size = 0.20 }
 			},
-			position = "left",
+			position = 'left',
 			size = 60
 		}, {
 			elements = {
-				{ id = "repl",    size = 0.5 },
-				{ id = "console", size = 0.5 }
+				{ id = 'repl',    size = 0.5 },
+				{ id = 'console', size = 0.5 }
 			},
-			position = "bottom",
+			position = 'bottom',
 			size = 10
 		} }
 	})
 
-	dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
-	dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
-	dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
+	dap.listeners.after.event_initialized['dapui_config'] = function() dapui.open() end
+	dap.listeners.before.event_terminated['dapui_config'] = function() dapui.close() end
+	dap.listeners.before.event_exited['dapui_config'] = function() dapui.close() end
 end
 
 return { setup_plugins = setup_plugins }
