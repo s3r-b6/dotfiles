@@ -1,28 +1,26 @@
+-- TODO: Set up the formatter
 local path_fmt = vim.fn.stdpath('config') .. '/lua/fmt/Default.xml'
 local mason_dir = vim.fn.stdpath('data') .. '/mason/packages/'
 
 local jdtls_cfg_dir = mason_dir .. 'jdtls/config_linux'
 
-
 local jdtls_jar = vim.fn.glob(mason_dir ..
 	'jdtls/plugins/org.eclipse.equinox.launcher_*.jar', true)
 local debugger_jar = vim.fn.glob(mason_dir ..
-	'java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar', true)
+	'java-debug-adapter/extension/server/com.microsoft.java.debug.plugin*.jar', true)
 local java_test_jars = vim.fn.glob(mason_dir ..
-	"java-test/extension/server/*.jar", true)
+	'java-test/extension/server/*.jar', true)
 
-local bundles = {
-	debugger_jar
-}
+local bundles = { debugger_jar }
+vim.list_extend(bundles, vim.split(java_test_jars, '\n'))
 
-vim.list_extend(bundles, vim.split(java_test_jars, "\n"))
+local root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw', 'pom.xml' }, {
+	upward = true,
+	path = vim.api.nvim_buf_get_name(0)
+})[1])
 
-local root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw', 'pom.xml' }, { upward = true })[1])
-
--- If you started neovim within `~/dev/xy/project-1` this would resolve to `project-1`
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-local data_dir = root_dir .. 'jdtls_data'
-
+local data_dir = '/tmp/jdtls/' .. project_name
 
 local config = {
 	cmd = {
@@ -44,19 +42,20 @@ local config = {
 	root_dir = root_dir,
 	init_options = { bundles = bundles, },
 	on_attach = function(_, bufnr)
+		require('lsp_keymaps')() -- This binds my general lsp keymaps
 		vim.keymap.set('n', '<leader>loi', function() require('jdtls').organize_imports() end,
 			{ desc = '[O]rganize [I]mports' })
 		vim.keymap.set('n', '<leader>lb', function() require('jdtls').build_projects() end,
 			{ desc = '[O]rganize [I]mports' })
 
-		vim.keymap.set('n', ',jd', ':JdtUpdateDebugConfigs',
+		vim.keymap.set('n', ',jd', function() require('jdtls.dap').setup_dap_main_class_configs() end,
 			{ desc = '[J]ava [D]iscover main classes and create nvim-dap configuration entries' })
 		vim.keymap.set('n', ',jt', function() require('jdtls.tests').generate() end,
 			{ desc = '[J]ava Generate [T]ests' })
 
-		vim.keymap.set('n', ',jtc', function() require 'jdtls'.test_class() end,
+		vim.keymap.set('n', ',jtc', function() require('jdtls').test_class() end,
 			{ desc = '[J]ava [T]est [C]lass' })
-		vim.keymap.set('n', ',jtm', function() require 'jdtls'.test_nearest_method() end,
+		vim.keymap.set('n', ',jtm', function() require('jdtls').test_nearest_method() end,
 			{ desc = '[J]ava run nearest [M]ethod' })
 
 		require 'lsp_signature'.on_attach({
@@ -68,4 +67,5 @@ local config = {
 	end
 }
 
+require('jdtls.dap').setup_dap()
 require('jdtls').start_or_attach(config)
