@@ -1,4 +1,4 @@
-local on_attach = function(_, bufnr)
+return function(_, bufnr)
 	vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { desc = '[R]ename' })
 	vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { desc = 'Code [A]ction' })
 	vim.keymap.set('v', '<leader>la', vim.lsp.buf.code_action, { desc = 'Code [A]ction' })
@@ -30,5 +30,3 @@ local on_attach = function(_, bufnr)
 		update_in_insert = true,
 	})
 end
-
-return on_attach

@@ -67,5 +67,5 @@ local config = {
 	end
 }
 
-require('jdtls.dap').setup_dap()
+require('jdtls.dap').setup_dap { hotcodereplace = "auto" }
 require('jdtls').start_or_attach(config)
