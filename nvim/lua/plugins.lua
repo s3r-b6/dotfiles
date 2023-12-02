@@ -34,7 +34,11 @@ return {
 			{ 'ms-jpq/coq.thirdparty' },
 		},
 	},
-	{ "mfussenegger/nvim-jdtls", event = "VeryLazy", },
+
+	-- Language specific
+	{ "mfussenegger/nvim-jdtls",   event = "VeryLazy", },
+	{ "simrat39/rust-tools.nvim", event = "VeryLazy", },
+
 	-- DAP
 	{
 		'mfussenegger/nvim-dap',
@@ -49,16 +53,16 @@ return {
 	},
 
 	-- Useful
-	{ 'tpope/vim-surround',      event = "VeryLazy" },
+	{ 'tpope/vim-surround',     event = "VeryLazy" },
 	{ 'tpope/vim-sleuth', },
-	{ 'tpope/vim-repeat',        event = "VeryLazy" },
-	{ 'mbbill/undotree',         event = "VeryLazy" },
-	{ 'unblevable/quick-scope',  event = "VeryLazy" },
-	{ 'folke/which-key.nvim',    opts = { plugins = { registers = true } } },
+	{ 'tpope/vim-repeat',       event = "VeryLazy" },
+	{ 'mbbill/undotree',        event = "VeryLazy" },
+	{ 'unblevable/quick-scope', event = "VeryLazy" },
+	{ 'folke/which-key.nvim',   opts = { plugins = { registers = true } } },
 	{ 'rrethy/vim-illuminate', },
 
 	-- Git things
-	{ "kdheepak/lazygit.nvim",   dependencies = { "nvim-lua/plenary.nvim", }, event = "VeryLazy" },
+	{ "kdheepak/lazygit.nvim",  dependencies = { "nvim-lua/plenary.nvim", }, event = "VeryLazy" },
 	{
 		'lewis6991/gitsigns.nvim',
 		opts = {
