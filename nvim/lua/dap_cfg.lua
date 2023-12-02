@@ -7,7 +7,6 @@ require('mason-nvim-dap').setup({
 		function(config)
 			require('mason-nvim-dap').default_setup(config)
 		end,
-		jdtls = function(config) end, -- This is handled with nvim-jdtls...
 	},
 })
 
