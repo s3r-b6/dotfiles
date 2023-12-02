@@ -166,10 +166,10 @@ local function setup_plugins()
 		incremental_selection = {
 			enable = true,
 			keymaps = {
-				init_selection = '<c-space>',
-				node_incremental = '<c-space>',
-				scope_incremental = '<c-s>',
-				node_decremental = '<M-space>',
+				init_selection = '<leader>v',
+				node_incremental = '<leader>v',
+				scope_incremental = '<leader>V',
+				node_decremental = '<M-v>',
 			},
 		},
 		textobjects = {

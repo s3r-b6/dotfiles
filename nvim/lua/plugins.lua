@@ -54,7 +54,6 @@ return {
 	{ 'tpope/vim-repeat',        event = "VeryLazy" },
 	{ 'mbbill/undotree',         event = "VeryLazy" },
 	{ 'unblevable/quick-scope',  event = "VeryLazy" },
-	{ 'numtostr/comment.nvim',   opts = {},                                   event = "VeryLazy" },
 	{ 'folke/which-key.nvim',    opts = { plugins = { registers = true } } },
 	{ 'rrethy/vim-illuminate', },
 
