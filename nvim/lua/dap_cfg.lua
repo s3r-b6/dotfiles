@@ -1,6 +1,15 @@
 local dapui, dap = require('dapui'), require('dap')
-require('mason-nvim-dap').setup()
+
 require('nvim-dap-virtual-text').setup({})
+require('mason-nvim-dap').setup({
+	ensure_installed = { 'codelldb' },
+	handlers = {
+		function(config)
+			require('mason-nvim-dap').default_setup(config)
+		end,
+		jdtls = function(config) end, -- This is handled with nvim-jdtls...
+	},
+})
 
 dapui.setup({
 	layouts = { {
@@ -21,6 +30,26 @@ dapui.setup({
 		size = 10
 	} }
 })
+
+
+
+local codelldb_cfg = {
+	name = 'DEF: LLDB Launch',
+	type = 'codelldb',
+	request = 'launch',
+	program = function()
+		local dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p')
+		return vim.fn.input('Path to executable: ', dir, 'file')
+	end,
+	cwd = '${workspaceFolder}',
+	stopOnEntry = false,
+	args = {},
+}
+
+dap.configurations.cpp = { codelldb_cfg }
+dap.configurations.c = { codelldb_cfg }
+dap.configurations.rust = { codelldb_cfg }
+dap.configurations.zig = { codelldb_cfg }
 
 dap.listeners.after.event_initialized['dapui_config'] = function() dapui.open() end
 dap.listeners.before.event_terminated['dapui_config'] = function() dapui.close() end

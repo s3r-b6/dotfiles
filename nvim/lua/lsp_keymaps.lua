@@ -29,4 +29,15 @@ return function(_, bufnr)
 		underline = { severity = vim.diagnostic.severity.ERROR },
 		update_in_insert = true,
 	})
+
+	-- Dap && dapui
+	vim.keymap.set("n", ",do", function() require('dapui').toggle() end, { desc = '[D]AP UI [O]pen' })
+	vim.keymap.set("n", ",db", ":DapToggleBreakpoint<CR>", { desc = '[D]AP toggle [B]reakpoint', silent = true })
+	vim.keymap.set("n", ",dr", ":DapToggleRepl<CR>", { desc = '[D]AP toggle [R]EPL', silent = true })
+	vim.keymap.set("n", ",dc", ":DapContinue<CR>", { desc = '[D]AP [C]ontinue', silent = true })
+	vim.keymap.set("n", ",de", ":lua require'dapui'.eval()", { desc = '[D]AP [E]val', silent = true })
+
+	vim.keymap.set("n", "<F10>", ":DapStepOver<CR>", { desc = 'Step over', silent = true })
+	vim.keymap.set("n", "<F11>", ":DapStepInto<CR>", { desc = 'Step into', silent = true })
+	vim.keymap.set("n", "<F12>", ":DapStepOut<CR>", { desc = 'Step out', silent = true })
 end

@@ -67,10 +67,6 @@ require('catppuccin').setup({
 		treesitter = true,
 		telescope = { enabled = true },
 		which_key = true,
-		dap = {
-			enabled = true,
-			enable_ui = true,
-		}
 	}
 })
 

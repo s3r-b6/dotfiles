@@ -8,8 +8,7 @@ local jdtls_jar = vim.fn.glob(mason_dir ..
 	'jdtls/plugins/org.eclipse.equinox.launcher_*.jar', true)
 local debugger_jar = vim.fn.glob(mason_dir ..
 	'java-debug-adapter/extension/server/com.microsoft.java.debug.plugin*.jar', true)
-local java_test_jars = vim.fn.glob(mason_dir ..
-	'java-test/extension/server/*.jar', true)
+local java_test_jars = vim.fn.glob("~/.local/share/vscode-java-test-0.40.1/server/*.jar", true)
 
 local bundles = { debugger_jar }
 vim.list_extend(bundles, vim.split(java_test_jars, '\n'))
@@ -46,16 +45,13 @@ local config = {
 		vim.keymap.set('n', '<leader>loi', function() require('jdtls').organize_imports() end,
 			{ desc = '[O]rganize [I]mports' })
 		vim.keymap.set('n', '<leader>lb', function() require('jdtls').build_projects() end,
-			{ desc = '[O]rganize [I]mports' })
+			{ desc = 'Build' })
 
 		vim.keymap.set('n', ',jd', function() require('jdtls.dap').setup_dap_main_class_configs() end,
 			{ desc = '[J]ava [D]iscover main classes and create nvim-dap configuration entries' })
-		vim.keymap.set('n', ',jt', function() require('jdtls.tests').generate() end,
-			{ desc = '[J]ava Generate [T]ests' })
-
-		vim.keymap.set('n', ',jtc', function() require('jdtls').test_class() end,
-			{ desc = '[J]ava [T]est [C]lass' })
-		vim.keymap.set('n', ',jtm', function() require('jdtls').test_nearest_method() end,
+		vim.keymap.set('n', ',jc', function() require('jdtls').test_class() end,
+			{ desc = '[J]ava Test [C]lass' })
+		vim.keymap.set('n', ',jm', function() require('jdtls').test_nearest_method() end,
 			{ desc = '[J]ava run nearest [M]ethod' })
 
 		require 'lsp_signature'.on_attach({
