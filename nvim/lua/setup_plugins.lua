@@ -276,6 +276,11 @@ local function setup_plugins()
 		on_attach = require('lsp_keymaps'),
 	}
 
+	require 'lspconfig'.glsl_analyzer.setup {
+		capabilities = require('cmp_nvim_lsp').default_capabilities(),
+		on_attach = require('lsp_keymaps'),
+	}
+
 	local dapui, dap = require('dapui'), require('dap')
 	require('mason-nvim-dap').setup()
 	require('nvim-dap-virtual-text').setup({})

@@ -30,6 +30,13 @@ vim.cmd('set guicursor=n-i-v-c-sm:block,ci-ve:ver25,r-cr-o:hor20')
 vim.diagnostic.config({ severity_sort = true })
 vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
 
+
+vim.cmd([[autocmd BufRead,BufNewFile *.fs setfiletype glsl]])
+vim.cmd([[autocmd BufRead,BufNewFile *.vs setfiletype glsl]])
+vim.cmd([[autocmd BufRead,BufNewFile *.frag setfiletype glsl]])
+vim.cmd([[autocmd BufRead,BufNewFile *.vert setfiletype glsl]])
+
+
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system {
