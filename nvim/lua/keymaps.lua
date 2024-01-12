@@ -45,9 +45,11 @@ vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch curren
 vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sp', ':Telescope projects<CR>', { desc = '[S]earch [P]rojects' })
-
+vim.keymap.set('n', '<leader>st', ':TodoTelescope<CR>', { desc = '[S]earch [T]odos' })
 
 --gen.nvim
 vim.keymap.set('v', ',g', ':Gen<CR>', { desc = 'Call Gen (ollama llm)', silent = true })
 vim.keymap.set('n', ',g', ':Gen<CR>', { desc = 'Call Gen (ollama llm)', silent = true })
 
+--Oil
+vim.keymap.set('n', '<leader>le', require("oil").open, { desc = 'Open Oil', silent = true })

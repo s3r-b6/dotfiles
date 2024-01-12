@@ -1,4 +1,9 @@
 return {
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+
 	-- Telescope
 	{ 'nvim-telescope/telescope.nvim',          branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
 	{ 'nvim-telescope/telescope-ui-select.nvim' },
@@ -84,12 +89,12 @@ return {
 	},
 
 	-- Pretty
-	-- nvim-tree/nvim-web-devicons
-	{ "catppuccin/nvim",                     name = "catppuccin", priority = 1000 },
-	{ 'lukas-reineke/indent-blankline.nvim', main = "ibl",        opts = {}, },
+	{ "catppuccin/nvim",                     name = "catppuccin",                             priority = 1000 },
+	{ 'lukas-reineke/indent-blankline.nvim', main = "ibl",                                    opts = {}, },
 	{ 'kosayoda/nvim-lightbulb' },
 	{ 'nvim-lualine/lualine.nvim', },
 
-	-- Testing this, will see if it stays
-	{ "David-Kunz/gen.nvim",                 event = "VeryLazy", },
+	{ "mfussenegger/nvim-lint" },
+
+	{ "stevearc/oil.nvim",                   dependencies = { 'nvim-tree/nvim-web-devicons' } }
 }
