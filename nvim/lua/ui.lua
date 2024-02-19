@@ -1,3 +1,15 @@
+require('catppuccin').setup({
+	integrations = {
+		gitsigns = true,
+		treesitter = true,
+		telescope = { enabled = true },
+		which_key = true,
+	}
+})
+
+
+vim.cmd.colorscheme "catppuccin"
+
 vim.g.lazygit_floating_window_winblend = 5
 vim.g.lazygit_floating_window_scaling_factor = 0.85
 vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
@@ -61,14 +73,6 @@ require('illuminate').configure({
 })
 
 
-require('catppuccin').setup({
-	integrations = {
-		gitsigns = true,
-		treesitter = true,
-		telescope = { enabled = true },
-		which_key = true,
-	}
-})
 
 
 require('lualine').setup {
@@ -80,6 +84,6 @@ require('lualine').setup {
 	}
 }
 
-vim.cmd.colorscheme "catppuccin"
+
 
 require('nvim-lightbulb').setup({ autocmd = { enabled = true } })

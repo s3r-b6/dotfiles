@@ -16,10 +16,8 @@ require('nvim-treesitter.configs').setup {
 	incremental_selection = {
 		enable = true,
 		keymaps = {
-			init_selection = '<leader>v',
 			node_incremental = '<leader>v',
-			scope_incremental = '<leader>V',
-			node_decremental = '<M-v>',
+			node_decremental = '<leader>V',
 		},
 	},
 	textobjects = {
@@ -100,13 +98,3 @@ end, { desc = "Next todo comment" })
 vim.keymap.set("n", "[t", function()
 	require("todo-comments").jump_prev()
 end, { desc = "Previous todo comment" })
-
-
--- VimTex settings
-vim.cmd("let g:vimtex_view_method = 'zathura'")
-vim.cmd("let g:tex_flavor = 'latex'")
--- This uses entr to force reloading
-vim.cmd("let g:vimtex_compiler_method = 'generic'")
-vim.cmd([[let g:vimtex_compiler_generic = {
-	\ 'command': 'ls *.tex | entr -c tectonic /_ --synctex --keep-logs -n',
-\}]])

@@ -95,6 +95,6 @@ return {
 	{ 'nvim-lualine/lualine.nvim', },
 
 	{ "mfussenegger/nvim-lint" },
-
-	{ "stevearc/oil.nvim",                   dependencies = { 'nvim-tree/nvim-web-devicons' } }
+	{ "stevearc/oil.nvim",                   dependencies = { 'nvim-tree/nvim-web-devicons' } },
+	{ 'sindrets/diffview.nvim' }
 }

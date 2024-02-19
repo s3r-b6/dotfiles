@@ -19,7 +19,9 @@ vim.keymap.set('n', '<leader>P', '"+P', { desc = "Paste from clipboard" })
 vim.keymap.set('v', '<leader>p', '"+p', { desc = "Paste from clipboard" })
 vim.keymap.set('v', '<leader>P', '"+P', { desc = "Paste from clipboard" })
 -- LazyGit
-vim.keymap.set('n', '<leader>gg', ':LazyGit<CR>')
+vim.keymap.set('n', '<leader>gg', ':LazyGit<CR>', { desc = "Open LazyGit inside nvim" })
+vim.keymap.set('n', '<leader>gd', ':DiffviewOpen<CR>', { desc = "Open diffview" })
+
 -- UndoTree
 vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>')
 -- Word wrap

@@ -25,33 +25,11 @@ local formatter_settings = {
 		}
 	end
 	},
-	ocaml = {
-		function()
-			return {
-				exe = 'ocamlformat',
-				args = { '--enable-outside-detected-project',
-					util.escape_path(util.get_current_buffer_file_path()), },
-				stdin = true
-			}
-		end,
-	},
-
-
-
-
 	python = { function()
 		return {
 			exe = mason_bin .. 'black',
 			args = { util.escape_path(util.get_current_buffer_file_path()), },
 			stdin = false
-		}
-	end,
-	},
-	tex = { function()
-		return {
-			exe = mason_bin .. 'latexindent',
-			args = { util.escape_path(util.get_current_buffer_file_path()), },
-			stdin = true
 		}
 	end,
 	},
