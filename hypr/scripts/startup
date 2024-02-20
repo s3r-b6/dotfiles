@@ -22,5 +22,6 @@ ${SCRIPTSDIR}/xauthority &
 dunst &
 nm-applet &
 hyprpaper --config ~/.config/hypr/hyprpapr.conf &
-Exec=env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify --uri=%U &
+exec env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify --uri=%U &
+kitty -1
 #kitty tty-clock &

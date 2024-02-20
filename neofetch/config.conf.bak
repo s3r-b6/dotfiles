@@ -1,0 +1,308 @@
+# See this wiki page for more info:
+# https://github.com/dylanaraps/neofetch/wiki/Customizing-Info
+print_info() {
+    info title
+    prin
+    info "OS" distro 
+    info "DE" de
+    prin
+    info "CPU" cpu
+    info "Usage" cpu_usage
+    info "GPU" gpu
+    info "Memory" memory
+    info "Disk" disk
+    info "Packages" packages
+    prin
+    info "Playing" song
+    #[[ "$player" ]] && prin "Player" "$player"
+    info cols
+    #info "Battery" battery
+    #info "GPU Driver" gpu_driver
+    #info "Font" font
+    #info "Terminal Font" term_font
+    #info "WM" wm
+    #info "WM Theme" wm_theme
+    #info "Theme" theme
+    #info "Locale" locale
+    #info "Local IP" local_ip
+    #info "Public IP" public_ip
+    #info "Icons" icons
+    #info "Resolution" resolution
+}
+
+### Title
+# Hide/Show Fully qualified domain name.
+#
+# Default:  'off'
+# Values:   'on', 'off'
+# Flag:     --title_fqdn
+title_fqdn="off"
+
+
+### Kernel
+# Shorten the output of the kernel function.
+kernel_shorthand="on"
+
+### Distro
+# Shorten the output of the distro function
+# Values:   'on', 'tiny', 'off'
+distro_shorthand="on"
+# Show/Hide OS Architecture.
+# Show 'x86_64', 'x86' and etc in 'Distro:' output.
+os_arch="off"
+
+### Uptime
+# Shorten the output of the uptime function
+# Values:  'on', 'tiny', 'off'
+uptime_shorthand="on"
+
+### Memory
+# Show memory pecentage in output.
+memory_percent="off"
+
+# Change memory output unit.
+# Values:  'kib', 'mib', 'gib'
+#   kib  '1020928KiB / 7117824KiB'
+#   mib  '1042MiB / 6951MiB'
+#   gib: ' 0.98GiB / 6.79GiB'
+memory_unit="GiB"
+
+### Packages
+# Show/Hide Package Manager names.
+# Values:  'on', 'tiny' 'off'
+package_managers="on"
+
+
+### Shell
+# Show the path to $SHELL
+shell_path="off"
+# Show $SHELL version
+shell_version="off"
+
+### CPU
+# CPU speed type
+# Values: 'scaling_cur_freq', 'scaling_min_freq', 'scaling_max_freq', 'bios_limit'.
+speed_type="bios_limit"
+# CPU speed shorthand
+speed_shorthand="on"
+# Enable/Disable CPU brand in output.
+cpu_brand="off"
+# CPU Speed
+# Hide/Show CPU speed.
+cpu_speed="on"
+# CPU Cores
+# Display CPU cores in output
+# Values:  'logical', 'physical', 'off'
+cpu_cores="logical"
+# CPU Temperature
+# Hide/Show CPU temperature.
+# Values:  'C', 'F', 'off'
+cpu_temp="off"
+
+### GPU
+# Enable/Disable GPU Brand
+gpu_brand="off"
+# Which GPU to display
+gpu_type="all"
+
+
+### Resolution
+# Display refresh rate next to each monitor
+refresh_rate="off"
+
+### Gtk Theme / Icons / Font
+# Shorten output of GTK Theme / Icons / Font
+gtk_shorthand="off"
+# Enable/Disable gtk2 Theme / Icons / Font
+gtk2="on"
+# Enable/Disable gtk3 Theme / Icons / Font
+gtk3="on"
+
+### Desktop Environment
+# Show Desktop Environment version
+# Default: 'off'
+# Values:  'on', 'off'
+# Flag:    --de_version
+de_version="on"
+
+### Disk
+# Which disks to display.
+# The values can be any /dev/sdXX, mount point or directory.
+# Values:  '/', '/dev/sdXX', '/path/to/drive'.
+disk_show=('/')
+# Disk subtitle.
+# Values:  'mount', 'name', 'dir', 'none'
+# Example:
+# name:   'Disk (/dev/sda1): 74G / 118G (66%)'
+# mount:  'Disk (/mnt/Local Disk): 74G / 118G (66%)'
+# dir:    'Disk (Local Disk): 74G / 118G (66%)'
+# none:   'Disk: 74G / 118G (66%)'
+disk_subtitle="mount"
+# Disk percent.
+# Show/Hide disk percent.
+disk_percent="on"
+
+### Song
+# Manually specify a music player.
+# Values:  'auto', 'player-name'
+music_player="auto"
+# Format to display song information.
+#
+# Default: '%artist% - %album% - %title%'
+# Values:  '%artist%', '%album%', '%title%'
+# Flag:    --song_format
+#
+# Example:
+# default: 'Song: Jet - Get Born - Sgt Major'
+song_format="%artist% - %title% "
+# Print the Artist, Album and Title on separate lines
+#
+# Default: 'off'
+# Values:  'on', 'off'
+# Flag:    --song_shorthand
+#
+# Example:
+# on:  'Artist: The Fratellis'
+#      'Album: Costello Music'
+#      'Song: Chelsea Dagger'
+#
+# off: 'Song: The Fratellis - Costello Music - Chelsea Dagger'
+song_shorthand="off"
+# 'mpc' arguments (specify a host, password etc).
+#
+# Default:  ''
+# Example: mpc_args=(-h HOST -P PASSWORD)
+mpc_args=()
+
+### Text Colors
+#
+# Default:  'distro'
+# Values:   'distro', 'num' 'num' 'num' 'num' 'num' 'num'
+# Flag:     --colors
+#
+# Each number represents a different part of the text in
+# this order: 'title', '@', 'underline', 'subtitle', 'colon', 'info'
+#
+# Example:
+# colors=(distro)      - Text is colored based on Distro colors.
+# colors=(4 6 1 8 8 6) - Text is colored in the order above.
+colors=(distro)
+
+
+### Text Options
+# Toggle bold text
+bold="on"
+# Enable/Disable Underline
+underline_enabled="on"
+# Underline character
+underline_char="-"
+# Info Separator
+# Replace the default separator with the specified string.
+separator=":"
+
+### Color Blocks
+# Color block range
+# The range of colors to print.
+# Values:   'num'
+block_range=(0 15)
+# Toggle color blocks
+color_blocks="on"
+# Color block width in spaces
+block_width=3
+# Color block height in lines
+block_height=1
+# Color Alignment
+# Values: 'auto', 'num'
+# Number specifies how far from the left side of the terminal (in spaces) to
+# begin printing the columns, in case you want to e.g. center them under your
+# text.
+col_offset="auto"
+
+### Progress Bars
+# Bar characters
+#
+# Default:  '-', '='
+bar_char_elapsed="~"
+bar_char_total="="
+bar_border="on"
+# Progress bar length in spaces
+# Number of chars long to make the progress bars.
+# Values:   'num'
+bar_length=15
+# Progress bar colors
+# When set to distro, uses your distro's logo colors.
+# Values:   'distro', 'num'
+bar_color_elapsed="distro"
+bar_color_total="distro"
+
+
+### Info display
+# Display a bar with the info.
+# Values:  'bar', 'infobar', 'barinfo', 'off'
+# Example:
+# bar:     '[---=======]'
+# infobar: 'info [---=======]'
+# barinfo: '[---=======] info'
+# off:     'info'
+cpu_display="barinfo"
+memory_display="off"
+battery_display="off"
+disk_display="off"
+
+### Backend Settings
+# Image backend.
+# Default:  'ascii'
+# Values:   'ascii', 'caca', 'chafa', 'jp2a', 'iterm2', 'off',
+#           'pot', 'termpix', 'pixterm', 'tycat', 'w3m', 'kitty'
+image_backend="pixterm"
+# Image Source
+# Which image or ascii file to display.
+#
+#           'command output (neofetch --ascii "$(fortune | cowsay -W 30)")'
+image_source="/home/ser/.config/neofetch/img/zote-2.jpg"
+
+### Ascii Options
+# Which distro's ascii art to display.
+ascii_distro="auto"
+# Ascii Colors
+# Values:   'distro', 'num' 'num' 'num' 'num' 'num' 'num'
+ascii_colors=(distro)
+# Bold ascii logo
+ascii_bold="on"
+
+### Image Options
+# Image loop
+# Setting this to on will make neofetch redraw the image constantly until
+# Ctrl+C is pressed. This fixes display issues in some terminal emulators.
+image_loop="off"
+# Thumbnail directory
+# Default: '~/.cache/thumbnails/neofetch'
+thumbnail_dir="${XDG_CACHE_HOME:-${HOME}/.cache}/thumbnails/neofetch"
+# Crop mode
+# Values:   'normal', 'fit', 'fill'
+crop_mode="fill"
+# Crop offset
+# Values:   'northwest', 'north', 'northeast', 'west', 'center'
+#           'east', 'southwest', 'south', 'southeast'
+crop_offset="center"
+# Image size
+# The image is half the terminal width by default.
+# Values:  'auto', '00px', '00%', 'none'
+image_size="300px"
+# Gap between image and text
+# Values:  'num', '-num'
+gap=5
+# Image offsets
+# Values:  'px'
+yoffset=2
+xoffset=2
+# Image background color
+# Values:  'color', 'blue'
+background_color="blue"
+### Misc Options
+# Stdout mode
+# Turn off all colors and disables image backend (ASCII/Image).
+# Useful for piping into another command.
+# Default: 'off'
+stdout="off"
+#### END ####

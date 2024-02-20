@@ -5,5 +5,5 @@ iDIR="$HOME/.config/hypr/mako/icons"
 if [[ "$1" == "--inc" ]]; then
     brightnessctl s +5% && notify-send -t 1000 -r 91 -u low -i "$iDIR/brightness-80.png" "Brightness up $(brightnessctl | grep -Po '([\d]{1,3}%)')"
 elif [[ "$1" == "--dec" ]]; then
-    brightnessctl s 5%- && notify-send -t 1000 -r 91 -u low -i "$iDIR/brightness-60.png" "Brightness down $(brightnessctl | grep -Po '([\d]{1,3}%)')"
+    brightnessctl s 5%- -n 2 && notify-send -t 1000 -r 91 -u low -i "$iDIR/brightness-60.png" "Brightness down $(brightnessctl | grep -Po '([\d]{1,3}%)')"
 fi 
