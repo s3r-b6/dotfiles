@@ -34,20 +34,17 @@
         "spacing": 10,
     },
     "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{: %A, %H:%M }",
-        "format-alt": "  {: %d/%m %H:%M }"
+      "interval": 60,
+      "tooltip": true,
+      "format": "{:%H:%M}",
+      "tooltip-format": "{:%Y-%m-%d}",
     },
     "pulseaudio": {
-        "scroll-step": 2, // %, can be a float
-        "format": "{icon} {volume}  |",
+        "scroll-step": 2,
+        "format": "  {volume}  |",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
-        "format-icons": {
-            "stock image type shit": ["", "", ""],
-            "default": ""
-        },
         "on-click": "pavucontrol",
         "tooltip": false,
     },

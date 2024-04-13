@@ -22,7 +22,7 @@ vim.cmd [[let g:loaded_node_provider = 0]]
 -- I am using this to map <F5> to my cpp build scripts right now
 local project_config = vim.fn.expand('%:p:h') .. '/.nvim.lua'
 if vim.fn.filereadable(project_config) == 1 then
-	vim.print(project_config)
+	-- vim.print(project_config)
 	vim.cmd('luafile ' .. project_config)
 end
 

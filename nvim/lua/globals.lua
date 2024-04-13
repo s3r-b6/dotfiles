@@ -25,10 +25,7 @@ vim.opt.number = true
 vim.opt.numberwidth = 4
 
 vim.bo.tabstop = 4
-vim.bo.ts = vim.bo.tabstop
-
 vim.bo.shiftwidth = 4
-vim.bo.sw = vim.bo.shiftwidth
 
 vim.opt.mouse = 'a'
 vim.opt.clipboard = 'unnamedplus'

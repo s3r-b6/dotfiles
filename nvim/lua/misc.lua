@@ -1,8 +1,6 @@
 vim.cmd([[autocmd BufRead,BufNewFile *.hlsl setfiletype hlsl]])
 vim.cmd([[autocmd BufRead,BufNewFile *.glsl setfiletype glsl]])
 
-require("todo-comments").setup {}
-
 -- Treesitter
 require('nvim-treesitter.configs').setup {
 	ensure_installed = {
@@ -66,35 +64,28 @@ require('nvim-treesitter.configs').setup {
 	},
 }
 
--- Oil
-require("oil").setup(
-	{
-		keymaps = {
-			["g?"] = "actions.show_help",
-			["<CR>"] = "actions.select",
-			--["<C-s>"] = "actions.select_vsplit",
-			--["<C-h>"] = "actions.select_split",
-			--["<C-t>"] = "actions.select_tab",
-			["<C-p>"] = "actions.preview",
-			["<C-c>"] = "actions.close",
-			["<C-l>"] = "actions.refresh",
-			["<BS>"] = "actions.parent",
-			["_"] = "actions.open_cwd",
-			["`"] = "actions.cd",
-			["~"] = "actions.tcd",
-			["gs"] = "actions.change_sort",
-			["gx"] = "actions.open_external",
-			["g."] = "actions.toggle_hidden",
-			--["g\\"] = "actions.toggle_trash",
-		},
-	}
+require("todo-comments").setup()
 
-)
+require("mini.files").setup({
+	mappings = {
+		close       = 'q',
+		go_in       = 'l',
+		go_in_plus  = 'L',
+		go_out      = 'h',
+		go_out_plus = 'H',
+		reset       = '<BS>',
+		reveal_cwd  = '@',
+		show_help   = 'g?',
+		synchronize = '=',
+		trim_left   = '<',
+		trim_right  = '>',
+	},
 
-vim.keymap.set("n", "]t", function()
-	require("todo-comments").jump_next()
-end, { desc = "Next todo comment" })
-
-vim.keymap.set("n", "[t", function()
-	require("todo-comments").jump_prev()
-end, { desc = "Previous todo comment" })
+	windows = {
+		max_number = math.huge,
+		preview = true,
+		width_focus = 30,
+		width_nofocus = 15,
+		width_preview = 45,
+	},
+})

@@ -1,8 +1,4 @@
 return {
-	{
-		"folke/todo-comments.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-	},
 
 	-- Telescope
 	{ 'nvim-telescope/telescope.nvim',          branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
@@ -47,6 +43,7 @@ return {
 	{
 		'mfussenegger/nvim-dap',
 		dependencies = {
+			'nvim-neotest/nvim-nio',
 			'jay-babu/mason-nvim-dap.nvim',
 			'mfussenegger/nvim-dap',
 			'williamboman/mason.nvim',
@@ -89,12 +86,17 @@ return {
 	},
 
 	-- Pretty
-	{ "catppuccin/nvim",                     name = "catppuccin",                             priority = 1000 },
-	{ 'lukas-reineke/indent-blankline.nvim', main = "ibl",                                    opts = {}, },
+	{ "catppuccin/nvim",                     name = "catppuccin", priority = 1000 },
+	{ 'lukas-reineke/indent-blankline.nvim', main = "ibl",        opts = {}, },
 	{ 'kosayoda/nvim-lightbulb' },
 	{ 'nvim-lualine/lualine.nvim', },
 
 	{ "mfussenegger/nvim-lint" },
-	{ "stevearc/oil.nvim",                   dependencies = { 'nvim-tree/nvim-web-devicons' } },
-	{ 'sindrets/diffview.nvim' }
+	{ 'sindrets/diffview.nvim' },
+
+	{ 'echasnovski/mini.files',              version = false },
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
 }
