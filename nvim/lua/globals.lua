@@ -46,3 +46,7 @@ vim.opt.tabstop = 4
 vim.opt.wrap = false
 vim.o.guicursor = 'n-i-v-c-sm:block,ci-ve:ver25,r-cr-o:hor20'
 vim.diagnostic.config({ severity_sort = true })
+
+-- Disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1

@@ -38,7 +38,8 @@ vim.keymap.set('n', '<leader>k', vim.diagnostic.open_float, { desc = 'Open float
 --Telescope maps
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>?', builtin.oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+-- I am trying rabbit.nvim
+-- vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>sc', builtin.current_buffer_fuzzy_find,
 	{ desc = '[S]earch in [C]urrent buffer' })
 vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
@@ -46,8 +47,7 @@ vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' 
 vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sp', ':Telescope projects<CR>', { desc = '[S]earch [P]rojects' })
 vim.keymap.set('n', '<leader>st', ':TodoTelescope<CR>', { desc = '[S]earch [T]odos' })
 
 -- File explorer
-vim.keymap.set('n', '<leader>le', ":lua MiniFiles.open()<CR>", { desc = 'Open MiniFiles', silent = true })
+vim.keymap.set('n', '<leader>le', ":NvimTreeToggle<CR>", { desc = 'Open MiniFiles', silent = true })

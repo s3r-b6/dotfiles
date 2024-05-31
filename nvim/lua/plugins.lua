@@ -1,5 +1,4 @@
 return {
-
 	-- Telescope
 	{ 'nvim-telescope/telescope.nvim',          branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
 	{ 'nvim-telescope/telescope-ui-select.nvim' },
@@ -10,8 +9,6 @@ return {
 			return vim.fn.executable 'make' == 1
 		end,
 	},
-	{ 'ahmedkhalf/project.nvim', },
-
 	-- Treesitter
 	{ 'nvim-treesitter/nvim-treesitter', dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' } },
 
@@ -93,10 +90,13 @@ return {
 
 	{ "mfussenegger/nvim-lint" },
 	{ 'sindrets/diffview.nvim' },
-
-	{ 'echasnovski/mini.files',              version = false },
+	{
+		"nvim-tree/nvim-tree.lua",
+		dependencies = { "nvim-tree/nvim-web-devicons" }
+	},
 	{
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
+	{ "voxelprismatic/rabbit.nvim" },
 }

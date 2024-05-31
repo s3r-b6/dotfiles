@@ -18,6 +18,16 @@ vim.cmd [[let g:loaded_python3_provider = 0]]
 vim.cmd [[let g:loaded_perl_provider = 0]]
 vim.cmd [[let g:loaded_node_provider = 0]]
 
+vim.wo.signcolumn = "yes:2"
+
+vim.cmd [[
+augroup kitty_mp
+    autocmd!
+    au VimLeave * :silent !kitty @ set-spacing padding=8 margin=0
+    au VimEnter * :silent !kitty @ set-spacing padding=0 margin=0
+augroup END
+]]
+
 -- Try to load a ./.nvim.lua if it exists in the project dir...
 -- I am using this to map <F5> to my cpp build scripts right now
 local project_config = vim.fn.expand('%:p:h') .. '/.nvim.lua'

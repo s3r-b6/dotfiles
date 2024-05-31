@@ -34,21 +34,7 @@ require('telescope').setup {
 	}
 }
 
-require('project_nvim').setup {
-	manual_mode = false,
-	detection_methods = { 'lsp', 'pattern' },
-	patterns = { '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json' },
-	ignore_lsp = {},
-	exclude_dirs = {},
-	show_hidden = false,
-	silent_chdir = true,
-	scope_chdir = 'global',
-	datapath = vim.fn.stdpath('data'),
-}
-
-
 pcall(require('telescope').load_extension, 'fzf')
-pcall(require('telescope').load_extension, 'projects')
 pcall(require('telescope').load_extension, 'ui-select')
 
 require('ibl').setup({ scope = { enabled = false } })
@@ -84,6 +70,23 @@ require('lualine').setup {
 	}
 }
 
-
-
+require('rabbit').setup({
+	default_keys = { open = { "<leader><space>" }, },
+	float = { top = 10, left = 4, },
+	plugin_opts = {
+		history = {
+			color = "#7FA9E8",
+			switch = "r",
+			keys = {},
+			opts = {},
+		},
+		reopen = {
+			color = "#907aa9",
+			switch = "o",
+			keys = {},
+			opts = {},
+		},
+	},
+}
+)
 require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
