@@ -20,7 +20,7 @@ fn main() {
         let not_charging = str.get(charging_pos..charging_pos + 1).unwrap() == "F";
 
         if not_charging {
-            println!("󰍽  {}%", charge_percent);
+            println!("󰍽 {}%", charge_percent);
         } else {
             println!("󰚥󰍽 {}%", charge_percent);
         }

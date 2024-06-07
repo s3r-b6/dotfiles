@@ -1,7 +1,5 @@
 #!/bin/bash
 
-SCRIPTSDIR=$HOME/.config/hypr/scripts
-
 # Kill already running process
 _ps=(waybar dunst)
 for _prs in "${_ps[@]}"; do
@@ -12,14 +10,15 @@ done
 
 openrazer-daemon &
 
-# Apply themes
-"${SCRIPTSDIR}"/gtkthemes &
-
 # Lauch statusbar (waybar)
-"${SCRIPTSDIR}"/statusbar &
+WAYBAR_CFG=$HOME/.config/hypr/waybar/
+waybar -c "$WAYBAR_CFG"/config.jsonc -s "$WAYBAR_CFG"/style.css & disown
 
-# Xauthority
-"${SCRIPTSDIR}"/xauthority &
+# generate an ~/.Xauthority file if there is none
+xauth_file=$(xauth -q info | grep "Xauthority" |awk -F ":" '{print$2}' | tr -d ' ')
+if [ ! -f "$xauth_file" ]; then
+  xauth gen "$DISPLAY" &> /dev/null
+fi
 
 nm-applet &
 dunst &
