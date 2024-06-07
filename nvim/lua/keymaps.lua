@@ -51,3 +51,5 @@ vim.keymap.set('n', '<leader>st', ':TodoTelescope<CR>', { desc = '[S]earch [T]od
 
 -- File explorer
 vim.keymap.set('n', '<leader>le', ":NvimTreeToggle<CR>", { desc = 'Open MiniFiles', silent = true })
+vim.keymap.set('n', 'gx', ":silent execute '!xdg-open ' shellescape(expand('<cfile>'), v:true)<CR>",
+	{ desc = 'Open link', silent = true })

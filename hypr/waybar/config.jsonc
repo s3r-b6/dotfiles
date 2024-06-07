@@ -117,7 +117,7 @@
   },
   "custom/viper-battery": {
       "format": "{}",
-      "exec": "~/.config/hypr/scripts/viper-battery.rs",
+      "exec": "~/.config/hypr/scripts/viper-battery",
       "tooltip": false,
       "interval": 90,
       "max-length": 35,

@@ -72,8 +72,9 @@ require('lualine').setup {
 
 require('rabbit').setup({
 	default_keys = { open = { "<leader><space>" }, },
-	float = { top = 10, left = 4, },
+	float = "center",
 	plugin_opts = {
+		window = { float = "center" },
 		history = {
 			color = "#7FA9E8",
 			switch = "r",
@@ -87,6 +88,8 @@ require('rabbit').setup({
 			opts = {},
 		},
 	},
-}
-)
+})
+
+require('rabbit').opts.window.float = "center"
+
 require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
