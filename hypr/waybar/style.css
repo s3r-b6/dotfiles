@@ -10,7 +10,7 @@
 }
 
 window#waybar {
-  background: #11111b;
+  background: #313243;
 }
 
 #workspaces {
@@ -50,6 +50,7 @@ window#waybar {
   margin-left: 7px;
 }
 
+#custom-swaync,
 #memory {
   padding-left: 9px;
   padding-right: 9px;

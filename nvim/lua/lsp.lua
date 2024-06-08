@@ -14,6 +14,7 @@ local handlers = {
 	end,
 	-- This is handled through nvim-jdtls
 	['jdtls'] = function() end,
+	['hyprls'] = function() end,
 
 	--- Specific server configs:
 
@@ -35,6 +36,17 @@ local handlers = {
 	end,
 }
 
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+	pattern = { "*.hl", "hypr*.conf" },
+	callback = function(event)
+		print(string.format("starting hyprls for %s", vim.inspect(event)))
+		vim.lsp.start {
+			name = "hyprlang",
+			cmd = { "hyprls" },
+			root_dir = vim.fn.getcwd(),
+		}
+	end
+})
 
 require('mason-lspconfig').setup {
 	automatic_installation = false,
