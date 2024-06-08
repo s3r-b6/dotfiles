@@ -6,8 +6,8 @@ STATUS=$(cat /sys/bus/hid/drivers/razermouse/0003:1532:007B.0003/charge_status)
 PERCENTAGE=$(echo "scale=2; ($VALUE / 255) * 100" | bc)
 
 if [ "$STATUS" -eq 1 ]; then
-    echo "󰚥󰍽 $PERCENTAGE%"
+    echo "󰍿 $PERCENTAGE%"
 else
-    echo "󰍽  $PERCENTAGE%"
+    echo "󰍽 $PERCENTAGE%"
 fi
 

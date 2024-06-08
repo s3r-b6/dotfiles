@@ -39,9 +39,11 @@ window#waybar {
 #memory,
 #disk,
 #clock,
-#battery {
-  font-size: 15px; /* Remove the quotes and correct the space */
-  color: #cdd6f4; /* Remove the quotes */
+#battery,
+#custom-swaync,
+#custom-viper-battery {
+  font-size: 15px;
+  color: #cdd6f4;
 }
 
 #cpu {
@@ -85,12 +87,6 @@ window#waybar {
 #clock {
   padding-left: 9px;
   padding-right: 15px;
-}
-
-#custom-viper-battery {
-  font-size: 15px;
-  color: #b4befe;
-  font-weight: bold; /* Remove the quotes */
 }
 
 #custom-launcher {

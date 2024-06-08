@@ -30,7 +30,9 @@
 @define-color rosewater #f5e0dc;
 
 @define-color text            @text;
+@define-color subtext         @subtext;
 @define-color background      @surface0;
+@define-color background-sec  @surface1;
 @define-color background-alt  @surface1;
 @define-color selected        @green;
 @define-color hover           @crust;

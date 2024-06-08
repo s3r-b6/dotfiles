@@ -251,11 +251,11 @@ progressbar {
 }
 
 .widget-mpris button {
-  color: alpha(@text, 0.6);
+  color: @text;
 }
 
 .widget-mpris button:hover {
-  color: @text;
+  color: @green;
 }
 
 .widget-mpris-album-art {
