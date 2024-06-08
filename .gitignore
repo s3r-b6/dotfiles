@@ -1,23 +1,14 @@
 #restrictive .gitignore
 /*
 !/archlinux-logout
-!/dunst
 !/kitty
-!/lvim
-lvim/plugin/packer_compiled.lua
-lvim/lazy-lock.json
-!/.ideavimrc
-!/README.md
-!/preview/
-!/pkglist.txt
-!/vis
-!/neofetch
 !/nvim
 !/hypr
-!/zellij
 !/.gitignore
 !/.zshrc
-!/pipewire
-!/lf
 !/fastfetch
 !/swaync
+!/pkglist.txt
+!/README.md
+!/preview/
+!/.ideavimrc
