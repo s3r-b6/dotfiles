@@ -23,5 +23,3 @@ fi
 nm-applet &
 dunst &
 hyprpaper --config ~/.config/hypr/hyprpapr.conf &
-sleep 8 && spotify &
-sleep 8 && webcord &
