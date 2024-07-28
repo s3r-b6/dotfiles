@@ -19,11 +19,11 @@
             "keyColor": "yellow",
             "format": "{2}"
         },
-        {
-            "type": "packages",
-            "key": "├󰏖",
-            "keyColor": "yellow"
-        },
+        // {
+        //     "type": "packages",
+        //     "key": "├󰏖",
+        //     "keyColor": "yellow"
+        // },
         {
             "type": "shell",
             "key": "├",
@@ -99,7 +99,7 @@
             "keyColor": "cyan"
         },
 
-        "break",
-        "colors"
+        // "break",
+        // "colors"
     ]
 }

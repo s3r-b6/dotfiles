@@ -1,5 +1,7 @@
 require('globals')
 
+
+
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system {
@@ -21,6 +23,9 @@ vim.cmd [[let g:loaded_node_provider = 0]]
 vim.wo.signcolumn = "yes:2"
 
 vim.cmd [[
+augroup custom_filetypes
+    au BufRead,BufNewFile *.http                setfiletype http
+augroup END
 augroup kitty_mp
     autocmd!
     au VimLeave * :silent !kitty @ set-spacing padding=8 margin=0

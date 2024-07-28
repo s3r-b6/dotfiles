@@ -99,4 +99,8 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{ "voxelprismatic/rabbit.nvim" },
+	{
+		"mistweaverco/kulala.nvim",
+		config = function() require('kulala').setup() end
+	},
 }
