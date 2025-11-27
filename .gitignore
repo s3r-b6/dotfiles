@@ -1,0 +1,14 @@
+#restrictive .gitignore
+/*
+!/archlinux-logout
+!/kitty
+!/nvim
+!/hypr
+!/.gitignore
+!/.zshrc
+!/fastfetch
+!/swaync
+!/pkglist.txt
+!/README.md
+!/preview/
+!/.ideavimrc
